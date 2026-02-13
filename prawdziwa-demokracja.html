@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prawdziwa Demokracja - Demokracja, która słucha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-mid: #2c5282;
+            --accent: #c05621;
+            --accent-light: #ed8936;
+            --text-dark: #1a202c;
+            --text-body: #2d3748;
+            --text-light: #718096;
+            --bg-cream: #faf7f4;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+            --red: #c53030;
+            --red-light: #fff5f5;
+            --red-border: #feb2b2;
+            --blue: #2b6cb0;
+            --blue-light: #ebf8ff;
+            --blue-border: #90cdf4;
+            --yellow: #b7791f;
+            --yellow-light: #fffff0;
+            --yellow-border: #f6e05e;
+            --green: #276749;
+            --green-light: #f0fff4;
+            --green-border: #9ae6b4;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Work Sans', sans-serif; color: var(--text-body); line-height: 1.7; background-color: var(--bg-cream); overflow-x: hidden; }
+        ::selection { background: var(--accent-light); color: white; }
+
+        nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 2px solid var(--primary); z-index: 1000; }
+        .nav-container { max-width: 1300px; margin: 0 auto; padding: 1.1rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Libre Baskerville', serif; font-size: 1.35rem; font-weight: 700; color: var(--primary); text-decoration: none; position: relative; }
+        .logo::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 65%; height: 3px; background: var(--accent-light); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+        .nav-links a { color: var(--text-body); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-cta { padding: 0.65rem 1.5rem; background: var(--primary); color: white !important; border-radius: 6px; font-weight: 700 !important; transition: background 0.2s, transform 0.2s !important; }
+        .nav-cta:hover { background: var(--accent) !important; transform: translateY(-2px); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
+        .section-label { display: inline-block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-bottom: 1rem; }
+        .section-title { font-family: 'Libre Baskerville', serif; font-size: 2.6rem; color: var(--primary); line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+        .section-lead { font-size: 1.2rem; color: var(--text-light); line-height: 1.8; max-width: 680px; }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* HERO */
+        .hero { margin-top: 68px; padding: 7rem 2.5rem 6rem; background: var(--primary); position: relative; overflow: hidden; }
+        .hero::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 60px; background: var(--bg-cream); clip-path: ellipse(55% 100% at 50% 100%); }
+        .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; }
+        .hero-inner { max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+        .hero-badge { display: inline-block; padding: 0.45rem 1.1rem; border: 1.5px solid rgba(255,255,255,0.35); border-radius: 50px; color: rgba(255,255,255,0.85); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; margin-bottom: 2rem; animation: fadeUp 0.7s ease 0.1s both; }
+        .hero h1 { font-family: 'Libre Baskerville', serif; font-size: 4rem; font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 1.75rem; animation: fadeUp 0.7s ease 0.25s both; }
+        .hero h1 em { font-style: normal; color: var(--accent-light); }
+        .hero-sub { font-size: 1.3rem; color: rgba(255,255,255,0.82); line-height: 1.75; max-width: 680px; margin: 0 auto 3rem; animation: fadeUp 0.7s ease 0.4s both; }
+        .hero-ctas { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.7s ease 0.55s both; }
+        .btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 1rem 2.25rem; border-radius: 7px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.25s ease; cursor: pointer; border: 2px solid transparent; }
+        .btn-white { background: white; color: var(--primary); border-color: white; }
+        .btn-white:hover { background: var(--accent-light); color: white; border-color: var(--accent-light); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+        .btn-outline-white { background: transparent; color: white; border-color: rgba(255,255,255,0.6); }
+        .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; transform: translateY(-3px); }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* PROBLEM */
+        .problem { padding: 6rem 2.5rem; background: var(--bg-cream); }
+        .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3rem; }
+        .problem-text p { font-size: 1.1rem; line-height: 1.85; color: var(--text-body); margin-bottom: 1.25rem; }
+        .problem-text p strong { color: var(--primary); }
+        .problem-stats { display: flex; flex-direction: column; gap: 1.5rem; }
+        .stat-card { background: white; border-left: 5px solid var(--accent); padding: 1.75rem 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .stat-card .big { font-family: 'Libre Baskerville', serif; font-size: 2.25rem; font-weight: 700; color: var(--primary); display: block; line-height: 1; margin-bottom: 0.5rem; }
+        .stat-card p { font-size: 0.95rem; color: var(--text-light); line-height: 1.5; }
+
+        /* SOLUTION */
+        .solution { padding: 6rem 2.5rem; background: white; border-top: 3px solid var(--accent); border-bottom: 3px solid var(--accent); }
+        .solution-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+        .solution-inner .section-lead { margin: 0 auto 3rem; }
+        .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: left; margin-top: 3rem; }
+        .principle { padding: 2rem; border-radius: 8px; background: var(--bg-cream); border: 1.5px solid var(--border); transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+        .principle:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .principle-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+        .principle h4 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--primary); margin-bottom: 0.6rem; }
+        .principle p { font-size: 0.95rem; color: var(--text-light); line-height: 1.65; }
+
+        /* TOOLS */
+        .tools { padding: 6rem 2.5rem; background: var(--bg-cream); }
+        .tools-header { text-align: center; margin-bottom: 3.5rem; }
+        .tools-header .section-lead { margin: 0 auto; }
+        .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .tool-card { background: white; border-radius: 10px; border: 2px solid var(--border); padding: 2.5rem 2rem; text-decoration: none; color: inherit; transition: all 0.3s ease; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+        .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--primary); transition: height 0.3s ease; }
+        .tool-card:hover { border-color: var(--primary); transform: translateY(-6px); box-shadow: 0 12px 35px rgba(26,54,93,0.12); }
+        .tool-card:hover::before { height: 6px; }
+        .tool-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 1rem; }
+        .tool-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--primary); margin-bottom: 0.75rem; }
+        .tool-card p { font-size: 0.95rem; color: var(--text-light); line-height: 1.7; flex: 1; margin-bottom: 1.5rem; }
+        .tool-link { font-size: 0.9rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
+        .tool-link .arrow { transition: transform 0.2s; }
+        .tool-card:hover .arrow { transform: translateX(5px); }
+        .tool-video-badge { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 600; color: var(--accent); background: #fff8f0; border: 1px solid var(--accent-light); border-radius: 20px; padding: 0.3rem 0.8rem; margin-bottom: 1rem; }
+
+        /* JOIN */
+        .join { padding: 7rem 2.5rem; background: var(--primary); text-align: center; position: relative; overflow: hidden; }
+        .join::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; }
+        .join-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+        .join h2 { font-family: 'Libre Baskerville', serif; font-size: 3rem; color: white; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+        .join h2 em { font-style: normal; color: var(--accent-light); }
+        .join > .join-inner > p { font-size: 1.2rem; color: rgba(255,255,255,0.82); line-height: 1.75; margin-bottom: 3rem; }
+        .roles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2rem; }
+        .role-card { border-radius: 10px; padding: 2rem 1.5rem; text-align: left; text-decoration: none; border: 2px solid transparent; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .role-card::after { content: '→'; position: absolute; bottom: 1.25rem; right: 1.25rem; font-size: 1.25rem; font-weight: 700; opacity: 0; transform: translateX(-8px); transition: all 0.3s ease; }
+        .role-card:hover::after { opacity: 1; transform: translateX(0); }
+        .role-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,0.25); }
+        .role-red { background: var(--red-light); border-color: var(--red-border); color: var(--red); }
+        .role-red:hover { border-color: var(--red); }
+        .role-red::after { color: var(--red); }
+        .role-blue { background: var(--blue-light); border-color: var(--blue-border); color: var(--blue); }
+        .role-blue:hover { border-color: var(--blue); }
+        .role-blue::after { color: var(--blue); }
+        .role-yellow { background: var(--yellow-light); border-color: var(--yellow-border); color: var(--yellow); }
+        .role-yellow:hover { border-color: var(--yellow); }
+        .role-yellow::after { color: var(--yellow); }
+        .role-green { background: var(--green-light); border-color: var(--green-border); color: var(--green); }
+        .role-green:hover { border-color: var(--green); }
+        .role-green::after { color: var(--green); }
+        .role-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; margin-bottom: 1rem; }
+        .role-red .role-dot { background: var(--red); }
+        .role-blue .role-dot { background: var(--blue); }
+        .role-yellow .role-dot { background: var(--yellow); }
+        .role-green .role-dot { background: var(--green); }
+        .role-card h4 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700; }
+        .role-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.65; margin-bottom: 0.75rem; display: block; }
+        .role-card p { font-size: 0.9rem; line-height: 1.6; opacity: 0.85; margin-bottom: 2rem; }
+        .join-note { font-size: 0.9rem; color: rgba(255,255,255,0.5); margin-top: 1.5rem; }
+
+        /* FOOTER */
+        footer { background: #0f1e33; color: rgba(255,255,255,0.65); padding: 3rem 2.5rem 2rem; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-logo { font-family: 'Libre Baskerville', serif; font-size: 1.25rem; color: white; font-weight: 700; }
+        .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent-light); }
+        .footer-copy { max-width: 1200px; margin: 0 auto; padding-top: 1.5rem; font-size: 0.82rem; text-align: center; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .roles-grid { grid-template-columns: repeat(2, 1fr); }
+            .tools-grid { grid-template-columns: 1fr 1fr; }
+            .principles { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .join h2 { font-size: 2.25rem; }
+            .hero-ctas { flex-direction: column; align-items: center; }
+            .problem-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .principles { grid-template-columns: 1fr; }
+            .nav-links li:not(:last-child) { display: none; }
+        }
+        @media (max-width: 520px) {
+            .hero { padding: 5rem 1.5rem 5rem; }
+            .hero h1 { font-size: 2rem; }
+            .roles-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <a href="#" class="logo">Prawdziwa Demokracja</a>
+        <ul class="nav-links">
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#rozwiazanie">Rozwiązanie</a></li>
+            <li><a href="#narzedzia">Narzędzia</a></li>
+            <li><a href="#dolacz" class="nav-cta">Dołącz →</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <span class="hero-badge">Inicjatywa obywatelska · Polska 2026</span>
+        <h1>Tylko duża społeczność<br>ma <em>realną moc</em> zmiany</h1>
+        <p class="hero-sub">
+            Nie kolejna partia. Nie kolejny manifest. Budujemy narzędzie wywierania presji społecznej na rządzących — oparte na faktach, deliberacji i sile liczebności.
+        </p>
+        <div class="hero-ctas">
+            <a href="#rozwiazanie" class="btn btn-white">Czym jest deliberacja? →</a>
+            <a href="#rozwiazanie" class="btn btn-outline-white">Dowiedz się więcej</a>
+        </div>
+    </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-label">Diagnoza</span>
+            <h2 class="section-title">Demokracja, która<br>nie słucha obywateli</h2>
+        </div>
+        <div class="problem-grid">
+            <div class="problem-text reveal">
+                <p>Politycy podejmują decyzje <strong>ponad głowami obywateli</strong>. Debata publiczna sprowadza się do krzyku, emocji i plemiennych podziałów. Każde wybory to wybór "mniejszego zła".</p>
+                <p>Obywatele mają <strong>realną władzę tylko raz na cztery lata</strong> — i to jedynie w formie wrzucenia kartki do urny. Między wyborami nikt się z nimi nie liczy.</p>
+                <p>Tymczasem <strong>siła tkwi w liczbach</strong>. Zorganizowana, świadoma społeczność potrafi wymusić zmiany, których nie przeforsuje żaden pojedynczy polityk.</p>
+            </div>
+            <div class="problem-stats reveal">
+                <div class="stat-card">
+                    <span class="big">73%</span>
+                    <p>Polaków uważa, że politycy nie reprezentują ich interesów (CBOS 2024)</p>
+                </div>
+                <div class="stat-card">
+                    <span class="big">4 lata</span>
+                    <p>Tyle czeka przeciętny obywatel na jedyną okazję do wyrażenia zdania w wyborach</p>
+                </div>
+                <div class="stat-card">
+                    <span class="big">0</span>
+                    <p>Mechanizmów deliberacyjnych w polskim ustawodawstwie na poziomie ogólnokrajowym</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution" id="rozwiazanie">
+    <div class="container">
+        <div class="solution-inner reveal">
+            <span class="section-label">Fundament</span>
+            <h2 class="section-title">Czym jest Deliberacja?</h2>
+            <p class="section-lead">Deliberacja to proces wspólnego dochodzenia do decyzji — przeciwieństwo krzyku, emocji i plemiennych podziałów.</p>
+        </div>
+        
+        <div class="problem-grid" style="margin-top: 3rem;">
+            <div class="problem-text reveal">
+                <h3 style="font-family: 'Libre Baskerville', serif; font-size: 1.6rem; color: var(--primary); margin-bottom: 1.5rem;">Deliberacja opiera się na:</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.75rem 0 0.75rem 2.5rem; position: relative; font-size: 1.05rem; line-height: 1.7; border-bottom: 1px solid var(--border);">
+                        <span style="position: absolute; left: 0; top: 0.75rem; font-size: 1.3rem; color: var(--accent); font-weight: 700;">→</span>
+                        Wysłuchaniu różnych perspektyw
+                    </li>
+                    <li style="padding: 0.75rem 0 0.75rem 2.5rem; position: relative; font-size: 1.05rem; line-height: 1.7; border-bottom: 1px solid var(--border);">
+                        <span style="position: absolute; left: 0; top: 0.75rem; font-size: 1.3rem; color: var(--accent); font-weight: 700;">→</span>
+                        Konfrontacji argumentów
+                    </li>
+                    <li style="padding: 0.75rem 0 0.75rem 2.5rem; position: relative; font-size: 1.05rem; line-height: 1.7; border-bottom: 1px solid var(--border);">
+                        <span style="position: absolute; left: 0; top: 0.75rem; font-size: 1.3rem; color: var(--accent); font-weight: 700;">→</span>
+                        Analizie danych i doświadczeń
+                    </li>
+                    <li style="padding: 0.75rem 0 0.75rem 2.5rem; position: relative; font-size: 1.05rem; line-height: 1.7;">
+                        <span style="position: absolute; left: 0; top: 0.75rem; font-size: 1.3rem; color: var(--accent); font-weight: 700;">→</span>
+                        Formułowaniu wniosków, które mogą stać się podstawą realnych decyzji publicznych
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="reveal">
+                <div style="background: white; padding: 2rem; border-radius: 8px; border: 2px solid var(--border);">
+                    <h4 style="color: var(--accent); margin-bottom: 1.25rem; font-size: 1.2rem; font-weight: 700;">To przeciwieństwo:</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.6rem 0 0.6rem 2rem; position: relative; color: var(--text-light); font-size: 1.05rem;">
+                            <span style="position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 1.2rem;">✗</span>
+                            Medialnych awantur
+                        </li>
+                        <li style="padding: 0.6rem 0 0.6rem 2rem; position: relative; color: var(--text-light); font-size: 1.05rem;">
+                            <span style="position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 1.2rem;">✗</span>
+                            Głosowania „na emocjach"
+                        </li>
+                        <li style="padding: 0.6rem 0 0.6rem 2rem; position: relative; color: var(--text-light); font-size: 1.05rem;">
+                            <span style="position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 1.2rem;">✗</span>
+                            Polityki uprawianej ponad głowami obywateli
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 4rem;">
+            <h3 style="font-family: 'Libre Baskerville', serif; font-size: 2rem; color: var(--primary); text-align: center; margin-bottom: 2.5rem;" class="reveal">Dekalog Prawdziwej Demokracji</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; max-width: 1100px; margin: 0 auto;">
+                <div class="principle reveal" style="display: flex; gap: 1.25rem; align-items: start;">
+                    <span style="font-family: 'Libre Baskerville', serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; line-height: 1; flex-shrink: 0;">01</span>
+                    <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.65; margin: 0;">Obywatele są źródłem decyzji, nie tylko elektoratem.</p>
+                </div>
+                <div class="principle reveal" style="display: flex; gap: 1.25rem; align-items: start;">
+                    <span style="font-family: 'Libre Baskerville', serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; line-height: 1; flex-shrink: 0;">02</span>
+                    <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.65; margin: 0;">Każdy głos ma znaczenie, jeśli jest wysłuchany i zrozumiany.</p>
+                </div>
+                <div class="principle reveal" style="display: flex; gap: 1.25rem; align-items: start;">
+                    <span style="font-family: 'Libre Baskerville', serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; line-height: 1; flex-shrink: 0;">03</span>
+                    <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.65; margin: 0;">Konflikt jest naturalny – chaos nie.</p>
+                </div>
+                <div class="principle reveal" style="display: flex; gap: 1.25rem; align-items: start;">
+                    <span style="font-family: 'Libre Baskerville', serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; line-height: 1; flex-shrink: 0;">04</span>
+                    <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.65; margin: 0;">Argumenty są ważniejsze niż tożsamości partyjne.</p>
+                </div>
+                <div class="principle reveal" style="display: flex; gap: 1.25rem; align-items: start;">
+                    <span style="font-family: 'Libre Baskerville', serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; line-height: 1; flex-shrink: 0;">05</span>
+                    <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.65; margin: 0;">Fakty i dane są fundamentem debaty.</p>
+                </div>
+                <div class="principle reveal" style="display: flex; gap: 1.25rem; align-items: start;">
+                    <span style="font-family: 'Libre Baskerville', serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; line-height: 1; flex-shrink: 0;">06</span>
+                    <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.65; margin: 0;">Emocje są ważne, ale nie zastępują rozumu.</p>
+                </div>
+                <div class="principle reveal" style="display: flex; gap: 1.25rem; align-items: start;">
+                    <span style="font-family: 'Libre Baskerville', serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; line-height: 1; flex-shrink: 0;">07</span>
+                    <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.65; margin: 0;">Decyzje wymagają procesu, nie jednego głosowania.</p>
+                </div>
+                <div class="principle reveal" style="display: flex; gap: 1.25rem; align-items: start;">
+                    <span style="font-family: 'Libre Baskerville', serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; line-height: 1; flex-shrink: 0;">08</span>
+                    <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.65; margin: 0;">Mniejszość musi być wysłuchana, większość – odpowiedzialna.</p>
+                </div>
+                <div class="principle reveal" style="display: flex; gap: 1.25rem; align-items: start;">
+                    <span style="font-family: 'Libre Baskerville', serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; line-height: 1; flex-shrink: 0;">09</span>
+                    <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.65; margin: 0;">Transparentność jest warunkiem zaufania.</p>
+                </div>
+                <div class="principle reveal" style="display: flex; gap: 1.25rem; align-items: start;">
+                    <span style="font-family: 'Libre Baskerville', serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; line-height: 1; flex-shrink: 0;">10</span>
+                    <p style="font-size: 1.05rem; color: var(--text-body); line-height: 1.65; margin: 0;">Demokracja to praktyka codzienna, nie święto co cztery lata.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools" id="narzedzia">
+    <div class="container">
+        <div class="tools-header reveal">
+            <span class="section-label">Narzędzia deliberacji</span>
+            <h2 class="section-title">Jak rozmawiamy?</h2>
+            <p class="section-lead">Opieramy się na sprawdzonych metodach deliberacji i nowoczesnych narzędziach konsultacyjnych.</p>
+        </div>
+        <div class="tools-grid">
+            <a href="narzedzia/model-4k.html" class="tool-card reveal">
+                <span class="tool-video-badge">▶ Film dostępny</span>
+                <span class="tool-tag">Metoda</span>
+                <h3>Model Debaty 4K</h3>
+                <p>Czterostopniowy proces, który zamienia konflikt w decyzję: Konflikt → Konfrontacja → Konsultacja → Konkluzja.</p>
+                <span class="tool-link">Zobacz jak działa <span class="arrow">→</span></span>
+            </a>
+            <a href="narzedzia/polis.html" class="tool-card reveal">
+                <span class="tool-tag">Narzędzie</span>
+                <h3>Polis</h3>
+                <p>Innowacyjne narzędzie konsultacji społecznych, które identyfikuje punkty wspólne bez polaryzacji "za/przeciw".</p>
+                <span class="tool-link">Dowiedz się więcej <span class="arrow">→</span></span>
+            </a>
+            <a href="narzedzia/kialo.html" class="tool-card reveal">
+                <span class="tool-tag">Narzędzie</span>
+                <h3>Kialo</h3>
+                <p>Platforma do strukturyzowanej debaty, która porządkuje argumenty i kontrargumenty w czytelne drzewo decyzyjne.</p>
+                <span class="tool-link">Dowiedz się więcej <span class="arrow">→</span></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- JOIN -->
+<section class="join" id="dolacz">
+    <div class="join-inner">
+        <div class="reveal">
+            <span class="section-label" style="color: var(--accent-light);">Dołącz do nas</span>
+            <h2>Każdy może wnieść<br>swoją <em>wartość</em> w inicjatywie</h2>
+            <p>Wybierz swoją rolę w ruchu. Każdy typ osobowości jest potrzebny — razem tworzymy kompletny ekosystem zmiany.</p>
+        </div>
+        <div class="roles-grid reveal">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8rotY7poYjDqkQ17tiW-j5P-W7JLuPsqNkMB9POPXruwtBw/viewform?usp=pp_url&entry.603345533=Lider" class="role-card role-red" target="_blank" rel="noopener">
+                <span class="role-dot"></span>
+                <span class="role-label">Czerwony</span>
+                <h4>Lider</h4>
+                <p>Działasz, motywujesz, robisz szum. Budujesz widoczność ruchu i mobilizujesz innych do działania.</p>
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8rotY7poYjDqkQ17tiW-j5P-W7JLuPsqNkMB9POPXruwtBw/viewform?usp=pp_url&entry.603345533=Analityk" class="role-card role-blue" target="_blank" rel="noopener">
+                <span class="role-dot"></span>
+                <span class="role-label">Niebieski</span>
+                <h4>Analityk</h4>
+                <p>Zbierasz dane, analizujesz problemy i dostarczasz rozwiązania oparte na faktach i dowodach.</p>
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8rotY7poYjDqkQ17tiW-j5P-W7JLuPsqNkMB9POPXruwtBw/viewform?usp=pp_url&entry.603345533=Budowniczy" class="role-card role-yellow" target="_blank" rel="noopener">
+                <span class="role-dot"></span>
+                <span class="role-label">Żółty</span>
+                <h4>Budowniczy</h4>
+                <p>Tworzysz zaufanie społeczne, łączysz ludzi i budujesz mosty między różnymi środowiskami.</p>
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8rotY7poYjDqkQ17tiW-j5P-W7JLuPsqNkMB9POPXruwtBw/viewform?usp=pp_url&entry.603345533=Stra%C5%BCnik" class="role-card role-green" target="_blank" rel="noopener">
+                <span class="role-dot"></span>
+                <span class="role-label">Zielony</span>
+                <h4>Strażnik</h4>
+                <p>Pilnujesz, by nikt nie został pominięty. Dostrzegasz zagrożenia i chronisz najsłabszych.</p>
+            </a>
+        </div>
+        <p class="join-note">Kliknięcie w kartę otworzy formularz rejestracji. Twój wybór roli zostanie zapisany automatycznie.</p>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-logo">Prawdziwa Demokracja</div>
+        <div class="footer-links">
+            <a href="mapa-drogowa.html">Mapa Drogowa</a>
+            <a href="blog.html">Aktualności</a>
+            <a href="narzedzia/model-4k.html">Narzędzia</a>
+            <a href="#dolacz">Dołącz</a>
+            <a href="mailto:kontakt@prawdziwademokracja.pl">Kontakt</a>
+        </div>
+    </div>
+    <div class="footer-copy">
+        <p>&copy; 2025 Prawdziwa Demokracja. Inicjatywa obywatelska.</p>
+    </div>
+</footer>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 80);
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id'); });
+        navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--primary)' : ''; });
+    });
+</script>
+</body>
+</html>
