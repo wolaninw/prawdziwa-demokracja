@@ -24,8 +24,8 @@
             --green: #276749; --green-light: #f0fff4; --green-border: #9ae6b4;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Work Sans', sans-serif; color: var(--text-body); line-height: 1.7; background-color: var(--bg-cream); overflow-x: hidden; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+        body { font-family: 'Work Sans', sans-serif; color: var(--text-body); line-height: 1.7; background-color: var(--bg-cream); width: 100%; overflow-x: hidden; position: relative; }
         ::selection { background: var(--accent-light); color: white; }
 
         /* NAV */
@@ -40,8 +40,8 @@
         .nav-cta:hover { background: var(--accent) !important; transform: translateY(-2px); }
 
         /* MOBILE MENU */
-        .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-        .mobile-menu-btn span { width: 25px; height: 3px; background: var(--primary); border-radius: 3px; transition: all 0.3s; }
+        .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1001; position: relative; }
+        .mobile-menu-btn span { width: 25px; height: 3px; background: var(--primary); border-radius: 3px; transition: all 0.3s; display: block; }
         .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
         .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
         .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
@@ -62,7 +62,7 @@
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
         /* HERO */
-        .hero { margin-top: 68px; padding: 7rem 2.5rem 6rem; background: var(--primary); position: relative; overflow: hidden; }
+        .hero { margin-top: 68px; padding: 7rem 2.5rem 6rem; background: var(--primary); position: relative; overflow: hidden; max-width: 100%; }
         
         /* Scroll padding for anchor links */
         section[id] { scroll-margin-top: 80px; }
@@ -161,19 +161,21 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: flex; }
-            .nav-container { padding: 1.1rem 1.5rem; }
+            .nav-container { padding: 1rem 1rem; }
             .logo { font-size: 1.1rem; }
-            .hero { padding: 5rem 1.5rem 5rem; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero-sub { font-size: 1.1rem; }
-            .section-title { font-size: 2rem; }
-            .join h2 { font-size: 2.25rem; }
-            .hero-ctas { flex-direction: column; align-items: stretch; }
-            .btn { justify-content: center; }
+            .hero { padding: 4rem 1.25rem 4rem; margin-top: 60px; }
+            .hero h1 { font-size: 2.2rem; line-height: 1.2; }
+            .hero-sub { font-size: 1.05rem; padding: 0 0.5rem; }
+            .hero-badge { font-size: 0.75rem; padding: 0.35rem 0.9rem; }
+            .section-title { font-size: 1.85rem; }
+            .join h2 { font-size: 2rem; }
+            .hero-ctas { flex-direction: column; align-items: stretch; gap: 1rem; }
+            .btn { justify-content: center; padding: 0.9rem 1.5rem; font-size: 0.95rem; }
             .problem-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .tools-grid { grid-template-columns: 1fr; }
+            .tools-grid { grid-template-columns: 1fr !important; max-width: 100% !important; }
             .roles-grid { grid-template-columns: 1fr; }
-            .container { padding: 0 1.5rem; }
+            .container { padding: 0 1.25rem; }
+            .problem, .solution, .tools, .join { padding: 4rem 1.25rem; }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {

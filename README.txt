@@ -1,42 +1,35 @@
-PRAWDZIWA DEMOKRACJA - Paczka do publikacji
-============================================
+PRAWDZIWA DEMOKRACJA - Paczka do publikacji (v2)
+=================================================
+
+POPRAWKI W TEJ WERSJI:
+======================
+✅ Naprawiony hamburger - większy obszar klikalny
+✅ Strona nie wychodzi poza ekran na mobile
+✅ Zmniejszone paddingi na mobile (1.25rem zamiast 1.5-2.5rem)
+✅ Hero dopasowane do małych ekranów
+✅ Logo i czcionki zmniejszone na mobile
+✅ Dodany overflow-x: hidden na html i body
 
 STRUKTURA PLIKÓW:
 ================
 prawdziwa-demokracja-package/
-├── index.html                          (strona główna - WYMAGANE)
-├── blog.html                           (lista aktualności)
-├── mapa-drogowa.html                   (mapa drogowa eksperymentu)
+├── index.html
+├── blog.html
+├── mapa-drogowa.html
 ├── narzedzia/
-│   ├── model-4k.html                   (Model Debaty 4K z filmem YouTube)
-│   └── polis.html                      (Konsultacje społeczne z AI)
+│   ├── model-4k.html
+│   └── polis.html
 └── aktualnosci/
-    └── 20260215-pierwsze-kroki.html    (przykładowy wpis na blog)
+    └── 20260215-pierwsze-kroki.html
 
-JAK OPUBLIKOWAĆ NA GITHUB PAGES:
-=================================
+JAK OPUBLIKOWAĆ:
+===============
+1. GitHub.com → repozytorium wolaninw/prawdziwa-demokracja
+2. Usuń WSZYSTKIE stare pliki
+3. Upload nowych plików z zachowaniem struktury folderów
+4. Settings → Pages → Source: main branch → Save
+5. Sprawdź po 2 minutach: https://wolaninw.github.io/prawdziwa-demokracja/
 
-1. Zaloguj się na GitHub.com
-2. Wejdź do repozytorium: github.com/wolaninw/prawdziwa-demokracja
-3. Usuń wszystkie stare pliki (jeśli są)
-4. Upload wszystkich plików z tej paczki zachowując strukturę folderów:
-   - Przeciągnij index.html, blog.html, mapa-drogowa.html do głównego katalogu
-   - Stwórz folder "narzedzia" i wgraj tam pliki z folderu narzedzia/
-   - Stwórz folder "aktualnosci" i wgraj tam pliki z folderu aktualnosci/
-5. Settings → Pages → Source: main branch → Save
-6. Odśwież po 2 minutach
-
-Strona będzie dostępna pod:
-https://wolaninw.github.io/prawdziwa-demokracja/
-
-POPRAWKI W TEJ WERSJI:
-======================
-✅ Naprawione mobile menu - nie wychodzi poza ekran
-✅ Hamburger menu poprawnie wyświetla się na mobile
-✅ Zmniejszone paddingi w menu mobile
-✅ Logo zmniejszone na mobile
-✅ Dodany scrollbar gdy menu jest za długie
-
-GOTOWE!
-=======
-Po uploadzie możesz testować stronę na grupie fokusowej.
+TESTOWANIE:
+===========
+Wyczyść cache (Ctrl+Shift+R) i przetestuj na telefonie.
