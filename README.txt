@@ -29,12 +29,13 @@ JAK OPUBLIKOWAĆ NA GITHUB PAGES:
 Strona będzie dostępna pod:
 https://wolaninw.github.io/prawdziwa-demokracja/
 
-WAŻNE UWAGI:
-============
-- Główny plik MUSI nazywać się index.html (nie prawdziwa-demokracja.html)
-- Zachowaj strukturę folderów (narzedzia/, aktualnosci/)
-- Formularz Google jest już podłączony z pre-filled wartościami ról
-- Film YouTube w Model 4K jest już osadzony
+POPRAWKI W TEJ WERSJI:
+======================
+✅ Naprawione mobile menu - nie wychodzi poza ekran
+✅ Hamburger menu poprawnie wyświetla się na mobile
+✅ Zmniejszone paddingi w menu mobile
+✅ Logo zmniejszone na mobile
+✅ Dodany scrollbar gdy menu jest za długie
 
 GOTOWE!
 =======

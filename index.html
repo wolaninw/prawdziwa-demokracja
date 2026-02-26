@@ -45,13 +45,14 @@
         .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
         .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
         .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
-        .mobile-nav { display: none; position: fixed; top: 68px; left: 0; right: 0; background: white; border-bottom: 2px solid var(--primary); padding: 1.5rem 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 999; }
+        .mobile-nav { display: none; position: fixed; top: 68px; left: 0; right: 0; background: white; border-bottom: 2px solid var(--primary); padding: 1rem 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 999; max-height: calc(100vh - 68px); overflow-y: auto; }
         .mobile-nav.active { display: block; }
         .mobile-nav ul { list-style: none; padding: 0; }
-        .mobile-nav ul li { margin-bottom: 1.25rem; }
-        .mobile-nav ul li a { color: var(--text-body); text-decoration: none; font-size: 1.05rem; font-weight: 500; display: block; padding: 0.5rem 0; }
+        .mobile-nav ul li { margin-bottom: 0.75rem; }
+        .mobile-nav ul li a { color: var(--text-body); text-decoration: none; font-size: 1rem; font-weight: 500; display: block; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+        .mobile-nav ul li:last-child a { border-bottom: none; }
         .mobile-nav ul li a:hover { color: var(--primary); }
-        .mobile-nav .nav-cta { display: block; text-align: center; margin-top: 1rem; }
+        .mobile-nav .nav-cta { display: block; text-align: center; margin-top: 0.5rem; border: none; padding: 0.75rem 1.25rem; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
         .section-label { display: inline-block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-bottom: 1rem; }
@@ -160,6 +161,8 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu-btn { display: flex; }
+            .nav-container { padding: 1.1rem 1.5rem; }
+            .logo { font-size: 1.1rem; }
             .hero { padding: 5rem 1.5rem 5rem; }
             .hero h1 { font-size: 2.5rem; }
             .hero-sub { font-size: 1.1rem; }
