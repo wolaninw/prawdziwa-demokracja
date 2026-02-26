@@ -1,28 +1,27 @@
-PRAWDZIWA DEMOKRACJA - Paczka do publikacji (v3)
-=================================================
+PRAWDZIWA DEMOKRACJA - Paczka do publikacji (v4 - NAPRAWIONE LINKI!)
+====================================================================
 
-POPRAWKI W TEJ WERSJI:
-======================
-✅ Skrócony opis AI w kafelku (lepiej się mieści na mobile)
-✅ Tool card - mniejsze czcionki na mobile (h3: 1.3rem, p: 0.9rem)
-✅ Tool link - mniejsza czcionka (0.85rem)
-✅ Lepsze paddingi w kartach na mobile (2rem 1.5rem)
+🔥 KRYTYCZNA POPRAWKA - LINKI DZIAŁAJĄ! 🔥
+==========================================
+✅ model-4k.html - wszystkie linki prowadzą do ../index.html (nie prawdziwa-demokracja.html)
+✅ polis.html - wszystkie linki poprawne
+✅ Nawigacja działa w obie strony
 
-WSZYSTKIE POPRZEDNIE POPRAWKI:
-==============================
-✅ Hamburger menu działa
-✅ Strona nie wychodzi poza ekran
-✅ Zmniejszone paddingi na mobile
-✅ Overflow-x: hidden
+WSZYSTKIE POPRAWKI:
+===================
+✅ Linki działają (v4)
+✅ Tool-card na mobile (v3)
+✅ Hamburger menu (v2)
+✅ Responsywność mobile (v1-3)
 
 STRUKTURA:
 ==========
 prawdziwa-demokracja-package/
-├── index.html
-├── blog.html  
+├── index.html                   ← Strona główna
+├── blog.html
 ├── mapa-drogowa.html
 ├── narzedzia/
-│   ├── model-4k.html
+│   ├── model-4k.html           ← POPRAWIONE LINKI!
 │   └── polis.html
 └── aktualnosci/
     └── 20260215-pierwsze-kroki.html
@@ -30,9 +29,11 @@ prawdziwa-demokracja-package/
 PUBLIKACJA:
 ===========
 1. GitHub → wolaninw/prawdziwa-demokracja
-2. Usuń stare pliki
-3. Upload z zachowaniem struktury folderów
-4. Settings → Pages → main branch → Save
-5. Link: https://wolaninw.github.io/prawdziwa-demokracja/
+2. USUŃ WSZYSTKIE stare pliki (ważne!)
+3. Upload nowych plików
+4. Settings → Pages → main → Save
+5. Wyczyść cache (Ctrl+Shift+R)
 
-TESTUJ z czystym cache (Ctrl+Shift+R)
+Link: https://wolaninw.github.io/prawdziwa-demokracja/
+
+TERAZ WSZYSTKO POWINNO DZIAŁAĆ!
