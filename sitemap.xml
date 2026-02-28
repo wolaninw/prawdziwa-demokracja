@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Strona główna -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Blog/Aktualności -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/blog.html</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Mapa drogowa -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/mapa-drogowa.html</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Model 4K -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/narzedzia/model-4k.html</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Konsultacje AI -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/narzedzia/polis.html</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Wpis blogowy - przykład -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/aktualnosci/20260215-pierwsze-kroki.html</loc>
+    <lastmod>2026-02-15</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+</urlset>

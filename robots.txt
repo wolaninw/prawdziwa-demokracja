@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://prawdziwademokracja.pl/sitemap.xml
+
+# Crawl-delay (opcjonalnie)
+Crawl-delay: 10

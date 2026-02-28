@@ -1,0 +1,132 @@
+# GOOGLE SEARCH CONSOLE - INSTRUKCJA KROK PO KROKU
+
+## 🎯 CEL: Dodać stronę do indeksowania Google
+
+---
+
+## KROK 1: Wejdź do Google Search Console
+
+1. Otwórz: https://search.google.com/search-console/
+2. Zaloguj się na konto Google
+3. Kliknij "Dodaj zasób" lub "Add property"
+
+---
+
+## KROK 2: Dodaj domenę
+
+**Wybierz typ zasobu:**
+- Preferowany: **"Domena"** (wszystkie warianty URL)
+- Wpisz: `prawdziwademokracja.pl`
+- Kliknij "Kontynuuj"
+
+---
+
+## KROK 3: Weryfikacja domeny (DNS)
+
+Google pokaże rekord TXT do dodania w DNS:
+
+**Przykład:**
+```
+Typ: TXT
+Name: @ (lub prawdziwademokracja.pl)
+Value: google-site-verification=AbCdEf123456789... (dostaniesz unikalny kod)
+```
+
+### Gdzie dodać:
+
+1. **OVH Panel** → Domeny → prawdziwademokracja.pl → Strefa DNS
+2. Kliknij "Dodaj rekord"
+3. Typ: **TXT**
+4. Subdomena: **@** (puste)
+5. Wartość: **Wklej kod z Google** (cały string google-site-verification=...)
+6. TTL: 3600
+7. **Zapisz**
+
+### Weryfikacja:
+
+1. **Wróć do Google Search Console**
+2. Kliknij "Weryfikuj"
+3. Jeśli nie działa od razu → **poczekaj 5-15 minut** (propagacja DNS)
+4. Spróbuj ponownie "Weryfikuj"
+
+---
+
+## KROK 4: Prześlij sitemap
+
+Po weryfikacji:
+
+1. **Lewy panel** → "Mapy witryn" (Sitemaps)
+2. W polu wpisz: `sitemap.xml`
+3. Kliknij "Prześlij"
+4. ✅ Status powinien być "Sukces"
+
+---
+
+## KROK 5: Wymuś indeksowanie
+
+1. **Lewy panel** → "Kontrola adresów URL"
+2. Wpisz: `https://prawdziwademokracja.pl`
+3. Kliknij "Enter"
+4. Google sprawdzi URL
+5. Kliknij **"Poproś o indeksowanie"**
+6. Potwierdź
+
+Powtórz dla:
+- `https://prawdziwademokracja.pl/blog.html`
+- `https://prawdziwademokracja.pl/narzedzia/model-4k.html`
+- `https://prawdziwademokracja.pl/narzedzia/polis.html`
+
+---
+
+## ⏰ TIMELINE:
+
+- Weryfikacja DNS: 5-30 minut
+- Pierwsza indeksacja: 1-7 dni
+- Pełna indeksacja: 2-4 tygodnie
+- Pozycjonowanie: 1-3 miesiące
+
+---
+
+## 📊 CO MONITOROWAĆ:
+
+W Google Search Console śledź:
+- **Wydajność** - kliknięcia, wyświetlenia, pozycje
+- **Zasięg** - które strony są indeksowane
+- **Zapytania** - jakie frazy prowadzą na stronę
+- **Core Web Vitals** - szybkość strony
+
+---
+
+## ✅ CHECKLIST:
+
+- [ ] Dodano zasób w Google Search Console
+- [ ] Dodano rekord TXT w OVH DNS
+- [ ] Zweryfikowano domenę
+- [ ] Przesłano sitemap.xml
+- [ ] Wymuszono indeksowanie głównych stron
+- [ ] Ustawiono powiadomienia email
+
+---
+
+## 🔥 DODATKOWE AKCJE SEO:
+
+### 1. Google Analytics (opcjonalnie)
+- https://analytics.google.com
+- Dodaj kod śledzenia do index.html
+
+### 2. Backlinki
+- Dodaj link do strony na:
+  - LinkedIn
+  - Facebook
+  - Twitter/X
+  - Reddit (r/Polska)
+  - Forum dyskusyjne
+
+### 3. Content Marketing
+- Publikuj nowe wpisy co tydzień
+- Używaj fraz kluczowych naturalnie
+- Dodawaj linki wewnętrzne między stronami
+
+---
+
+GOTOWE! 🚀
