@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | Prawdziwa Demokracja</title>
+    <meta name="description" content="Skontaktuj się z inicjatywą Prawdziwa Demokracja. Pytania, współpraca, dołączenie do społeczności.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #c05621;
+            --accent-light: #ed8936;
+            --text-dark: #1a202c;
+            --text-body: #2d3748;
+            --text-light: #718096;
+            --bg-cream: #faf7f4;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text-body);
+            line-height: 1.7;
+            background-color: var(--bg-cream);
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--primary);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 65%;
+            height: 3px;
+            background: var(--accent-light);
+        }
+
+        .back-link {
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: var(--primary); }
+
+        /* Hero */
+        .hero {
+            margin-top: 68px;
+            padding: 5rem 2.5rem 4rem;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content */
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2.5rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-card h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+        }
+
+        .contact-card p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-body);
+        }
+
+        .contact-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent);
+        }
+
+        .info-box {
+            background: #fffbeb;
+            border: 2px solid #fbbf24;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            color: #92400e;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box p {
+            color: #78350f;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f1e33;
+            color: rgba(255,255,255,0.65);
+            padding: 3rem 2.5rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-copy {
+            font-size: 0.82rem;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.05rem; }
+            .content { padding: 3rem 1.5rem; }
+            .contact-card { padding: 2rem 1.5rem; }
+            .nav-container { padding: 1rem; }
+            .logo { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-container">
+        <a href="index.html" class="logo">Prawdziwa Demokracja</a>
+        <a href="index.html" class="back-link">← Strona główna</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div>
+        <h1>Kontakt</h1>
+        <p>Masz pytania? Chcesz współpracować? Napisz lub zadzwoń.</p>
+    </div>
+</section>
+
+<!-- Content -->
+<section class="content">
+    
+    <div class="contact-grid">
+        
+        <div class="contact-card">
+            <h3><span class="contact-icon">📧</span> Email</h3>
+            <p>Najszybszy sposób kontaktu. Odpowiadamy zwykle w ciągu 24-48 godzin.</p>
+            <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a>
+        </div>
+
+        <div class="contact-card">
+            <h3><span class="contact-icon">📱</span> Telefon</h3>
+            <p>Preferujemy kontakt mailowy, ale w pilnych sprawach możesz zadzwonić.</p>
+            <a href="tel:+48731370032">+48 731 370 032</a>
+        </div>
+
+    </div>
+
+    <div class="info-box">
+        <h4>🤖 W przyszłości: Agent AI</h4>
+        <p>Planujemy wdrożenie agenta AI, który będzie odpowiadał na najczęstsze pytania i pomagał w nawigacji po projekcie. Obecne dane kontaktowe mogą ulec zmianie — będziemy o tym informować na stronie.</p>
+    </div>
+
+    <h2 style="font-family: 'Libre Baskerville', serif; font-size: 2rem; color: var(--primary); margin: 3rem 0 1.5rem;">O czym możesz napisać?</h2>
+
+    <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+        • <strong>Chcesz dołączyć do społeczności</strong> — napisz, w jakiej roli widzisz swoją aktywność
+    </p>
+
+    <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+        • <strong>Masz pytania o projekt</strong> — chętnie wyjaśnimy szczegóły
+    </p>
+
+    <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+        • <strong>Widzisz możliwość współpracy</strong> — jesteśmy otwarci na partnerstwa z NGO, uczelniami, mediami
+    </p>
+
+    <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+        • <strong>Chcesz zorganizować deliberację w swoim regionie</strong> — porozmawiamy o pilotażu
+    </p>
+
+    <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+        • <strong>Masz uwagi do strony lub projektu</strong> — każdy feedback jest cenny
+    </p>
+
+    <h2 style="font-family: 'Libre Baskerville', serif; font-size: 2rem; color: var(--primary); margin: 3rem 0 1.5rem;">Czasu odpowiedzi</h2>
+
+    <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+        Staramy się odpowiadać na wszystkie wiadomości w ciągu <strong>24-48 godzin</strong> (dni robocze).
+    </p>
+
+    <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+        Jeśli nie otrzymałeś odpowiedzi w tym czasie — sprawdź folder SPAM lub napisz ponownie.
+    </p>
+
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="index.html">Strona główna</a>
+            <a href="index.html#narzedzia">Narzędzia</a>
+            <a href="blog.html">Aktualności</a>
+            <a href="kontakt.html">Kontakt</a>
+        </div>
+        <div class="footer-copy">
+            <p>&copy; 2026 Prawdziwa Demokracja. Inicjatywa obywatelska.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

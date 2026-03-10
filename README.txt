@@ -1,63 +1,66 @@
-PRAWDZIWA DEMOKRACJA - PACZKA Z SEO (v5.1)
-==========================================
+PRAWDZIWA DEMOKRACJA - WERSJA Z KONTAKTEM (v10)
+================================================
 
-🚀 AKTUALIZACJA - ROZSZERZONE KEYWORDS!
-========================================
-✅ Dodano 9 nowych fraz kluczowych (razem 17 fraz)
+🆕 NOWA STRONA KONTAKTOWA!
+==========================
+✅ Dedykowana strona kontakt.html
+✅ Email: wolanin.w@gmail.com
+✅ Telefon: +48 731 370 032
+✅ Info o przyszłym agencie AI
+✅ Sekcja "O czym możesz napisać?"
+✅ Czas odpowiedzi: 24-48h
 
-WSZYSTKIE FRAZY KLUCZOWE:
-=========================
-Główne:
-• deliberacja polska
-• debata 4K
-• prawdziwa demokracja
-• demokracja obywatelska
-• konsultacje społeczne AI
-• debata deliberatywna
-• konsultacje społeczne
-• inicjatywa obywatelska
+ZAWARTOŚĆ STRONY KONTAKTOWEJ:
+==============================
+→ 2 karty kontaktowe (Email, Telefon)
+→ Yellow info box (przyszły agent AI)
+→ Lista tematów (dołączenie, pytania, współpraca, deliberacja, feedback)
+→ Czas odpowiedzi
+→ Responsive design
 
-Dodatkowe:
-• demokracja deliberatywna
-• czym jest deliberacja
-• model deliberacji
-• proces deliberacyjny
-• podejmowanie decyzji publicznych
-• konsultacje społeczne online
-• nowoczesna demokracja
-• narzędzia partycypacyjne
+DANE KONTAKTOWE:
+================
+Email: wolanin.w@gmail.com
+Tel: +48 731 370 032
 
-PEŁNE SEO ZAWIERA:
-==================
-✅ 17 fraz kluczowych w meta keywords
-✅ Meta tagi (title, description)
-✅ Open Graph + Twitter Cards
-✅ Schema.org structured data
-✅ robots.txt
-✅ sitemap.xml
-✅ Canonical URLs
-✅ Instrukcja Google Search Console
+UWAGA:
+======
+⚠️ W przyszłości planowane wdrożenie agenta AI
+⚠️ Dane kontaktowe mogą ulec zmianie
+⚠️ Będzie komunikat na stronie
 
-STRUKTURA:
-==========
+PEŁNA STRUKTURA:
+=================
 prawdziwa-demokracja-package/
-├── index.html                          ← 17 keywords!
+├── index.html                                   ← zaktualizowany link
 ├── blog.html
+├── kontakt.html                                 ← NOWA STRONA!
 ├── mapa-drogowa.html
 ├── robots.txt
-├── sitemap.xml
-├── GOOGLE_SEARCH_CONSOLE.txt           ← PRZECZYTAJ!
+├── sitemap.xml                                  ← zaktualizowany!
+├── GOOGLE_SEARCH_CONSOLE.txt
 ├── narzedzia/
 │   ├── model-4k.html
 │   └── polis.html
 └── aktualnosci/
-    └── 20260215-pierwsze-kroki.html
+    ├── 20260215-pierwsze-kroki.html
+    ├── czym-jest-deliberacja.html
+    └── dlaczego-debata-przestala-dzialac.html
 
-WDROŻENIE:
-==========
-1. Upload na GitHub
-2. Dodaj do Google Search Console (instrukcja w paczce)
-3. Publikuj content regularnie
-4. Buduj backlinki
+ZAWARTOŚĆ KOMPLETNA:
+====================
+✅ 8 stron HTML
+✅ 3 artykuły na blogu
+✅ 2 narzędzia
+✅ Strona kontaktowa
+✅ Pełne SEO
+✅ Mobile responsive
 
-GOTOWE DO POZYCJONOWANIA! 🎯
+PUBLIKACJA:
+===========
+1. Upload wszystkich plików
+2. Test linków w footerze (każda strona → kontakt)
+3. Sprawdź mailto: i tel: linki na mobile
+4. Prześlij zaktualizowany sitemap.xml
+
+GOTOWE DO PUBLIKACJI! ✅

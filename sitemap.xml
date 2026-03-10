@@ -12,9 +12,17 @@
   <!-- Blog/Aktualności -->
   <url>
     <loc>https://prawdziwademokracja.pl/blog.html</loc>
-    <lastmod>2026-02-26</lastmod>
+    <lastmod>2026-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  
+  <!-- Kontakt -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/kontakt.html</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   
   <!-- Mapa drogowa -->
@@ -47,6 +55,22 @@
     <lastmod>2026-02-15</lastmod>
     <changefreq>never</changefreq>
     <priority>0.6</priority>
+  </url>
+  
+  <!-- Artykuł edukacyjny o deliberacji -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/aktualnosci/czym-jest-deliberacja.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Artykuł o problemach debaty publicznej -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/aktualnosci/dlaczego-debata-przestala-dzialac.html</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   
 </urlset>
