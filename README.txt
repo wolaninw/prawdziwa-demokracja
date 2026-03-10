@@ -1,66 +1,47 @@
-PRAWDZIWA DEMOKRACJA - WERSJA Z KONTAKTEM (v10)
-================================================
+PRAWDZIWA DEMOKRACJA - FINALNA WERSJA (v14)
+============================================
 
-🆕 NOWA STRONA KONTAKTOWA!
+✅ NOWY HERO Z KOLOROWYMI AKCENTAMI!
+====================================
+
+Nagłówek:
+"Czy w Polsce da się 
+ROZMAWIAĆ (pomarańczowy) zamiast KRZYCZEĆ (pomarańczowy)?"
+
+Podtytuł:
+"Testujemy to w projekcie Prawdziwa Demokracja."
+
+WIZUALNY EFEKT:
+===============
+• Słowa kluczowe "rozmawiać" i "krzyczeć" podświetlone na pomarańczowo
+• Kolor: #ed8936 (accent-light)
+• Wyróżnia kluczowy kontrast przekazu
+
+WSZYSTKIE POPRAWKI W v14:
 ==========================
-✅ Dedykowana strona kontakt.html
-✅ Email: wolanin.w@gmail.com
-✅ Telefon: +48 731 370 032
-✅ Info o przyszłym agencie AI
-✅ Sekcja "O czym możesz napisać?"
-✅ Czas odpowiedzi: 24-48h
+✅ Hero z kolorowymi akcentami
+✅ Kolejność artykułów chronologiczna (najnowszy → najstarszy)
+✅ Wszystkie linki "Kontakt" działają
+✅ Pełne footery na wszystkich podstronach
 
-ZAWARTOŚĆ STRONY KONTAKTOWEJ:
-==============================
-→ 2 karty kontaktowe (Email, Telefon)
-→ Yellow info box (przyszły agent AI)
-→ Lista tematów (dołączenie, pytania, współpraca, deliberacja, feedback)
-→ Czas odpowiedzi
-→ Responsive design
-
-DANE KONTAKTOWE:
-================
-Email: wolanin.w@gmail.com
-Tel: +48 731 370 032
-
-UWAGA:
-======
-⚠️ W przyszłości planowane wdrożenie agenta AI
-⚠️ Dane kontaktowe mogą ulec zmianie
-⚠️ Będzie komunikat na stronie
-
-PEŁNA STRUKTURA:
+ZAWARTOŚĆ PACZKI:
 =================
-prawdziwa-demokracja-package/
-├── index.html                                   ← zaktualizowany link
-├── blog.html
-├── kontakt.html                                 ← NOWA STRONA!
-├── mapa-drogowa.html
-├── robots.txt
-├── sitemap.xml                                  ← zaktualizowany!
-├── GOOGLE_SEARCH_CONSOLE.txt
-├── narzedzia/
-│   ├── model-4k.html
-│   └── polis.html
-└── aktualnosci/
-    ├── 20260215-pierwsze-kroki.html
-    ├── czym-jest-deliberacja.html
-    └── dlaczego-debata-przestala-dzialac.html
+→ 8 stron HTML
+→ 3 artykuły (10.03, 28.02, 15.02)
+→ Strona kontaktowa
+→ Pełne SEO
+→ Mobile responsive
 
-ZAWARTOŚĆ KOMPLETNA:
-====================
-✅ 8 stron HTML
-✅ 3 artykuły na blogu
-✅ 2 narzędzia
-✅ Strona kontaktowa
-✅ Pełne SEO
-✅ Mobile responsive
+ARTYKUŁ DO PUBLIKACJI PÓŹNIEJ:
+===============================
+📁 DO-PUBLIKACJI-POZNIEJ/
+   └── "Czy zwykli obywatele potrafią podejmować dobre decyzje?"
 
 PUBLIKACJA:
 ===========
-1. Upload wszystkich plików
-2. Test linków w footerze (każda strona → kontakt)
-3. Sprawdź mailto: i tel: linki na mobile
-4. Prześlij zaktualizowany sitemap.xml
+1. Upload wszystkich plików (oprócz DO-PUBLIKACJI-POZNIEJ/)
+2. Sprawdź hero - pomarańczowe akcenty
+3. Test mobile (responsive)
+4. Share na social media
 
-GOTOWE DO PUBLIKACJI! ✅
+GOTOWE DO PUBLIKACJI! 🚀

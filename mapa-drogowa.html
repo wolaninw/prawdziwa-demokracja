@@ -475,11 +475,33 @@
             padding: 3rem 2.5rem 2rem;
         }
 
-        .footer-copy {
+        .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-copy {
             font-size: 0.82rem;
+            opacity: 0.5;
         }
 
         /* Responsive */
@@ -699,8 +721,16 @@
 
 <!-- Footer -->
 <footer>
-    <div class="footer-copy">
-        <p>&copy; 2026 Prawdziwa Demokracja. Inicjatywa obywatelska.</p>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="index.html">Strona główna</a>
+            <a href="index.html#narzedzia">Narzędzia</a>
+            <a href="blog.html">Aktualności</a>
+            <a href="kontakt.html">Kontakt</a>
+        </div>
+        <div class="footer-copy">
+            <p>&copy; 2026 Prawdziwa Demokracja. Inicjatywa obywatelska.</p>
+        </div>
     </div>
 </footer>
 
