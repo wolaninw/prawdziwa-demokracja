@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dlaczego debata publiczna przestała działać? | Prawdziwa Demokracja</title>
+    <meta name="description" content="Coraz więcej osób ma wrażenie, że współczesna debata publiczna przestała spełniać swoją podstawową funkcję. Zamiast prowadzić do decyzji, kończy się kłótnią.">
+    <meta name="keywords" content="debata publiczna polska, polaryzacja polityczna, media społecznościowe, algorytmy, debata jako spektakl, konflikt polityczny">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #c05621;
+            --accent-light: #ed8936;
+            --text-dark: #1a202c;
+            --text-body: #2d3748;
+            --text-light: #718096;
+            --bg-cream: #faf7f4;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text-body);
+            line-height: 1.7;
+            background-color: var(--bg-cream);
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--primary);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 65%;
+            height: 3px;
+            background: var(--accent-light);
+        }
+
+        .back-link {
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: var(--primary); }
+
+        /* Hero */
+        .hero {
+            margin-top: 68px;
+            padding: 5rem 2.5rem 4rem;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-meta {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Article */
+        .article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2.5rem;
+        }
+
+        .article p {
+            font-size: 1.1rem;
+            line-height: 1.85;
+            margin-bottom: 1.5rem;
+        }
+
+        .article h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+        }
+
+        .article h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 2.5rem 0 1rem;
+            line-height: 1.4;
+        }
+
+        .article strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .article em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2744 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            margin: 3rem 0;
+        }
+
+        .highlight-box p {
+            margin: 0 0 1rem 0;
+            opacity: 1;
+            color: #ffffff;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-box strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .example-box {
+            background: #fff5f5;
+            border: 2px solid #feb2b2;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .example-box h4 {
+            color: #c53030;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box {
+            background: var(--primary);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-box h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .cta-box p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2.25rem;
+            border-radius: 7px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            background: white;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent-light);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f1e33;
+            color: rgba(255,255,255,0.65);
+            padding: 3rem 2.5rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-copy {
+            font-size: 0.82rem;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .article { padding: 3rem 1.5rem; }
+            .article h2 { font-size: 1.6rem; }
+            .article p { font-size: 1.05rem; }
+            .nav-container { padding: 1rem; }
+            .logo { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-container">
+        <a href="../index.html" class="logo">Prawdziwa Demokracja</a>
+        <a href="../blog.html" class="back-link">← Wszystkie artykuły</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div>
+        <h1>Dlaczego debata publiczna przestała działać?</h1>
+        <p class="hero-meta">Artykuł · 6–7 min czytania</p>
+    </div>
+</section>
+
+<!-- Article -->
+<article class="article">
+    
+    <p>Coraz więcej osób ma wrażenie, że współczesna debata publiczna przestała spełniać swoją podstawową funkcję.</p>
+
+    <p>Zamiast prowadzić do lepszego zrozumienia problemów i wspólnych decyzji, często kończy się kolejną kłótnią.</p>
+
+    <p>Politycy przekonują swoich zwolenników. Komentatorzy mobilizują własne środowiska. Media społecznościowe wzmacniają emocje.</p>
+
+    <p>W rezultacie rozmowa coraz częściej przypomina <strong>starcie dwóch plemion</strong>, a nie próbę rozwiązania wspólnego problemu.</p>
+
+    <p>Dlaczego tak się dzieje?</p>
+
+    <h2>Konflikt jest naturalny</h2>
+    
+    <p>Na początek warto powiedzieć jasno: konflikt w demokracji nie jest niczym złym.</p>
+
+    <p>Społeczeństwa składają się z ludzi o różnych doświadczeniach, interesach i wartościach. Różnice zdań są więc czymś naturalnym.</p>
+
+    <p>Problem pojawia się wtedy, gdy nie potrafimy już prowadzić sporów w sposób konstruktywny.</p>
+
+    <p><strong>Wtedy konflikt przestaje prowadzić do decyzji — a zaczyna prowadzić tylko do podziałów.</strong></p>
+
+    <h2>Polaryzacja polityczna</h2>
+
+    <p>W wielu krajach obserwujemy coraz silniejszą polaryzację.</p>
+
+    <p>Zamiast różnicy opinii pojawia się podział na dwa obozy, które patrzą na siebie z rosnącą nieufnością.</p>
+
+    <p>W takiej sytuacji debata publiczna przestaje być miejscem poszukiwania rozwiązań.</p>
+
+    <p><strong>Staje się walką o zwycięstwo własnej strony.</strong></p>
+
+    <h2>Debata jako spektakl</h2>
+
+    <p>Współczesna polityka coraz częściej przypomina widowisko.</p>
+
+    <p>Programy publicystyczne są projektowane tak, aby przyciągały uwagę widzów. Konflikt i emocje sprawdzają się w tym najlepiej.</p>
+
+    <p>W efekcie rozmowa często wygląda tak:</p>
+
+    <p>• Szybkie riposty<br>
+    • Mocne hasła<br>
+    • Wyraźny podział na strony</p>
+
+    <p>To dobrze działa w telewizji i w internecie, ale rzadko prowadzi do rozwiązania problemu.</p>
+
+    <div class="example-box">
+        <h4>⚠️ Debata jako rozrywka</h4>
+        <p>Badania pokazują, że programy publicystyczne projektuje się podobnie jak programy rozrywkowe — mają trzymać widza przed ekranem.</p>
+        <p>Problem polega na tym, że polityka nie jest rozrywką. To proces podejmowania decyzji, które wpływają na życie milionów ludzi.</p>
+    </div>
+
+    <h2>Media społecznościowe i algorytmy</h2>
+
+    <p>Media społecznościowe zmieniły sposób, w jaki rozmawiamy o polityce.</p>
+
+    <p>Algorytmy platform promują treści, które wywołują silne emocje — oburzenie, gniew lub strach.</p>
+
+    <p>Treści spokojne i wyważone rozchodzą się znacznie wolniej.</p>
+
+    <p>W rezultacie w przestrzeni publicznej dominują wypowiedzi najbardziej radykalne.</p>
+
+    <p><strong>To dodatkowo wzmacnia wrażenie, że społeczeństwo jest głęboko podzielone.</strong></p>
+
+    <h2>Brak przestrzeni do rozmowy</h2>
+
+    <p>Paradoks współczesnej demokracji polega na tym, że mamy coraz więcej miejsc do mówienia, ale coraz mniej przestrzeni do słuchania.</p>
+
+    <p>W wielu debatach uczestnicy nie próbują zrozumieć drugiej strony.</p>
+
+    <p>Słuchają tylko po to, aby przygotować kontrargument.</p>
+
+    <p><strong>To sprawia, że rozmowa staje się serią monologów.</strong></p>
+
+    <div class="highlight-box">
+        <p>Coraz więcej badaczy i praktyków demokracji uważa, że problemem nie jest sam konflikt.</p>
+        <p><strong>Problemem jest brak dobrych metod prowadzenia sporów.</strong></p>
+    </div>
+
+    <h2>Czy można inaczej?</h2>
+
+    <p>Właśnie dlatego w wielu krajach rozwija się podejście zwane deliberacją — procesem rozmowy, który pomaga ludziom analizować problemy wspólnie i dochodzić do wniosków.</p>
+
+    <p>Deliberacja nie eliminuje konfliktu.</p>
+
+    <p><strong>Pomaga go przekształcić w proces prowadzący do decyzji.</strong></p>
+
+    <h2>Co dalej?</h2>
+
+    <p>Jeśli tradycyjna debata publiczna coraz częściej prowadzi do polaryzacji, warto zadać pytanie:</p>
+
+    <p><strong>Czy istnieje sposób prowadzenia sporów, który pozwala ludziom naprawdę się usłyszeć?</strong></p>
+
+    <p>W kolejnych artykułach przyjrzymy się temu, jak w praktyce działają procesy deliberacyjne i dlaczego w wielu krajach zaczynają odgrywać coraz większą rolę w demokracji.</p>
+
+</article>
+
+<!-- CTA -->
+<div class="article">
+    <div class="cta-box">
+        <h3>Dołącz do rozmowy</h3>
+        <p>Projekt Prawdziwa Demokracja chce sprawdzić, czy takie podejście może działać również w Polsce. Naszym celem jest przetestowanie nowych form rozmowy obywatelskiej i konsultacji społecznych.</p>
+        <a href="../index.html#dolacz" class="btn">Dołącz do społeczności →</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="../index.html">Strona główna</a>
+            <a href="../index.html#narzedzia">Narzędzia</a>
+            <a href="../blog.html">Aktualności</a>
+            <a href="../index.html#dolacz">Dołącz</a>
+        </div>
+        <div class="footer-copy">
+            <p>&copy; 2026 Prawdziwa Demokracja. Inicjatywa obywatelska.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
