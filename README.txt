@@ -1,47 +1,60 @@
-PRAWDZIWA DEMOKRACJA - FINALNA WERSJA (v14)
+PRAWDZIWA DEMOKRACJA - FINALNA WERSJA (v16)
 ============================================
 
-✅ NOWY HERO Z KOLOROWYMI AKCENTAMI!
-====================================
+✅ GOOGLE ANALYTICS DODANY!
+===========================
+Tracking ID: G-L9KQTN0XS0
 
-Nagłówek:
-"Czy w Polsce da się 
-ROZMAWIAĆ (pomarańczowy) zamiast KRZYCZEĆ (pomarańczowy)?"
+Google Analytics zainstalowany na WSZYSTKICH stronach:
+-------------------------------------------------------
+✅ index.html (strona główna)
+✅ blog.html
+✅ kontakt.html
+✅ mapa-drogowa.html
+✅ Wszystkie 3 artykuły:
+   - czym-jest-deliberacja.html
+   - dlaczego-debata-przestala-dzialac.html
+   - 20260215-pierwsze-kroki.html
+✅ Wszystkie 2 narzędzia:
+   - model-4k.html
+   - polis.html
 
-Podtytuł:
-"Testujemy to w projekcie Prawdziwa Demokracja."
+RÓWNIEŻ w artykule do przyszłej publikacji:
+✅ czy-obywatele-potrafia-podejmowac-decyzje.html
 
-WIZUALNY EFEKT:
-===============
-• Słowa kluczowe "rozmawiać" i "krzyczeć" podświetlone na pomarańczowo
-• Kolor: #ed8936 (accent-light)
-• Wyróżnia kluczowy kontrast przekazu
+CO BĘDZIE ŚLEDZONE:
+===================
+→ Wyświetlenia stron
+→ Sesje użytkowników
+→ Źródła ruchu
+→ Czas na stronie
+→ Współczynnik odrzuceń
+→ Konwersje (kliknięcia w CTA)
 
-WSZYSTKIE POPRAWKI W v14:
-==========================
-✅ Hero z kolorowymi akcentami
-✅ Kolejność artykułów chronologiczna (najnowszy → najstarszy)
-✅ Wszystkie linki "Kontakt" działają
-✅ Pełne footery na wszystkich podstronach
-
-ZAWARTOŚĆ PACZKI:
-=================
-→ 8 stron HTML
-→ 3 artykuły (10.03, 28.02, 15.02)
-→ Strona kontaktowa
-→ Pełne SEO
-→ Mobile responsive
+PEŁNA ZAWARTOŚĆ v16:
+====================
+✅ Google Analytics na wszystkich stronach
+✅ Hero z pomarańczowymi akcentami
+✅ Blog - 3 artykuły chronologicznie
+✅ Wszystkie linki działają
+✅ Pełne SEO (robots.txt, sitemap.xml)
+✅ Strona kontaktowa
 
 ARTYKUŁ DO PUBLIKACJI PÓŹNIEJ:
 ===============================
 📁 DO-PUBLIKACJI-POZNIEJ/
-   └── "Czy zwykli obywatele potrafią podejmować dobre decyzje?"
+   └── czy-obywatele-potrafia-podejmowac-decyzje.html
+       (już z Google Analytics!)
 
 PUBLIKACJA:
 ===========
 1. Upload wszystkich plików (oprócz DO-PUBLIKACJI-POZNIEJ/)
-2. Sprawdź hero - pomarańczowe akcenty
-3. Test mobile (responsive)
-4. Share na social media
+2. Sprawdź w Google Analytics (Real-time) czy działa:
+   - analytics.google.com
+   - Reports → Realtime
+   - Odwiedź swoją stronę
+   - Powinieneś zobaczyć siebie w "real-time"
 
-GOTOWE DO PUBLIKACJI! 🚀
+DANE BĘDĄ ZBIERANE OD MOMENTU PUBLIKACJI! 📊
+
+GOTOWE! 🚀
