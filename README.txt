@@ -1,60 +1,43 @@
-PRAWDZIWA DEMOKRACJA - FINALNA WERSJA (v16)
+PRAWDZIWA DEMOKRACJA - FINALNA WERSJA (v18)
 ============================================
 
-✅ GOOGLE ANALYTICS DODANY!
-===========================
-Tracking ID: G-L9KQTN0XS0
+✅ POPRAWIONY EMAIL NA STRONIE KONTAKTOWEJ!
+===========================================
+Nowy email projektu: prawdziwa.demokracja2026@gmail.com
 
-Google Analytics zainstalowany na WSZYSTKICH stronach:
--------------------------------------------------------
-✅ index.html (strona główna)
-✅ blog.html
-✅ kontakt.html
-✅ mapa-drogowa.html
-✅ Wszystkie 3 artykuły:
-   - czym-jest-deliberacja.html
-   - dlaczego-debata-przestala-dzialac.html
-   - 20260215-pierwsze-kroki.html
-✅ Wszystkie 2 narzędzia:
-   - model-4k.html
-   - polis.html
+DANE KONTAKTOWE:
+================
+📧 Email: prawdziwa.demokracja2026@gmail.com
+📱 Telefon: +48 731 370 032
 
-RÓWNIEŻ w artykule do przyszłej publikacji:
-✅ czy-obywatele-potrafia-podejmowac-decyzje.html
+GOOGLE ANALYTICS:
+=================
+✅ 2 konta jednocześnie:
+   - G-L9KQTN0XS0
+   - G-ZMLWKN6M53
+✅ Zainstalowane na wszystkich stronach
 
-CO BĘDZIE ŚLEDZONE:
-===================
-→ Wyświetlenia stron
-→ Sesje użytkowników
-→ Źródła ruchu
-→ Czas na stronie
-→ Współczynnik odrzuceń
-→ Konwersje (kliknięcia w CTA)
-
-PEŁNA ZAWARTOŚĆ v16:
+PEŁNA ZAWARTOŚĆ v18:
 ====================
-✅ Google Analytics na wszystkich stronach
+✅ Poprawiony email kontaktowy
+✅ Google Analytics (2 konta)
 ✅ Hero z pomarańczowymi akcentami
 ✅ Blog - 3 artykuły chronologicznie
 ✅ Wszystkie linki działają
-✅ Pełne SEO (robots.txt, sitemap.xml)
-✅ Strona kontaktowa
+✅ Pełne SEO
 
-ARTYKUŁ DO PUBLIKACJI PÓŹNIEJ:
-===============================
-📁 DO-PUBLIKACJI-POZNIEJ/
-   └── czy-obywatele-potrafia-podejmowac-decyzje.html
-       (już z Google Analytics!)
+STRUKTURA:
+==========
+→ 8 stron HTML
+→ 3 artykuły opublikowane
+→ 1 artykuł do przyszłej publikacji
+→ Wszystkie narzędzia
 
 PUBLIKACJA:
 ===========
 1. Upload wszystkich plików (oprócz DO-PUBLIKACJI-POZNIEJ/)
-2. Sprawdź w Google Analytics (Real-time) czy działa:
-   - analytics.google.com
-   - Reports → Realtime
-   - Odwiedź swoją stronę
-   - Powinieneś zobaczyć siebie w "real-time"
+2. Sprawdź stronę kontaktową - email powinien być widoczny
+3. Test Google Analytics w Realtime (oba konta)
+4. Gotowe!
 
-DANE BĘDĄ ZBIERANE OD MOMENTU PUBLIKACJI! 📊
-
-GOTOWE! 🚀
+WSZYSTKO DZIAŁA! 🚀
