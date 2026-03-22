@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jak wygląda deliberacja w praktyce? | Prawdziwa Demokracja</title>
+    <meta name="description" content="Czy da się w Polsce spokojnie porozmawiać o trudnych sprawach? Planujemy pierwszą deliberację obywatelską – 30-50 mieszkańców, konkretny problem lokalny, uporządkowany proces.">
+    <meta name="keywords" content="deliberacja w praktyce, deliberacja obywatelska, uczestnictwo obywatelskie, demokracja partycypacyjna, polska">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #c05621;
+            --accent-light: #ed8936;
+            --text-dark: #1a202c;
+            --text-body: #2d3748;
+            --text-light: #718096;
+            --bg-cream: #faf7f4;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text-body);
+            line-height: 1.7;
+            background-color: var(--bg-cream);
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--primary);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 65%;
+            height: 3px;
+            background: var(--accent-light);
+        }
+
+        .back-link {
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: var(--primary); }
+
+        /* Hero */
+        .hero {
+            margin-top: 68px;
+            padding: 5rem 2.5rem 4rem;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-meta {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Article */
+        .article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2.5rem;
+        }
+
+        .article p {
+            font-size: 1.1rem;
+            line-height: 1.85;
+            margin-bottom: 1.5rem;
+        }
+
+        .article h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+        }
+
+        .article h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 2.5rem 0 1rem;
+            line-height: 1.4;
+        }
+
+        .article ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .article li {
+            font-size: 1.1rem;
+            line-height: 1.85;
+            margin-bottom: 0.75rem;
+        }
+
+        .article strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2744 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            margin: 3rem 0;
+        }
+
+        .highlight-box p {
+            margin: 0 0 1rem 0;
+            opacity: 1;
+            color: #ffffff;
+            font-size: 1.15rem;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-box strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .info-box {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            color: #166534;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-box p {
+            color: #15803d;
+            margin: 0 0 0.75rem 0;
+            line-height: 1.7;
+        }
+
+        .info-box ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .info-box li {
+            color: #15803d;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step {
+            background: #f8f9fa;
+            border-left: 4px solid var(--accent-light);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .process-step h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        .cta-box {
+            background: var(--primary);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-box h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .cta-box p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2.25rem;
+            border-radius: 7px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            background: white;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent-light);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f1e33;
+            color: rgba(255,255,255,0.65);
+            padding: 3rem 2.5rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-copy {
+            font-size: 0.82rem;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .article { padding: 3rem 1.5rem; }
+            .article h2 { font-size: 1.6rem; }
+            .article p { font-size: 1.05rem; }
+            .nav-container { padding: 1rem; }
+            .logo { font-size: 1.1rem; }
+            .process-step { padding: 1.25rem 1.5rem; }
+        }
+    </style>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9KQTN0XS0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9KQTN0XS0');
+      gtag('config', 'G-ZMLWKN6M53');
+    </script>
+    
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-container">
+        <a href="../index.html" class="logo">Prawdziwa Demokracja</a>
+        <a href="../blog.html" class="back-link">← Wszystkie artykuły</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div>
+        <h1>Jak wygląda deliberacja w praktyce?</h1>
+        <p class="hero-meta">Praktyka · 7 min czytania</p>
+    </div>
+</section>
+
+<!-- Article -->
+<article class="article">
+    
+    <p><strong>Czy da się w Polsce spokojnie porozmawiać o trudnych sprawach — tak, żeby nie kończyło się to kłótnią?</strong></p>
+
+    <p>Zamiast zaczynać od teorii, chcemy to po prostu sprawdzić w praktyce.</p>
+
+    <p>W ramach inicjatywy <strong>Prawdziwa Demokracja</strong> planujemy przeprowadzić pierwszą deliberację obywatelską — czyli spotkanie mieszkańców, których celem będzie wspólne zastanowienie się nad konkretnym problemem lokalnym.</p>
+
+    <h2>👥 Kto bierze udział?</h2>
+
+    <p>Do udziału zapraszamy około <strong>30–50 osób</strong> — zwykłych mieszkańców:</p>
+
+    <ul>
+        <li>o różnych poglądach</li>
+        <li>w różnym wieku</li>
+        <li>z różnych części miasta</li>
+    </ul>
+
+    <p>Nie trzeba mieć specjalistycznej wiedzy ani doświadczenia. Wystarczy jedno: <strong>gotowość do rozmowy i wysłuchania innych</strong>.</p>
+
+    <h2>🧩 O czym będziemy rozmawiać?</h2>
+
+    <p>Temat deliberacji będzie <strong>konkretny i lokalny</strong>.</p>
+
+    <p>Na przykład:</p>
+
+    <div class="info-box">
+        <p><strong>👉 Jak rozwiązać problem parkowania w mieście?</strong></p>
+        <p><strong>👉 Czy budować parkingi wielopoziomowe?</strong></p>
+    </div>
+
+    <p>Chodzi o sprawy, które realnie wpływają na życie mieszkańców i często budzą emocje.</p>
+
+    <h2>🏗️ Jak wygląda proces?</h2>
+
+    <p>Deliberacja nie jest zwykłą dyskusją. To <strong>uporządkowany proces</strong> składający się z kilku etapów.</p>
+
+    <div class="process-step">
+        <h3>🟦 1. Zrozumienie problemu</h3>
+        <p>Na początku uczestnicy poznają temat:</p>
+        <ul>
+            <li>wysłuchują różnych opinii</li>
+            <li>poznają fakty i argumenty</li>
+            <li>zadają pytania</li>
+        </ul>
+        <p><strong>Celem nie jest przekonanie innych, ale zrozumienie różnych punktów widzenia.</strong></p>
+    </div>
+
+    <div class="process-step">
+        <h3>🟨 2. Rozmowa i konfrontacja argumentów</h3>
+        <p>W drugim etapie zaczyna się właściwa dyskusja.</p>
+        <p>Uczestnicy:</p>
+        <ul>
+            <li>przedstawiają swoje argumenty</li>
+            <li>słuchają innych</li>
+            <li>próbują znaleźć punkty wspólne</li>
+        </ul>
+        <p>Rozmowa prowadzona jest według <strong>uporządkowanego modelu (model 4K)</strong>, który pomaga oddzielić emocje od argumentów i nadać dyskusji strukturę.</p>
+    </div>
+
+    <div class="process-step">
+        <h3>🟩 3. Wspólne wnioski</h3>
+        <p>Na końcu uczestnicy próbują odpowiedzieć na pytanie:</p>
+        <p><strong>👉 Jakie rozwiązania mają sens?</strong></p>
+        <p>Efektem jest:</p>
+        <ul>
+            <li>lista propozycji</li>
+            <li>wskazanie punktów zgody</li>
+            <li>oraz miejsc, gdzie nadal istnieje różnica zdań</li>
+        </ul>
+    </div>
+
+    <h2>🤖 Co dzieje się z argumentami?</h2>
+
+    <p>W trakcie całego procesu <strong>zbierane są wszystkie wypowiedzi uczestników</strong>.</p>
+
+    <p>Następnie są one analizowane i porządkowane, aby:</p>
+
+    <ul>
+        <li>pokazać najważniejsze argumenty</li>
+        <li>znaleźć powtarzające się wnioski</li>
+        <li>lepiej zrozumieć różnice zdań</li>
+    </ul>
+
+    <p>Dzięki temu <strong>żadna opinia nie „ginie" w dyskusji</strong>.</p>
+
+    <h2>📄 Co powstaje na końcu?</h2>
+
+    <p>Efektem deliberacji jest <strong>raport</strong> zawierający:</p>
+
+    <ul>
+        <li>opis problemu</li>
+        <li>główne argumenty uczestników</li>
+        <li>możliwe rozwiązania</li>
+    </ul>
+
+    <p>Raport może być przekazany władzom lokalnym lub wykorzystany w dalszej dyskusji publicznej.</p>
+
+    <div class="highlight-box">
+        <h3 style="color: white; margin-top: 0;">🤝 Po co to wszystko?</h3>
+        <p>Celem deliberacji nie jest to, żeby wszyscy się ze sobą zgodzili.</p>
+        <p><strong>Celem jest:</strong></p>
+        <p>👉 lepsze zrozumienie problemu<br>
+        👉 zobaczenie różnych perspektyw<br>
+        👉 znalezienie możliwych rozwiązań</p>
+    </div>
+
+    <h2>❓ Najważniejsze pytanie</h2>
+
+    <p><strong>Czy grupa zwykłych ludzi — o różnych poglądach — jest w stanie wspólnie dojść do sensownych wniosków?</strong></p>
+
+    <p>Tego nie da się rozstrzygnąć w teorii.</p>
+
+    <p>Dlatego chcemy to sprawdzić w praktyce.</p>
+
+</article>
+
+<!-- CTA -->
+<div class="article">
+    <div class="cta-box">
+        <h3>Chcesz wziąć udział?</h3>
+        <p>Jeśli interesuje Cię uczestnictwo w pierwszej deliberacji obywatelskiej lub chcesz dowiedzieć się więcej o projekcie, dołącz do społeczności Prawdziwa Demokracja.</p>
+        <a href="../index.html#dolacz" class="btn">Dołącz do projektu →</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="../index.html">Strona główna</a>
+            <a href="../index.html#narzedzia">Narzędzia</a>
+            <a href="../blog.html">Aktualności</a>
+            <a href="../kontakt.html">Kontakt</a>
+        </div>
+        <div class="footer-copy">
+            <p>&copy; 2026 Prawdziwa Demokracja. Inicjatywa obywatelska.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
