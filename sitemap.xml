@@ -12,8 +12,16 @@
   <!-- Blog/Aktualności -->
   <url>
     <loc>https://prawdziwademokracja.pl/blog.html</loc>
-    <lastmod>2026-03-17</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Artykuł o praktyce deliberacji -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/aktualnosci/jak-wyglada-deliberacja-w-praktyce.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
