@@ -146,20 +146,24 @@ textarea:focus { border-color: var(--gold); }
 
 <div class="hero">
   <div class="hero-badge">Prototyp · Model Synapsa</div>
-  <h1>Synapsa — Deliberacja w czasie rzeczywistym</h1>
+  <div id="qi-display" style="font-size:clamp(18px,3.5vw,28px);font-weight:700;line-height:1.3;color:#faf7f2;margin-bottom:6px;">Czy telefony komórkowe powinny być zakazane podczas lekcji?</div>
   <p>Zbieraj opinie · głosuj ZA lub PRZECIW · wygeneruj mapę argumentów</p>
 </div>
 
+<!-- Pasek z opcją zmiany pytania (domyślnie ukryty) -->
 <div class="q-bar">
-  <span style="flex:1;font-family:Georgia,serif;font-size:13px;color:var(--ink);font-weight:700;" id="qi-display">Czy telefony komórkowe powinny być zakazane podczas lekcji?</span>
+  <button onclick="toggleQEdit()" id="qedit-btn" style="padding:6px 14px;background:transparent;color:var(--ink2);border:1px solid var(--paper3);border-radius:6px;font-family:Georgia,serif;font-size:11px;cursor:pointer;white-space:nowrap;">✎ Zmień pytanie</button>
+  <div id="qedit-row" style="display:none;flex:1;display:none;gap:6px;align-items:center;flex-wrap:wrap;">
+    <input id="qi" value="Czy telefony komórkowe powinny być zakazane podczas lekcji?" placeholder="Wpisz pytanie…" style="flex:1;min-width:180px;border:1px solid var(--paper3);border-radius:6px;padding:6px 10px;font-family:Georgia,serif;font-size:13px;color:var(--ink);outline:none;background:white;" />
+    <button onclick="setQ()" style="padding:6px 14px;background:var(--gold);color:white;border:none;border-radius:6px;font-family:Georgia,serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">Ustaw pytanie</button>
+    <button onclick="toggleQEdit()" style="padding:6px 10px;background:transparent;color:var(--ink3);border:1px solid var(--paper3);border-radius:6px;font-family:Georgia,serif;font-size:11px;cursor:pointer;">✕</button>
+  </div>
+  <span style="flex:1;"></span>
   <span class="save-row">
     <span class="save-dot" id="sdot" style="background:#9ed4b8"></span>
     <span id="slabel" style="color:var(--ink3)">Łączenie…</span>
   </span>
 </div>
-
-<!-- Ukryte pole przechowujące stałe pytanie — zmień wartość tu aby zmienić pytanie -->
-<input type="hidden" id="qi" value="Czy telefony komórkowe powinny być zakazane podczas lekcji?" />
 
 <div class="layout">
 
@@ -295,13 +299,40 @@ function saveState() {
   } catch(e) { setSave('Błąd zapisu', '#8b2020'); }
 }
 
+// ── TOGGLE EDYCJI PYTANIA ───────────────────────────────────────
+// Przycisk "Zmień pytanie" pokazuje/ukrywa wiersz z inputem.
+// Po ustawieniu nowego pytania wiersz się chowa automatycznie.
+function toggleQEdit() {
+  var row = document.getElementById('qedit-row');
+  var btn = document.getElementById('qedit-btn');
+  var visible = row.style.display === 'flex';
+  row.style.display = visible ? 'none' : 'flex';
+  btn.style.display = visible ? '' : 'none';
+}
+
 // ── ZMIANA PYTANIA ──────────────────────────────────────────────
-// Pytanie jest zablokowane — zmień wartość w atrybucie value
-// pola #qi w kodzie HTML (szukaj: <input type="hidden" id="qi")
+// Aby zmienić pytanie na stałe w kodzie, edytuj atrybut value
+// elementu <input id="qi"> oraz tekst w <div id="qi-display">.
 function setQ() {
   var q = document.getElementById('qi').value.trim();
   if (!q) return;
+  
+  // Sprawdź czy są już jakieś dane
+  var hasData = state.votes.pro > 0 || state.votes.con > 0 || 
+                state.args.pro.length > 0 || state.args.con.length > 0;
+  
+  // Jeśli są dane, zapytaj o potwierdzenie
+  if (hasData) {
+    if (!confirm('Ustawienie nowego pytania spowoduje usunięcie wszystkich argumentów i danych z deliberacji.\n\nCzy na pewno chcesz kontynuować?')) {
+      return; // Anuluj jeśli użytkownik kliknął "Anuluj"
+    }
+  }
+  
+  // Aktualizuj nagłówek na czarnym tle
   document.getElementById('qi-display').textContent = q;
+  // Schowaj wiersz edycji, pokaż przycisk
+  document.getElementById('qedit-row').style.display = 'none';
+  document.getElementById('qedit-btn').style.display = '';
   document.getElementById('gbtn').disabled = true;
   document.getElementById('gmsg').textContent = '';
   document.getElementById('promptbox').style.display = 'none';
