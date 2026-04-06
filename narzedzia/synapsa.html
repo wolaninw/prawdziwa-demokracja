@@ -316,18 +316,6 @@ function toggleQEdit() {
 function setQ() {
   var q = document.getElementById('qi').value.trim();
   if (!q) return;
-  
-  // Sprawdź czy są już jakieś dane
-  var hasData = state.votes.pro > 0 || state.votes.con > 0 || 
-                state.args.pro.length > 0 || state.args.con.length > 0;
-  
-  // Jeśli są dane, zapytaj o potwierdzenie
-  if (hasData) {
-    if (!confirm('Ustawienie nowego pytania spowoduje usunięcie wszystkich argumentów i danych z deliberacji.\n\nCzy na pewno chcesz kontynuować?')) {
-      return; // Anuluj jeśli użytkownik kliknął "Anuluj"
-    }
-  }
-  
   // Aktualizuj nagłówek na czarnym tle
   document.getElementById('qi-display').textContent = q;
   // Schowaj wiersz edycji, pokaż przycisk
