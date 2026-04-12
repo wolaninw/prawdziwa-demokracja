@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zamiast narzekać – zacznijmy rozmawiać. Startujemy z pierwszą debatą dla młodych | Prawdziwa Demokracja</title>
+    <meta name="description" content="Rozpoczynamy przygotowania do pierwszej pilotażowej debaty dla młodych. Zamiast tylko narzekać - spróbujmy wspólnie szukać rozwiązań.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9KQTN0XS0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9KQTN0XS0');
+      gtag('config', 'G-ZMLWKN6M53');
+    </script>
+    
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #c05621;
+            --accent-light: #ed8936;
+            --text-dark: #1a202c;
+            --text-body: #2d3748;
+            --text-light: #718096;
+            --bg-cream: #faf7f4;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text-body);
+            line-height: 1.7;
+            background-color: var(--bg-cream);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--primary);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        article {
+            margin-top: 68px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 3rem 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .article-category {
+            background: var(--accent-light);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .article-lead {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .article-content h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin: 2.5rem 0 1rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        .highlight-box {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .cta-box {
+            background: var(--primary);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-light);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #0f1e33;
+            color: rgba(255,255,255,0.65);
+            padding: 3rem 2.5rem 2rem;
+            margin-top: 5rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <a href="../index.html" class="logo">Prawdziwa Demokracja</a>
+        <ul class="nav-links">
+            <li><a href="../blog.html">Aktualności</a></li>
+            <li><a href="../kontakt.html">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<article>
+    <div class="article-meta">
+        <span>📅 12 kwietnia 2026</span>
+        <span class="article-category">Akcja</span>
+    </div>
+
+    <h1>Zamiast narzekać – zacznijmy rozmawiać. Startujemy z pierwszą debatą dla młodych</h1>
+
+    <p class="article-lead">
+        W Polsce coraz częściej rozmawiamy o problemach młodych ludzi: trudnościach na rynku pracy, wyzwaniach edukacji, mieszkalnictwie czy wpływie internetu na codzienne życie. Zbyt często jednak kończy się to na komentarzach, sporach i wzajemnym przekonywaniu się do swoich racji.
+    </p>
+
+    <div class="article-content">
+        <p>Projekt <strong>Prawdziwa Demokracja</strong> powstał z innego założenia: zamiast tylko narzekać, spróbujmy wspólnie szukać rozwiązań.</p>
+
+        <p>Dlatego rozpoczynamy przygotowania do <strong>pierwszej pilotażowej debaty dla młodych</strong>, w której chcemy połączyć rozmowę na żywo z nowoczesnym narzędziem zbierania opinii – <strong>SYNAPSA</strong>.</p>
+
+        <div class="highlight-box">
+            <h3>Celem spotkania będzie nie tylko dyskusja, ale przede wszystkim:</h3>
+            <ul>
+                <li>zrozumienie problemu,</li>
+                <li>zebranie różnych perspektyw,</li>
+                <li>wypracowanie możliwych rozwiązań,</li>
+                <li>wskazanie rekomendowanego kierunku działań.</li>
+            </ul>
+        </div>
+
+        <p>W debacie przetestujemy również <strong>model 4K</strong> – autorski sposób prowadzenia uporządkowanej rozmowy o problemach społecznych.</p>
+
+        <p>Naszą ambicją jest stworzenie czegoś więcej niż jednego spotkania. Chcemy budować <strong>„mózg miasta"</strong> – przestrzeń, w której mieszkańcy i młodzi ludzie mogą realnie wpływać na przyszłość swojego otoczenia.</p>
+
+        <h2>Gdzie i kiedy?</h2>
+
+        <p>Debata odbędzie się w formie stacjonarnej, najprawdopodobniej w <strong>Urban Labie w Kielcach</strong>. Dokładny termin podamy wkrótce.</p>
+
+        <div class="cta-box">
+            <h3>Chcesz wziąć udział?</h3>
+            <p>Jeśli chcesz mieć wpływ na to, jak powinny wyglądać rozwiązania problemów młodego pokolenia, zapraszamy do udziału.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScdogW74W4txKrR9BakINw9XkG4MxUwbpM91RDta2r5_HbdMQ/viewform" target="_blank" class="cta-button">Wypełnij formularz</a>
+        </div>
+
+        <p style="margin-top: 3rem; font-weight: 600;">To dopiero początek.</p>
+    </div>

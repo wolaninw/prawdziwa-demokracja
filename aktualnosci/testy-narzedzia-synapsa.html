@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testujemy Synapsę - pierwsze narzędzie deliberacyjne | Prawdziwa Demokracja</title>
+    <meta name="description" content="Rozpoczynamy testy Synapsy - narzędzia do prowadzenia deliberacji online. Zapraszamy do wspólnego testowania i konsultacji w sprawie możliwości wykorzystania.">
+    <link rel="canonical" href="https://prawdziwademokracja.pl/aktualnosci/testy-narzedzia-synapsa.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Testujemy Synapsę - pierwsze narzędzie deliberacyjne">
+    <meta property="og:description" content="Rozpoczynamy testy Synapsy - narzędzia do prowadzenia deliberacji online.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://prawdziwademokracja.pl/aktualnosci/testy-narzedzia-synapsa.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L9KQTN0XS0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L9KQTN0XS0');
+      gtag('config', 'G-ZMLWKN6M53');
+    </script>
+    
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #c05621;
+            --accent-light: #ed8936;
+            --text-dark: #1a202c;
+            --text-body: #2d3748;
+            --text-light: #718096;
+            --bg-cream: #faf7f4;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text-body);
+            line-height: 1.7;
+            background-color: var(--bg-cream);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--primary);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 65%;
+            height: 3px;
+            background: var(--accent-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Article */
+        article {
+            margin-top: 68px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 3rem 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .article-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .article-category {
+            background: var(--accent-light);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .article-reading-time {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .article-content h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin: 2.5rem 0 1rem;
+        }
+
+        .article-content h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.35rem;
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        .article-content strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .info-box p {
+            margin-bottom: 0;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .highlight-box {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        /* CTA */
+        .cta-box {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .cta-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-light);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cta-button:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f1e33;
+            color: rgba(255,255,255,0.65);
+            padding: 3rem 2.5rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-copy {
+            font-size: 0.82rem;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .article-content h2 { font-size: 1.5rem; }
+            .nav-links { display: none; }
+            article { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-container">
+        <a href="../index.html" class="logo">Prawdziwa Demokracja</a>
+        <ul class="nav-links">
+            <li><a href="../index.html#narzedzia">Narzędzia</a></li>
+            <li><a href="../blog.html">Aktualności</a></li>
+            <li><a href="../kontakt.html">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Article -->
+<article>
+    <div class="article-meta">
+        <span class="article-date">📅 27 marca 2026</span>
+        <span class="article-category">Narzędzia</span>
+        <span class="article-reading-time">⏱ 6 min czytania</span>
+    </div>
+
+    <h1>Testujemy Synapsę — pierwsze narzędzie do deliberacji online</h1>
+
+    <div class="article-content">
+        <p>Przez ostatnie tygodnie pracowaliśmy nad <strong>Synapsą</strong> — interaktywnym narzędziem do prowadzenia deliberacji online. Dzisiaj uruchamiamy fazę publicznych testów i zapraszamy do wspólnego sprawdzenia, jak działa w praktyce.</p>
+
+        <h2>Czym jest Synapsa?</h2>
+
+        <p>Synapsa to prototyp platformy deliberacyjnej, która umożliwia:</p>
+
+        <ul>
+            <li><strong>Strukturyzowanie dyskusji</strong> — wyraźny podział na argumenty "za" i "przeciw"</li>
+            <li><strong>Głosowanie</strong> — uczestnicy mogą wyrazić swoje stanowisko</li>
+            <li><strong>Zbieranie argumentów</strong> — każdy może dodać swój punkt widzenia</li>
+            <li><strong>Wizualizację wyników</strong> — paski procentowe pokazują rozkład opinii</li>
+            <li><strong>Generowanie map argumentów</strong> — AI pomaga zidentyfikować główne wątki dyskusji</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p><strong>💡 Kluczowa różnica:</strong> W tradycyjnej debacie wszyscy mówią jednocześnie i najgłośniejszy wygrywa. W Synapsie każdy argument ma równą szansę być wysłuchanym, a AI pomaga uporządkować chaos w przejrzystą strukturę.</p>
+        </div>
+
+        <h2>Dlaczego w ogóle tworzyć takie narzędzie?</h2>
+
+        <p>Pracując nad koncepcją deliberacji w Polsce, szybko zdaliśmy sobie sprawę z jednego problemu: <strong>brakuje narzędzi</strong>. Istniejące rozwiązania są albo zbyt skomplikowane, albo niedostosowane do polskiego kontekstu, albo po prostu niedostępne.</p>
+
+        <p>Potrzebowaliśmy czegoś, co:</p>
+
+        <ul>
+            <li>Jest <strong>proste</strong> w użyciu — nie wymaga szkolenia</li>
+            <li>Działa <strong>po polsku</strong> — zarówno interfejs jak i AI</li>
+            <li>Jest <strong>transparentne</strong> — każdy widzi te same dane</li>
+            <li>Wspiera <strong>konstruktywną dyskusję</strong> — nie polaryzację</li>
+        </ul>
+
+        <h2>Co możesz teraz przetestować?</h2>
+
+        <p>Obecna wersja Synapsy (v27) to <strong>prototyp</strong> — nie finalna aplikacja, ale działające narzędzie do testów. Możesz:</p>
+
+        <h3>1. Ustawić własne pytanie deliberacji</h3>
+        <p>Zamiast naszego przykładu o AI, wpisz własny temat — lokalny, krajowy, lub nawet w ramach organizacji. System zapyta czy na pewno chcesz usunąć obecne dane.</p>
+
+        <h3>2. Głosować i dodawać argumenty</h3>
+        <p>Zagłosuj "ZA" lub "PRZECIW", a następnie dodaj swoje argumenty. Możesz dodać ich tyle, ile chcesz — każdy zostanie zapisany.</p>
+
+        <h3>3. Zobaczyć rozkład opinii</h3>
+        <p>Paski procentowe na środku ekranu pokazują, jak rozkładają się głosy. To nie jest bindujące — to tylko sposób na szybkie zobaczenie, gdzie jest większość i jak duża jest mniejszość.</p>
+
+        <h3>4. Wygenerować mapę argumentów</h3>
+        <p>Przycisk "Generuj mapę argumentów" (na razie demo) pokazuje, jak AI mogłoby pogrupować argumenty według głównych wątków. W pełnej wersji to będzie działało automatycznie.</p>
+
+        <h3>5. Rozpocząć od nowa</h3>
+        <p>Przycisk "Rozpocznij od nowa" czyści wszystkie dane i pozwala zacząć świeżą deliberację.</p>
+
+        <div class="info-box">
+            <p><strong>⚠️ Ważne:</strong> Synapsa zapisuje dane lokalnie w Twojej przeglądarce (localStorage). Oznacza to, że nikt inny nie widzi Twoich argumentów — to tylko Twoja prywatna sesja testowa. W przyszłości będzie opcja współdzielenia sesji z innymi uczestnikami.</p>
+        </div>
+
+        <h2>Co planujemy dodać?</h2>
+
+        <p>To dopiero początek. W kolejnych wersjach chcemy wprowadzić:</p>
+
+        <ul>
+            <li><strong>Tryb współdzielony</strong> — kilka osób w jednej sesji</li>
+            <li><strong>Prawdziwą analizę AI</strong> — automatyczne grupowanie argumentów</li>
+            <li><strong>Eksport wyników</strong> — pobranie raportu z deliberacji</li>
+            <li><strong>Moderację</strong> — możliwość prowadzenia deliberacji przez moderatora</li>
+            <li><strong>Integrację z Model 4K</strong> — strukturyzacja procesu deliberacyjnego</li>
+        </ul>
+
+        <h2>Jak możesz pomóc?</h2>
+
+        <p>Jesteśmy na początku drogi i <strong>potrzebujemy Twojego feedbacku</strong>. Oto jak możesz nam pomóc:</p>
+
+        <h3>1. Przetestuj narzędzie</h3>
+        <p>Wejdź na stronę Synapsy, wypróbuj wszystkie funkcje. Co działa? Co nie? Co jest niejasne?</p>
+
+        <h3>2. Podziel się uwagami</h3>
+        <p>Napisz do nas na <a href="/cdn-cgi/l/email-protection#ee9e9c8f998a9487998fc08a8b8381859c8f8d848fdcdedcd8ae89838f8782c08d8183" style="color: #0066cc;"><span class="__cf_email__" data-cfemail="235351425447594a54420d47464e4c4851424049421113111563444e424a4f0d404c4e">[email&#160;protected]</span></a> lub przez <a href="../kontakt.html" style="color: #0066cc;">formularz kontaktowy</a>. Szczególnie interesują nas:</p>
+
+        <ul>
+            <li>Problemy techniczne (coś nie działa)</li>
+            <li>Problemy UX (coś jest niejasne lub mylące)</li>
+            <li>Pomysły na funkcje (czego brakuje?)</li>
+            <li>Potencjalne przypadki użycia (gdzie to mogłoby być przydatne?)</li>
+        </ul>
+
+        <h3>3. Pomyśl o zastosowaniach</h3>
+        <p>Czy widzisz miejsce na takie narzędzie w Twojej:</p>
+
+        <ul>
+            <li>Organizacji pozarządowej?</li>
+            <li>Grupie sąsiedzkiej?</li>
+            <li>Samorządzie lokalnym?</li>
+            <li>Firmie (decyzje zespołowe)?</li>
+            <li>Szkole (dyskusje klasowe)?</li>
+        </ul>
+
+        <div class="success-box">
+            <p><strong>💬 Konsultacje w sprawie wykorzystania:</strong> Jeśli zastanawiasz się nad użyciem Synapsy (lub podobnego narzędzia) w konkretnym kontekście — napisz do nas. Chętnie porozmawiamy o możliwościach i ograniczeniach.</p>
+        </div>
+
+        <h2>Otwarty rozwój</h2>
+
+        <p>Synapsa rozwija się transparentnie. Każda wersja jest publicznie dostępna do testów. Nie chowamy niedokończonych funkcji — pokazujemy je jako prototypy i uczymy się na podstawie Waszych reakcji.</p>
+
+        <p>To podejście ma dwie zalety:</p>
+
+        <ul>
+            <li><strong>Szybsze uczenie się</strong> — widzimy co działa, a co nie, zanim zainwestujemy miesiące pracy</li>
+            <li><strong>Budowanie zaufania</strong> — nie obiecujemy gotowego produktu, pokazujemy proces tworzenia</li>
+        </ul>
+
+        <h2>Co dalej?</h2>
+
+        <p>Najbliższe kroki to:</p>
+
+        <ol>
+            <li><strong>Zbieranie feedbacku</strong> — przez najbliższe 2-3 tygodnie</li>
+            <li><strong>Pierwsza iteracja</strong> — poprawki techniczne i UX</li>
+            <li><strong>Testy w grupie</strong> — deliberacja 10-15 osób na żywo</li>
+            <li><strong>Wersja współdzielona</strong> — kilka osób w jednej sesji online</li>
+        </ol>
+
+        <p>Jeśli wszystko pójdzie dobrze, w Q2 2026 powinniśmy mieć wersję nadającą się do pierwszych prawdziwych deliberacji — nie tylko testów, ale rzeczywistych dyskusji o lokalnych problemach.</p>
+
+        <div class="cta-box">
+            <h3>Wypróbuj Synapsę już teraz</h3>
+            <p>Prototyp jest dostępny publicznie. Nie potrzebujesz konta — wystarczy przeglądarka.</p>
+            <a href="../narzedzia/synapsa.html" class="cta-button">Otwórz Synapsę →</a>
+        </div>
+
+        <h2>Kontakt</h2>
+
+        <p>Masz pytania? Pomysły? Chcesz pomóc w testach?</p>
+
+        <p>Napisz do nas: <a href="/cdn-cgi/l/email-protection#0575776472617f6c72642b6160686a6e7764666f6437353733456268646c692b666a68" style="color: #0066cc;"><span class="__cf_email__" data-cfemail="a6d6d4c7d1c2dccfd1c788c2c3cbc9cdd4c7c5ccc794969490e6c1cbc7cfca88c5c9cb">[email&#160;protected]</span></a></p>
+
+        <p style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e2e8f0; font-style: italic; color: var(--text-light);">
+            To nie jest finalna aplikacja — to początek wspólnej pracy nad narzędziem, którego w Polsce jeszcze nie ma. Dołącz do procesu.
+        </p>
+    </div>
+</article>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="../index.html">Strona główna</a>
+            
