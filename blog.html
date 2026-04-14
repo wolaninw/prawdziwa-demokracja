@@ -112,63 +112,6 @@
             padding: 4rem 2.5rem;
         }
 
-        .newsletter-box {
-            background: white;
-            border: 2px solid var(--accent-light);
-            border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 4rem;
-            text-align: center;
-        }
-
-        .newsletter-box h3 {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .newsletter-box p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-
-        .newsletter-form {
-            display: flex;
-            gap: 1rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 0.875rem 1.25rem;
-            border: 2px solid var(--border);
-            border-radius: 6px;
-            font-size: 1rem;
-            font-family: 'Work Sans', sans-serif;
-        }
-
-        .newsletter-form input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .newsletter-form button {
-            padding: 0.875rem 1.75rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s;
-            font-family: 'Work Sans', sans-serif;
-        }
-
-        .newsletter-form button:hover {
-            background: var(--accent);
-        }
 
         /* Posts */
         .posts-list {
@@ -310,7 +253,6 @@
             .hero h1 { font-size: 2.25rem; }
             .content { padding: 3rem 1.5rem; }
             .post-card { padding: 2rem 1.5rem; }
-            .newsletter-form { flex-direction: column; }
         }
     </style>
     
@@ -344,16 +286,6 @@
 <!-- Content -->
 <section class="content">
     
-    <!-- Newsletter Signup -->
-    <div class="newsletter-box">
-        <h3>📬 Zapisz się na newsletter</h3>
-        <p>Otrzymuj aktualności bezpośrednio na swoją skrzynkę — raz w tygodniu, zero spamu</p>
-        <form class="newsletter-form" id="newsletter-form">
-            <input type="email" placeholder="Twój adres email" required>
-            <button type="submit">Zapisz się</button>
-        </form>
-    </div>
-
     <!-- Posts List -->
     <div class="posts-list">
         
@@ -467,11 +399,4 @@
     </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Newsletter form
-    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = this.querySelector('input[type="email"]').value;
-        
-        // TODO: Podłącz do swojego systemu mailingowego
-        console.log('Newsletter si
+</body></html>
