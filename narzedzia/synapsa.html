@@ -118,6 +118,9 @@ textarea:focus { border-color: var(--gold); }
 /* ── PROMPT BOX ── */
 .prompt-box { background: #f8f5ee; border: 1px solid var(--paper3); border-left: 3px solid var(--gold); border-radius: 0 7px 7px 0; padding: 10px 14px; font-size: 11px; line-height: 1.6; color: var(--ink2); margin-top: 4px; }
 .prompt-box strong { display: block; margin-bottom: 4px; color: var(--gold); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.copy-btn { margin-top: 8px; padding: 7px 14px; background: var(--gold); color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.copy-btn:hover { opacity: .88; }
+.copy-btn.copied { background: var(--green); }
 
 /* ── FOOTER ── */
 .footer { background: var(--navy); color: rgba(255,255,255,.55); padding: 16px 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 11px; font-style: italic; border-top: 3px solid var(--gold); }
@@ -133,6 +136,20 @@ textarea:focus { border-color: var(--gold); }
 .mod-btn-export { padding: 7px 16px; background: #1d6e48; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; }
 .mod-btn-export:hover { opacity: .88; }
 .mod-btn-reopen { padding: 7px 16px; background: #c4922a; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; display:none; }
+.mod-btn-reset { padding: 7px 16px; background: #4a4640; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; }
+.mod-btn-reset:hover { opacity: .88; }
+/* Modal potwierdzenia resetu */
+.reset-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:999; align-items:center; justify-content:center; }
+.reset-modal.open { display:flex; }
+.reset-modal-box { background:white; border-radius:12px; padding:28px 32px; max-width:400px; width:90%; font-family:Georgia,serif; box-shadow:0 8px 32px rgba(0,0,0,.25); }
+.reset-modal-box h3 { font-size:16px; color:#8b2020; margin-bottom:10px; }
+.reset-modal-box p { font-size:13px; color:#4a4640; line-height:1.6; margin-bottom:18px; }
+.reset-modal-box input { width:100%; border:2px solid #e8e1d6; border-radius:6px; padding:8px 11px; font-family:Georgia,serif; font-size:13px; outline:none; margin-bottom:14px; }
+.reset-modal-box input:focus { border-color:#8b2020; }
+.reset-modal-btns { display:flex; gap:10px; }
+.reset-confirm-btn { flex:1; padding:9px; background:#8b2020; color:white; border:none; border-radius:6px; font-family:Georgia,serif; font-size:13px; font-weight:700; cursor:pointer; }
+.reset-confirm-btn:disabled { opacity:.4; cursor:not-allowed; }
+.reset-cancel-btn { flex:1; padding:9px; background:#f2ede4; color:#4a4640; border:1px solid #e8e1d6; border-radius:6px; font-family:Georgia,serif; font-size:13px; font-weight:700; cursor:pointer; }
 .closed-banner { background: #8b2020; color: white; text-align: center; padding: 10px 24px; font-size: 13px; font-weight: 700; letter-spacing: .05em; display: none; }
 
 /* ── RESPONSIVE ── */
@@ -159,7 +176,21 @@ textarea:focus { border-color: var(--gold); }
   <button class="mod-btn-close" onclick="closeVoting()">⏹ Zakończ głosowanie</button>
   <button class="mod-btn-reopen" id="reopen-btn" onclick="reopenVoting()">▶ Wznów głosowanie</button>
   <button class="mod-btn-export" onclick="exportReport()">⬇ Eksportuj raport</button>
+  <button class="mod-btn-reset" onclick="openResetModal()">🗑 Wyczyść synapsę</button>
   <span id="closed-label" style="color:#f0a0a0;display:none;">● Głosowanie zamknięte</span>
+</div>
+
+<!-- MODAL POTWIERDZENIA RESETU -->
+<div class="reset-modal" id="reset-modal">
+  <div class="reset-modal-box">
+    <h3>⚠ Wyczyść synapsę</h3>
+    <p>Ta operacja <strong>trwale usuwa</strong> wszystkie odpowiedzi i mapę argumentów dla bieżącego pytania z bazy danych. Nie można jej cofnąć.<br><br>Wpisz <strong>WYCZYŚĆ</strong> aby potwierdzić:</p>
+    <input type="text" id="reset-confirm-input" placeholder="Wpisz WYCZYŚĆ" oninput="checkResetConfirm()" />
+    <div class="reset-modal-btns">
+      <button class="reset-cancel-btn" onclick="closeResetModal()">Anuluj</button>
+      <button class="reset-confirm-btn" id="reset-confirm-btn" onclick="confirmReset()" disabled>Usuń wszystko</button>
+    </div>
+  </div>
 </div>
 <div class="closed-banner" id="closed-banner">Głosowanie zostało zakończone przez moderatora. Dziękujemy za udział!</div>
 
@@ -228,8 +259,11 @@ textarea:focus { border-color: var(--gold); }
 
       <!-- PROMPT BOX: wyświetla prompt do skopiowania do AI -->
       <div class="prompt-box" id="promptbox" style="display:none">
-        <strong>Skopiuj ten prompt i wklej do Claude.ai lub ChatGPT</strong>
+        <strong>Wklej ten prompt do Claude.ai lub ChatGPT</strong>
         <span id="prompttext" style="white-space:pre-wrap;word-break:break-all;font-size:10px;"></span>
+        <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">
+          <span id="copy-icon">⎘</span> <span id="copy-label">Kopiuj prompt</span>
+        </button>
       </div>
 
       <!-- JSON PASTE BOX: po otrzymaniu wyniku od AI wklej go tutaj -->
@@ -330,7 +364,7 @@ function sbFetch(path, method, body) {
       'Content-Type': 'application/json',
       'apikey': SUPABASE_KEY,
       'Authorization': 'Bearer ' + SUPABASE_KEY,
-      'Prefer': method === 'POST' ? 'return=representation' : ''
+      'Prefer': method === 'POST' ? 'return=representation' : (method === 'DELETE' ? 'return=minimal' : '')
     },
     body: body ? JSON.stringify(body) : undefined
   }).then(function(r) {
@@ -431,6 +465,46 @@ function setQ() {
   document.getElementById('promptbox').style.display = 'none';
   document.getElementById('jsonbox').style.display = 'none';
   loadState(q);
+}
+
+// ── KOPIOWANIE PROMPTU ─────────────────────────────────────────
+// Kopiuje treść promptu do schowka i zmienia wygląd przycisku
+// na potwierdzenie (zielony "Skopiowano!") przez 2 sekundy.
+function copyPrompt() {
+  var text = document.getElementById('prompttext').textContent;
+  var btn = document.getElementById('copy-btn');
+  var label = document.getElementById('copy-label');
+  var icon = document.getElementById('copy-icon');
+  navigator.clipboard.writeText(text)
+    .then(function() {
+      btn.classList.add('copied');
+      icon.textContent = '✓';
+      label.textContent = 'Skopiowano!';
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        icon.textContent = '⎘';
+        label.textContent = 'Kopiuj prompt';
+      }, 2000);
+    })
+    .catch(function() {
+      // Fallback dla starszych przeglądarek
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.classList.add('copied');
+      icon.textContent = '✓';
+      label.textContent = 'Skopiowano!';
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        icon.textContent = '⎘';
+        label.textContent = 'Kopiuj prompt';
+      }, 2000);
+    });
 }
 
 // ── WYBÓR STANOWISKA (ZA / PRZECIW) ────────────────────────────
@@ -741,6 +815,69 @@ function exportReport() {
   win.document.write('<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8"><title>Raport — ' + q + '</title></head><body style="margin:0;font-family:Georgia,serif;">' + reportHtml + '<script>window.onload=function(){window.print();}<\/script></body></html>');
   win.document.close();
 }
+
+// ── RESET SYNAPSY ───────────────────────────────────────────────
+// Usuwa wszystkie odpowiedzi i mapę argumentów z Supabase
+// dla bieżącego pytania. Wymaga wpisania "WYCZYŚĆ" jako
+// zabezpieczenie przed przypadkowym kliknięciem.
+
+function openResetModal() {
+  document.getElementById('reset-modal').classList.add('open');
+  document.getElementById('reset-confirm-input').value = '';
+  document.getElementById('reset-confirm-btn').disabled = true;
+  setTimeout(function(){ document.getElementById('reset-confirm-input').focus(); }, 100);
+}
+
+function closeResetModal() {
+  document.getElementById('reset-modal').classList.remove('open');
+}
+
+function checkResetConfirm() {
+  var val = document.getElementById('reset-confirm-input').value.trim();
+  document.getElementById('reset-confirm-btn').disabled = val !== 'WYCZYŚĆ';
+}
+
+async function confirmReset() {
+  var q = document.getElementById('qi').value.trim();
+  closeResetModal();
+  setSave('Czyszczenie…', '#8b2020');
+
+  try {
+    // Usuń wszystkie odpowiedzi dla tego pytania
+    await sbFetch(
+      'responses?question=eq.' + encodeURIComponent(q),
+      'DELETE'
+    );
+    // Usuń mapę argumentów dla tego pytania
+    await sbFetch(
+      'arg_maps?question=eq.' + encodeURIComponent(q),
+      'DELETE'
+    );
+
+    // Wyczyść lokalny stan
+    STATE = { question: q, responses: [], proArgs: [], conArgs: [], closed: false };
+    render();
+    showArgs('pargs', [], 'pro');
+    showArgs('cargs', [], 'con');
+    applyClosedState(false);
+    document.getElementById('gbtn').disabled = true;
+    document.getElementById('gmsg').textContent = '';
+    document.getElementById('promptbox').style.display = 'none';
+    document.getElementById('jsonbox').style.display = 'none';
+
+    setSave('Wyczyszczono ✓', '#1d6e48');
+    flash('Synapsa wyczyszczona!');
+  } catch(e) {
+    setSave('Błąd czyszczenia', '#8b2020');
+    console.error('confirmReset:', e);
+  }
+}
+
+// Zamknij modal klikając poza nim
+document.addEventListener('click', function(e) {
+  var modal = document.getElementById('reset-modal');
+  if (modal && e.target === modal) closeResetModal();
+});
 
 setV('pro');
 loadState(document.getElementById('qi').value.trim());
