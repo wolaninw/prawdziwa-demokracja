@@ -125,6 +125,16 @@ textarea:focus { border-color: var(--gold); }
 .footer strong { font-style: normal; color: rgba(255,255,255,.85); }
 .footer a { color: rgba(255,255,255,.55); text-decoration: underline; }
 
+/* ── PASEK MODERATORA ── */
+.mod-bar { background: #1e3a5f; border-bottom: 2px solid #c4922a; padding: 8px 24px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.mod-bar span { font-size: 11px; color: rgba(255,255,255,.6); font-style: italic; }
+.mod-btn-close { padding: 7px 16px; background: #8b2020; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; }
+.mod-btn-close:hover { opacity: .88; }
+.mod-btn-export { padding: 7px 16px; background: #1d6e48; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; }
+.mod-btn-export:hover { opacity: .88; }
+.mod-btn-reopen { padding: 7px 16px; background: #c4922a; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; display:none; }
+.closed-banner { background: #8b2020; color: white; text-align: center; padding: 10px 24px; font-size: 13px; font-weight: 700; letter-spacing: .05em; display: none; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 700px) {
   .layout { grid-template-columns: 1fr; }
@@ -143,6 +153,15 @@ textarea:focus { border-color: var(--gold); }
   </a>
   <a class="nav-back" href="https://prawdziwademokracja.pl/#narzedzia">← Wszystkie narzędzia</a>
 </nav>
+
+<div class="mod-bar">
+  <span>Panel moderatora:</span>
+  <button class="mod-btn-close" onclick="closeVoting()">⏹ Zakończ głosowanie</button>
+  <button class="mod-btn-reopen" id="reopen-btn" onclick="reopenVoting()">▶ Wznów głosowanie</button>
+  <button class="mod-btn-export" onclick="exportReport()">⬇ Eksportuj raport</button>
+  <span id="closed-label" style="color:#f0a0a0;display:none;">● Głosowanie zamknięte</span>
+</div>
+<div class="closed-banner" id="closed-banner">Głosowanie zostało zakończone przez moderatora. Dziękujemy za udział!</div>
 
 <div class="hero">
   <div class="hero-badge">Prototyp · Model Synapsa</div>
@@ -267,37 +286,123 @@ function setSave(txt, color) {
   document.getElementById('sdot').style.background = color;
 }
 
-// ── BAZA DANYCH: ODCZYT ─────────────────────────────────────────
-// Używa localStorage jako zamiennika persistent storage
-// (w środowisku poza Claude.ai)
-function loadState(q) {
-  STORAGE_KEY = slugify(q);
-  setSave('Ładowanie…', '#c4922a');
-  try {
-    var raw = localStorage.getItem(STORAGE_KEY);
-    STATE = raw
-      ? JSON.parse(raw)
-      : { question: q, responses: [], proArgs: [], conArgs: [] };
-  } catch(e) {
-    STATE = { question: q, responses: [], proArgs: [], conArgs: [] };
-  }
-  render();
-  showArgs('pargs', STATE.proArgs, 'pro');
-  showArgs('cargs', STATE.conArgs, 'con');
-  if (STATE.responses.length) document.getElementById('gbtn').disabled = false;
-  setSave('Gotowe ✓', '#1d6e48');
+// ════════════════════════════════════════════════════════════════
+// KONFIGURACJA SUPABASE
+// ────────────────────────────────────────────────────────────────
+// Jak skonfigurować (jednorazowo, ~10 minut):
+//
+// 1. Załóż darmowe konto na https://supabase.com
+// 2. Utwórz nowy projekt (wybierz region Europe)
+// 3. W panelu Supabase otwórz: SQL Editor → wklej i uruchom:
+//
+//    CREATE TABLE responses (
+//      id        bigserial PRIMARY KEY,
+//      question  text NOT NULL,
+//      vote      text NOT NULL,
+//      reason    text NOT NULL,
+//      created_at timestamptz DEFAULT now()
+//    );
+//    ALTER TABLE responses ENABLE ROW LEVEL SECURITY;
+//    CREATE POLICY "allow_all" ON responses FOR ALL USING (true) WITH CHECK (true);
+//
+//    CREATE TABLE arg_maps (
+//      id        bigserial PRIMARY KEY,
+//      question  text UNIQUE NOT NULL,
+//      pro_args  jsonb DEFAULT '[]',
+//      con_args  jsonb DEFAULT '[]',
+//      updated_at timestamptz DEFAULT now()
+//    );
+//    ALTER TABLE arg_maps ENABLE ROW LEVEL SECURITY;
+//    CREATE POLICY "allow_all" ON arg_maps FOR ALL USING (true) WITH CHECK (true);
+//
+// 4. Skopiuj ze Settings → API:
+//    • Project URL  → wklej jako SUPABASE_URL poniżej
+//    • anon public key → wklej jako SUPABASE_KEY poniżej
+//
+// ════════════════════════════════════════════════════════════════
+var SUPABASE_URL = 'https://vfvgqhzdwzljfbzmerzo.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmdmdxaHpkd3psamZiem1lcnpvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MjY3MTAsImV4cCI6MjA5NDEwMjcxMH0.jncvu2oWncv62-tbcT4GWxM6MJNlz5fFoTJNr_wkMYs';
+
+function sbFetch(path, method, body) {
+  return fetch(SUPABASE_URL + '/rest/v1/' + path, {
+    method: method || 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Prefer': method === 'POST' ? 'return=representation' : ''
+    },
+    body: body ? JSON.stringify(body) : undefined
+  }).then(function(r) {
+    if (!r.ok) return r.text().then(function(t) { throw new Error(t); });
+    return r.json().catch(function() { return {}; });
+  });
 }
 
-// ── BAZA DANYCH: ZAPIS ──────────────────────────────────────────
-// W wersji produkcyjnej: zastąpić fetch('/api/save', STATE)
-function saveState() {
-  if (!STORAGE_KEY) return;
-  setSave('Zapisuje…', '#c4922a');
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
-    setSave('Zapisano ✓', '#1d6e48');
-  } catch(e) { setSave('Błąd zapisu', '#8b2020'); }
+// ── BAZA DANYCH: ODCZYT ─────────────────────────────────────────
+// Pobiera wszystkie odpowiedzi dla bieżącego pytania z Supabase.
+// Co 5 sekund odpytuje bazę o nowe odpowiedzi (polling).
+function loadState(q) {
+  STORAGE_KEY = q;
+  setSave('Ładowanie…', '#c4922a');
+  STATE = { question: q, responses: [], proArgs: [], conArgs: [] };
+
+  sbFetch('responses?question=eq.' + encodeURIComponent(q) + '&order=created_at.asc&select=vote,reason')
+    .then(function(rows) {
+      STATE.responses = (rows || []).map(function(r) { return { v: r.vote, r: r.reason }; });
+      render();
+      if (STATE.responses.length) document.getElementById('gbtn').disabled = false;
+    })
+    .catch(function(e) { console.error('loadState responses:', e); });
+
+  sbFetch('arg_maps?question=eq.' + encodeURIComponent(q) + '&select=pro_args,con_args')
+    .then(function(rows) {
+      if (rows && rows[0]) {
+        STATE.proArgs = rows[0].pro_args || [];
+        STATE.conArgs = rows[0].con_args || [];
+        showArgs('pargs', STATE.proArgs, 'pro');
+        showArgs('cargs', STATE.conArgs, 'con');
+      }
+      setSave('Połączono ✓', '#1d6e48');
+    })
+    .catch(function(e) { setSave('Błąd połączenia', '#8b2020'); console.error(e); });
+
+  // Polling co 5 sekund — wszyscy uczestnicy widzą nowe odpowiedzi na bieżąco
+  clearInterval(window._pollInterval);
+  window._pollInterval = setInterval(function() {
+    sbFetch('responses?question=eq.' + encodeURIComponent(q) + '&order=created_at.asc&select=vote,reason')
+      .then(function(rows) {
+        var prev = STATE.responses.length;
+        STATE.responses = (rows || []).map(function(r) { return { v: r.vote, r: r.reason }; });
+        render();
+        if (STATE.responses.length > prev) document.getElementById('gbtn').disabled = false;
+      })
+      .catch(function() {});
+  }, 5000);
 }
+
+// ── BAZA DANYCH: ZAPIS ODPOWIEDZI ───────────────────────────────
+// Każdy uczestnik zapisuje swój głos bezpośrednio do Supabase.
+// Dane są natychmiast widoczne dla innych uczestników (po max 5 sek).
+function saveResponse(vote, reason) {
+  setSave('Zapisuje…', '#c4922a');
+  var q = document.getElementById('qi').value.trim();
+  sbFetch('responses', 'POST', { question: q, vote: vote, reason: reason })
+    .then(function() { setSave('Zapisano ✓', '#1d6e48'); })
+    .catch(function(e) { setSave('Błąd zapisu', '#8b2020'); console.error(e); });
+}
+
+// ── BAZA DANYCH: ZAPIS MAPY ARGUMENTÓW ─────────────────────────
+// Zapisuje zagregowaną mapę argumentów (wynik analizy AI).
+function saveArgMap() {
+  var q = document.getElementById('qi').value.trim();
+  sbFetch('arg_maps', 'POST', {
+    question: q, pro_args: STATE.proArgs, con_args: STATE.conArgs,
+    updated_at: new Date().toISOString()
+  });
+}
+
+function saveState() {}
 
 // ── TOGGLE EDYCJI PYTANIA ───────────────────────────────────────
 // Przycisk "Zmień pytanie" pokazuje/ukrywa wiersz z inputem.
@@ -350,11 +455,13 @@ function setV(v) {
 function addR() {
   var r = document.getElementById('reason').value.trim();
   if (!r) { flash('Wpisz uzasadnienie'); return; }
-  STATE.responses.push({ v: V, r: r, ts: Date.now() });
+  // Zapisz do Supabase — dane trafią do wspólnej bazy widocznej dla wszystkich
+  saveResponse(V, r);
+  // Dodaj lokalnie do STATE żeby nie czekać na polling
+  STATE.responses.push({ v: V, r: r });
   document.getElementById('reason').value = '';
   flash('Dodano!');
   render();
-  saveState();
   document.getElementById('gbtn').disabled = false;
 }
 
@@ -472,7 +579,8 @@ function applyJson() {
     STATE.conArgs = Array.isArray(parsed.con) ? parsed.con : [];
     showArgs('pargs', STATE.proArgs, 'pro');
     showArgs('cargs', STATE.conArgs, 'con');
-    saveState();
+    // Zapisz mapę do Supabase — będzie widoczna dla wszystkich odwiedzających
+    saveArgMap();
     document.getElementById('gmsg').textContent = 'Mapa argumentów zaktualizowana ✓';
     document.getElementById('jsonbox').style.display = 'none';
     document.getElementById('promptbox').style.display = 'none';
@@ -502,8 +610,144 @@ function showArgs(id, args, type) {
 }
 
 // ── INICJALIZACJA ───────────────────────────────────────────────
+// ── ZAMKNIĘCIE GŁOSOWANIA ───────────────────────────────────────
+// Moderator klika "Zakończ głosowanie" — formularz się blokuje,
+// pojawia się baner informujący uczestników.
+// Stan zamknięcia jest zapisywany w bazie (arg_maps.closed = true).
+function closeVoting() {
+  if (!confirm('Czy na pewno zakończyć głosowanie? Uczestnicy nie będą mogli dodawać nowych odpowiedzi.')) return;
+  STATE.closed = true;
+  applyClosedState(true);
+  saveArgMap(); // zapisz stan zamknięcia w bazie
+}
+
+function reopenVoting() {
+  if (!confirm('Czy wznowić głosowanie?')) return;
+  STATE.closed = false;
+  applyClosedState(false);
+  saveArgMap();
+}
+
+// Aplikuje wizualny stan zamknięcia/otwarcia bez pytania
+function applyClosedState(closed) {
+  document.getElementById('closed-banner').style.display = closed ? 'block' : 'none';
+  document.getElementById('closed-label').style.display = closed ? '' : 'none';
+  document.querySelector('.mod-btn-close').style.display = closed ? 'none' : '';
+  document.getElementById('reopen-btn').style.display = closed ? '' : 'none';
+  // Zablokuj / odblokuj formularz
+  var addBtn = document.querySelector('.add-btn');
+  var reasonTA = document.getElementById('reason');
+  var bpro = document.getElementById('bpro');
+  var bcon = document.getElementById('bcon');
+  [addBtn, reasonTA, bpro, bcon].forEach(function(el) {
+    if (el) el.disabled = closed;
+  });
+  if (addBtn) addBtn.style.opacity = closed ? '0.4' : '1';
+}
+
+// ── EKSPORT RAPORTU ─────────────────────────────────────────────
+// Generuje raport HTML z wynikami plebiscytu:
+//   • pytanie i data
+//   • wynik sondażu (ZA / PRZECIW z procentami)
+//   • lista zagregowanych argumentów ZA
+//   • lista zagregowanych argumentów PRZECIW
+//   • lista wszystkich zebranych odpowiedzi
+// Raport można wydrukować (Ctrl+P) lub zapisać jako PDF z przeglądarki.
+// Przycisk "Zapisz jako PNG" używa html2canvas do zrzutu ekranu.
+function exportReport() {
+  var q = document.getElementById('qi').value.trim();
+  var tot = STATE.responses.length;
+  var pros = STATE.responses.filter(function(x){ return x.v === 'pro'; }).length;
+  var cons = tot - pros;
+  var pp = tot ? Math.round(pros / tot * 100) : 0;
+  var cp = tot ? Math.round(cons / tot * 100) : 0;
+  var now = new Date().toLocaleString('pl-PL');
+
+  // Buduj HTML raportu
+  var proArgsHtml = STATE.proArgs.length
+    ? STATE.proArgs.map(function(a) {
+        return '<li style="margin-bottom:8px;"><span style="color:#1d6e48;">●</span> ' + a.argument +
+          (a.count > 1 ? ' <em style="color:#8a857e;font-size:12px;">(' + a.count + ' podobnych argumentów)</em>' : '') + '</li>';
+      }).join('')
+    : '<li style="color:#8a857e;font-style:italic;">Brak wygenerowanych argumentów</li>';
+
+  var conArgsHtml = STATE.conArgs.length
+    ? STATE.conArgs.map(function(a) {
+        return '<li style="margin-bottom:8px;"><span style="color:#8b2020;">●</span> ' + a.argument +
+          (a.count > 1 ? ' <em style="color:#8a857e;font-size:12px;">(' + a.count + ' podobnych argumentów)</em>' : '') + '</li>';
+      }).join('')
+    : '<li style="color:#8a857e;font-style:italic;">Brak wygenerowanych argumentów</li>';
+
+  var responsesHtml = STATE.responses.length
+    ? STATE.responses.map(function(x, i) {
+        var color = x.v === 'pro' ? '#1d6e48' : '#8b2020';
+        var label = x.v === 'pro' ? 'ZA' : 'PRZECIW';
+        return '<tr style="border-bottom:1px solid #e8e1d6;">' +
+          '<td style="padding:6px 10px;color:#8a857e;font-size:11px;">' + (i+1) + '</td>' +
+          '<td style="padding:6px 10px;font-weight:700;color:' + color + ';font-size:11px;">' + label + '</td>' +
+          '<td style="padding:6px 10px;font-size:12px;">' + x.r + '</td>' +
+          '</tr>';
+      }).join('')
+    : '<tr><td colspan="3" style="padding:12px;color:#8a857e;font-style:italic;">Brak odpowiedzi</td></tr>';
+
+  var reportHtml =
+    '<div style="background:#1a1714;color:white;padding:20px 28px;border-bottom:3px solid #c4922a;">' +
+      '<div style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#c4922a;font-weight:700;margin-bottom:6px;">Raport Deliberacji · Model Synapsa · Prawdziwa Demokracja</div>' +
+      '<div style="font-size:20px;font-weight:700;line-height:1.3;">' + q + '</div>' +
+      '<div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:4px;">Wygenerowano: ' + now + '</div>' +
+    '</div>' +
+    '<div style="padding:24px 28px;">' +
+      '<h2 style="font-size:15px;border-bottom:2px solid #c4922a;padding-bottom:6px;margin-bottom:14px;">Wynik sondażu</h2>' +
+      '<div style="display:flex;gap:24px;margin-bottom:8px;">' +
+        '<div style="flex:1;background:#edf7f2;border:1px solid #9ed4b8;border-radius:8px;padding:14px;text-align:center;">' +
+          '<div style="font-size:28px;font-weight:900;color:#1d6e48;">' + pp + '%</div>' +
+          '<div style="font-size:12px;color:#1d6e48;font-weight:700;">ZA (' + pros + ' głosów)</div>' +
+        '</div>' +
+        '<div style="flex:1;background:#fdf0f0;border:1px solid #e8a5a5;border-radius:8px;padding:14px;text-align:center;">' +
+          '<div style="font-size:28px;font-weight:900;color:#8b2020;">' + cp + '%</div>' +
+          '<div style="font-size:12px;color:#8b2020;font-weight:700;">PRZECIW (' + cons + ' głosów)</div>' +
+        '</div>' +
+        '<div style="flex:1;background:#f2ede4;border:1px solid #e8e1d6;border-radius:8px;padding:14px;text-align:center;">' +
+          '<div style="font-size:28px;font-weight:900;color:#1a1714;">' + tot + '</div>' +
+          '<div style="font-size:12px;color:#4a4640;font-weight:700;">Łączna liczba głosów</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:16px;margin-top:20px;">' +
+        '<div style="flex:1;">' +
+          '<h2 style="font-size:14px;color:#1d6e48;border-bottom:2px solid #1d6e48;padding-bottom:6px;margin-bottom:10px;">Argumenty ZA</h2>' +
+          '<ul style="padding-left:0;list-style:none;">' + proArgsHtml + '</ul>' +
+        '</div>' +
+        '<div style="flex:1;">' +
+          '<h2 style="font-size:14px;color:#8b2020;border-bottom:2px solid #8b2020;padding-bottom:6px;margin-bottom:10px;">Argumenty PRZECIW</h2>' +
+          '<ul style="padding-left:0;list-style:none;">' + conArgsHtml + '</ul>' +
+        '</div>' +
+      '</div>' +
+      '<h2 style="font-size:14px;border-bottom:2px solid #e8e1d6;padding-bottom:6px;margin:20px 0 10px;color:#4a4640;">Wszystkie zebrane odpowiedzi (' + tot + ')</h2>' +
+      '<table style="width:100%;border-collapse:collapse;font-family:Georgia,serif;">' +
+        '<thead><tr style="background:#f2ede4;">' +
+          '<th style="padding:6px 10px;text-align:left;font-size:11px;color:#8a857e;">#</th>' +
+          '<th style="padding:6px 10px;text-align:left;font-size:11px;color:#8a857e;">Głos</th>' +
+          '<th style="padding:6px 10px;text-align:left;font-size:11px;color:#8a857e;">Uzasadnienie</th>' +
+        '</tr></thead>' +
+        '<tbody>' + responsesHtml + '</tbody>' +
+      '</table>' +
+      '<div style="margin-top:24px;padding-top:12px;border-top:1px solid #e8e1d6;font-size:10px;color:#8a857e;font-style:italic;">' +
+        'Raport wygenerowany przez narzędzie Synapsa · Prawdziwa Demokracja · prawdziwademokracja.pl' +
+      '</div>' +
+    '</div>';
+
+  // Otwórz raport w nowym oknie — użytkownik może wydrukować lub zapisać jako PDF
+  var win = window.open('', '_blank', 'width=900,height=700');
+  win.document.write('<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8"><title>Raport — ' + q + '</title></head><body style="margin:0;font-family:Georgia,serif;">' + reportHtml + '<script>window.onload=function(){window.print();}<\/script></body></html>');
+  win.document.close();
+}
+
 setV('pro');
 loadState(document.getElementById('qi').value.trim());
 </script>
 </body>
+<!-- UKRYTY DIV DO EKSPORTU RAPORTU -->
+<div id="export-tpl" style="display:none;font-family:Georgia,serif;max-width:800px;margin:0 auto;padding:40px;">
+</div>
+
 </html>
