@@ -427,12 +427,16 @@ function sbFetch(path, method, body) {
 // ── BAZA DANYCH: ODCZYT ─────────────────────────────────────────
 // Pobiera wszystkie odpowiedzi dla bieżącego pytania z Supabase.
 // Co 5 sekund odpytuje bazę o nowe odpowiedzi (polling).
-function loadState(q) {
-  STORAGE_KEY = q;
-  setSave('Ładowanie…', '#c4922a');
-  STATE = { question: q, responses: [], proArgs: [], conArgs: [] };
+// ── BAZA DANYCH: ODCZYT ─────────────────────────────────────────
+// Używa synapsa_id (liczba) zamiast tekstu pytania.
+// Eliminuje problem różnych synaps na różnych urządzeniach.
+function loadState(synapsaId, q) {
+  STORAGE_KEY = synapsaId;
+  STATE.question = q;
+  STATE.synapsaId = synapsaId;
 
-  sbFetch('responses?question=eq.' + encodeURIComponent(q) + '&order=created_at.asc&select=vote,reason')
+  // Pobierz odpowiedzi po synapsa_id
+  sbFetch('responses?synapsa_id=eq.' + synapsaId + '&order=created_at.asc&select=vote,reason')
     .then(function(rows) {
       STATE.responses = (rows || []).map(function(r) { return { v: r.vote, r: r.reason }; });
       render();
@@ -440,6 +444,7 @@ function loadState(q) {
     })
     .catch(function(e) { console.error('loadState responses:', e); });
 
+  // Pobierz mapę argumentów po synapsa_id
   sbFetch('arg_maps?question=eq.' + encodeURIComponent(q) + '&select=pro_args,con_args')
     .then(function(rows) {
       if (rows && rows[0]) {
@@ -452,10 +457,10 @@ function loadState(q) {
     })
     .catch(function(e) { setSave('Błąd połączenia', '#8b2020'); console.error(e); });
 
-  // Polling co 5 sekund — wszyscy uczestnicy widzą nowe odpowiedzi na bieżąco
+  // Polling co 5 sekund — wszyscy widzą nowe odpowiedzi
   clearInterval(window._pollInterval);
   window._pollInterval = setInterval(function() {
-    sbFetch('responses?question=eq.' + encodeURIComponent(q) + '&order=created_at.asc&select=vote,reason')
+    sbFetch('responses?synapsa_id=eq.' + synapsaId + '&order=created_at.asc&select=vote,reason')
       .then(function(rows) {
         var prev = STATE.responses.length;
         STATE.responses = (rows || []).map(function(r) { return { v: r.vote, r: r.reason }; });
@@ -469,10 +474,17 @@ function loadState(q) {
 // ── BAZA DANYCH: ZAPIS ODPOWIEDZI ───────────────────────────────
 // Każdy uczestnik zapisuje swój głos bezpośrednio do Supabase.
 // Dane są natychmiast widoczne dla innych uczestników (po max 5 sek).
+// ── ZAPIS ODPOWIEDZI ────────────────────────────────────────────
+// Zapisuje synapsa_id razem z odpowiedzią — powiązanie przez ID.
 function saveResponse(vote, reason) {
   setSave('Zapisuje…', '#c4922a');
   var q = document.getElementById('qi').value.trim();
-  sbFetch('responses', 'POST', { question: q, vote: vote, reason: reason })
+  sbFetch('responses', 'POST', {
+    question: q,
+    vote: vote,
+    reason: reason,
+    synapsa_id: STATE.synapsaId
+  })
     .then(function() { setSave('Zapisano ✓', '#1d6e48'); })
     .catch(function(e) { setSave('Błąd zapisu', '#8b2020'); console.error(e); });
 }
@@ -503,19 +515,34 @@ function toggleQEdit() {
 // ── ZMIANA PYTANIA ──────────────────────────────────────────────
 // Aby zmienić pytanie na stałe w kodzie, edytuj atrybut value
 // elementu <input id="qi"> oraz tekst w <div id="qi-display">.
-function setQ() {
+// ── ZMIANA PYTANIA (ADMIN) ──────────────────────────────────────
+// Tworzy nową synapsę w bazie i przekierowuje do niej przez ?id=
+async function setQ() {
   var q = document.getElementById('qi').value.trim();
   if (!q) return;
-  // Aktualizuj nagłówek na czarnym tle
-  document.getElementById('qi-display').textContent = q;
-  // Schowaj wiersz edycji, pokaż przycisk
-  document.getElementById('qedit-row').style.display = 'none';
-  document.getElementById('qedit-btn').style.display = '';
+  try {
+    var rows = await sbFetch('synapsy', 'POST', {
+      question: q, status: 'open', created_at: new Date().toISOString()
+    });
+    var newId = rows && rows[0] ? rows[0].id : null;
+    if (newId) {
+      window.location.href = 'synapsa.html?id=' + newId;
+    } else {
+      // Fallback bez ID
+      document.getElementById('qi-display').textContent = q;
+      document.getElementById('qedit-row').style.display = 'none';
+      document.getElementById('qedit-btn').style.display = '';
+    }
+  } catch(e) {
+    console.error('setQ:', e);
+    document.getElementById('qi-display').textContent = q;
+    document.getElementById('qedit-row').style.display = 'none';
+    document.getElementById('qedit-btn').style.display = '';
+  }
   document.getElementById('gbtn').disabled = true;
   document.getElementById('gmsg').textContent = '';
   document.getElementById('promptbox').style.display = 'none';
   document.getElementById('jsonbox').style.display = 'none';
-  loadState(q);
 }
 
 // ── KOPIOWANIE PROMPTU ─────────────────────────────────────────
@@ -896,7 +923,7 @@ async function confirmReset() {
   try {
     // Usuń wszystkie odpowiedzi dla tego pytania
     await sbFetch(
-      'responses?question=eq.' + encodeURIComponent(q),
+      'responses?synapsa_id=eq.' + STATE.synapsaId,
       'DELETE'
     );
     // Usuń mapę argumentów dla tego pytania
@@ -965,10 +992,14 @@ async function startNewSynapsa() {
       created_at: new Date().toISOString()
     });
     // Przejdź do synapsy z nowym pytaniem w URL
-    window.location.href = 'synapsa.html?q=' + encodeURIComponent(q);
+    var newRows = await sbFetch('synapsy?question=eq.' + encodeURIComponent(q) + '&select=id');
+    var newId = newRows && newRows[0] ? newRows[0].id : null;
+    window.location.href = 'synapsa.html?' + (newId ? 'id=' + newId : 'q=' + encodeURIComponent(q));
   } catch(e) {
     // Nawet bez zapisu w tabeli synapsy — otwórz pytanie
-    window.location.href = 'synapsa.html?q=' + encodeURIComponent(q);
+    var newRows = await sbFetch('synapsy?question=eq.' + encodeURIComponent(q) + '&select=id');
+    var newId = newRows && newRows[0] ? newRows[0].id : null;
+    window.location.href = 'synapsa.html?' + (newId ? 'id=' + newId : 'q=' + encodeURIComponent(q));
     console.error('startNewSynapsa:', e);
   }
 }
@@ -1052,36 +1083,44 @@ if (sessionStorage.getItem('synapsa_admin') === '1') {
 // Admin zmienia pytanie przez panel — zmiana jest trwała dla
 // wszystkich użytkowników bez edycji kodu HTML.
 
+// ── ŁADOWANIE SYNAPSY PO ID ─────────────────────────────────────
+// Synapsa jest identyfikowana przez ID (nie tekst pytania).
+// URL: synapsa.html?id=3  → ładuje synapsę o id=3
+// Bez parametru → ładuje pierwszą otwartą synapsę.
 async function loadActiveSynapsa() {
   setSave('Ładowanie…', '#c4922a');
   try {
-    // Szukaj aktywnej synapsy w tabeli synapsy
-    var rows = await sbFetch('synapsy?status=eq.open&order=created_at.desc&limit=1&select=question');
-    if (rows && rows[0] && rows[0].question) {
-      var q = rows[0].question;
-      document.getElementById('qi').value = q;
-      document.getElementById('qi-display').textContent = q;
-      loadState(q);
+    var params = new URLSearchParams(window.location.search);
+    var idParam = params.get('id');
+    var rows;
+
+    if (idParam) {
+      // Konkretna synapsa po ID
+      rows = await sbFetch('synapsy?id=eq.' + idParam + '&select=id,question,status');
     } else {
-      // Fallback: użyj pytania z URL lub domyślnego z HTML
-      var params = new URLSearchParams(window.location.search);
-      var qParam = params.get('q');
-      if (qParam) {
-        document.getElementById('qi').value = qParam;
-        document.getElementById('qi-display').textContent = qParam;
+      // Pierwsza otwarta (dla admina bez parametru)
+      rows = await sbFetch('synapsy?status=eq.open&order=created_at.desc&limit=1&select=id,question,status');
+    }
+
+    if (rows && rows[0]) {
+      var s = rows[0];
+      STATE.synapsaId = s.id;
+      document.getElementById('qi').value = s.question;
+      document.getElementById('qi-display').textContent = s.question;
+      // Pokaż w URL bez przeładowania
+      if (!idParam) {
+        history.replaceState(null, '', '?id=' + s.id);
       }
-      loadState(document.getElementById('qi').value.trim());
+      if (s.status === 'closed') {
+        applyClosedState(true);
+      }
+      loadState(s.id, s.question);
+    } else {
+      setSave('Brak synaps — utwórz pierwszą', '#c4922a');
     }
   } catch(e) {
     console.error('loadActiveSynapsa:', e);
-    // Fallback przy błędzie połączenia
-    var params = new URLSearchParams(window.location.search);
-    var qParam = params.get('q');
-    if (qParam) {
-      document.getElementById('qi').value = qParam;
-      document.getElementById('qi-display').textContent = qParam;
-    }
-    loadState(document.getElementById('qi').value.trim());
+    setSave('Błąd połączenia', '#8b2020');
   }
 }
 

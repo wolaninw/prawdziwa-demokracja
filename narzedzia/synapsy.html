@@ -183,7 +183,61 @@ function sbFetch(path, method, body) {
 
 // Ładuje synapsy z bazy i zlicza głosy dla każdej
 async function loadSynapsy() {
+  document.getElementById('list').innerHTML = '<div class="loading">Łączenie z bazą danych…</div>';
+  document.getElementById('stat-pill').textContent = 'Ładowanie…';
+
   try {
+    // Sprawdź połączenie z Supabase
+    var testRes = await fetch(SUPABASE_URL + '/rest/v1/synapsy?limit=1', {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+    });
+
+    // Tabela nie istnieje — pokaż instrukcję SQL
+    if (testRes.status === 404 || testRes.status === 400) {
+      var errText = await testRes.text();
+      if (errText.includes('relation') || errText.includes('does not exist') || errText.includes('42P01')) {
+        document.getElementById('list').innerHTML =
+          '<div class="empty-state" style="text-align:left;padding:24px;">' +
+          '<div style="font-size:24px;margin-bottom:12px;">⚠️</div>' +
+          '<p style="font-size:14px;font-weight:700;color:#8b2020;margin-bottom:12px;">Tabela <code>synapsy</code> nie istnieje w Supabase.</p>' +
+          '<p style="font-size:13px;color:#4a4640;margin-bottom:16px;">Wejdź w Supabase → SQL Editor i uruchom:</p>' +
+          '<pre style="background:#f2ede4;padding:14px;border-radius:8px;font-size:12px;line-height:1.7;overflow-x:auto;">' +
+          'CREATE TABLE synapsy (
+' +
+          '  id        bigserial PRIMARY KEY,
+' +
+          '  question  text NOT NULL,
+' +
+          '  status    text DEFAULT 'open',
+' +
+          '  created_at timestamptz DEFAULT now()
+' +
+          ');
+' +
+          'ALTER TABLE synapsy ENABLE ROW LEVEL SECURITY;
+' +
+          'CREATE POLICY "allow_all" ON synapsy
+' +
+          '  FOR ALL USING (true) WITH CHECK (true);
+
+' +
+          '-- Pierwsze pytanie:
+' +
+          'INSERT INTO synapsy (question, status)
+' +
+          'VALUES ('Czy telefony komórkowe powinny być zakazane podczas lekcji?', 'open');' +
+          '</pre>' +
+          '<p style="font-size:12px;color:#8a857e;margin-top:12px;font-style:italic;">Po uruchomieniu SQL odśwież tę stronę.</p>' +
+          '</div>';
+        document.getElementById('stat-pill').textContent = 'Błąd konfiguracji';
+        return;
+      }
+    }
+
+    if (!testRes.ok) {
+      throw new Error('HTTP ' + testRes.status + ' — sprawdź klucze Supabase');
+    }
+
     // Pobierz listę synaps
     var synapsy = await sbFetch('synapsy?order=created_at.desc&select=id,question,status,created_at');
     // Pobierz liczbę głosów per pytanie
@@ -198,24 +252,31 @@ async function loadSynapsy() {
     });
 
     ALL_SYNAPSY = (synapsy || []).map(function(s, i) {
-      var c = counts[s.question] || { pro: 0, con: 0 };
+      var cnt = counts[s.question] || { pro: 0, con: 0 };
       return {
         id: s.id,
         question: s.question,
         status: s.status || 'open',
         created_at: s.created_at,
-        pro: c.pro,
-        con: c.con,
-        total: c.pro + c.con,
+        pro: cnt.pro,
+        con: cnt.con,
+        total: cnt.pro + cnt.con,
         num: i + 1
       };
     });
 
     renderList();
+
   } catch(e) {
     document.getElementById('list').innerHTML =
-      '<div class="empty-state"><div>⚠</div><p>Błąd ładowania: ' + e.message + '<br>Sprawdź czy tabela <strong>synapsy</strong> istnieje w Supabase.</p></div>';
-    console.error(e);
+      '<div class="empty-state" style="text-align:left;padding:24px;">' +
+      '<div style="font-size:24px;margin-bottom:12px;">⚠️</div>' +
+      '<p style="font-size:14px;font-weight:700;color:#8b2020;margin-bottom:8px;">Błąd połączenia z bazą</p>' +
+      '<p style="font-size:13px;color:#4a4640;">' + e.message + '</p>' +
+      '<p style="font-size:12px;color:#8a857e;margin-top:12px;font-style:italic;">Sprawdź czy SUPABASE_URL i SUPABASE_KEY są poprawne w kodzie pliku.</p>' +
+      '</div>';
+    document.getElementById('stat-pill').textContent = 'Błąd połączenia';
+    console.error('loadSynapsy error:', e);
   }
 }
 
@@ -265,7 +326,7 @@ function renderList() {
         '</div>'
       : '';
 
-    return '<a class="synapsa-card" href="synapsa.html?q=' + encodeURIComponent(s.question) + '">' +
+    return '<a class="synapsa-card" href="synapsa.html?id=' + s.id + '">' +
       '<div class="synapsa-num">#' + s.num + '</div>' +
       '<div class="synapsa-body">' +
         '<div class="synapsa-q">' + s.question + '</div>' +
@@ -320,7 +381,9 @@ async function startNew() {
       created_at: new Date().toISOString()
     });
   } catch(e) { console.error(e); }
-  window.location.href = 'synapsa.html?q=' + encodeURIComponent(q);
+  var newRows = await sbFetch('synapsy?question=eq.' + encodeURIComponent(q) + '&order=created_at.desc&limit=1&select=id');
+  var newId = newRows && newRows[0] ? newRows[0].id : null;
+  window.location.href = 'synapsa.html?' + (newId ? 'id=' + newId : 'q=' + encodeURIComponent(q));
 }
 
 document.addEventListener('click', function(e) {
