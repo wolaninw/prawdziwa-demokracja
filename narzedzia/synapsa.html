@@ -138,6 +138,23 @@ textarea:focus { border-color: var(--gold); }
 .mod-btn-reopen { padding: 7px 16px; background: #c4922a; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; display:none; }
 .mod-btn-reset { padding: 7px 16px; background: #4a4640; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; }
 .mod-btn-reset:hover { opacity: .88; }
+.mod-btn-new { padding: 7px 16px; background: #c4922a; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; }
+.mod-btn-new:hover { opacity: .88; }
+.mod-btn-list { padding: 7px 16px; background: transparent; color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.3); border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+.mod-btn-list:hover { color: white; border-color: rgba(255,255,255,.6); }
+/* Modal nowej synapsy */
+.new-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:999; align-items:center; justify-content:center; }
+.new-modal.open { display:flex; }
+.new-modal-box { background:white; border-radius:12px; padding:28px 32px; max-width:480px; width:90%; font-family:Georgia,serif; box-shadow:0 8px 32px rgba(0,0,0,.25); }
+.new-modal-box h3 { font-size:16px; color:#1a1714; margin-bottom:8px; }
+.new-modal-box p { font-size:12px; color:#8a857e; margin-bottom:14px; line-height:1.6; }
+.new-modal-box input { width:100%; border:2px solid #e8e1d6; border-radius:6px; padding:9px 11px; font-family:Georgia,serif; font-size:14px; outline:none; margin-bottom:6px; }
+.new-modal-box input:focus { border-color:#c4922a; }
+.new-modal-hint { font-size:11px; color:#8a857e; font-style:italic; margin-bottom:16px; }
+.new-modal-btns { display:flex; gap:10px; }
+.new-start-btn { flex:1; padding:10px; background:#1a1714; color:white; border:none; border-radius:6px; font-family:Georgia,serif; font-size:13px; font-weight:700; cursor:pointer; }
+.new-start-btn:disabled { opacity:.4; cursor:not-allowed; }
+.new-cancel-btn { padding:10px 18px; background:#f2ede4; color:#4a4640; border:1px solid #e8e1d6; border-radius:6px; font-family:Georgia,serif; font-size:13px; font-weight:700; cursor:pointer; }
 /* Modal potwierdzenia resetu */
 .reset-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:999; align-items:center; justify-content:center; }
 .reset-modal.open { display:flex; }
@@ -151,6 +168,15 @@ textarea:focus { border-color: var(--gold); }
 .reset-confirm-btn:disabled { opacity:.4; cursor:not-allowed; }
 .reset-cancel-btn { flex:1; padding:9px; background:#f2ede4; color:#4a4640; border:1px solid #e8e1d6; border-radius:6px; font-family:Georgia,serif; font-size:13px; font-weight:700; cursor:pointer; }
 .closed-banner { background: #8b2020; color: white; text-align: center; padding: 10px 24px; font-size: 13px; font-weight: 700; letter-spacing: .05em; display: none; }
+
+/* ── PANEL ADMINA ── */
+.admin-login-bar { background: #1a1714; border-bottom: 1px solid #2e2a26; padding: 6px 24px; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.admin-login-bar input { padding: 4px 10px; border: 1px solid #3e3a36; border-radius: 5px; background: #2e2a26; color: #faf7f2; font-family: Georgia,serif; font-size: 11px; outline: none; width: 140px; }
+.admin-login-bar input::placeholder { color: #6a6560; }
+.admin-login-btn { padding: 4px 12px; background: #c4922a; color: white; border: none; border-radius: 5px; font-family: Georgia,serif; font-size: 11px; font-weight: 700; cursor: pointer; }
+.admin-logout-btn { padding: 4px 12px; background: transparent; color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.2); border-radius: 5px; font-family: Georgia,serif; font-size: 11px; cursor: pointer; display: none; }
+.admin-status { font-size: 10px; font-style: italic; color: rgba(255,255,255,.4); }
+.admin-status.logged { color: #9ed4b8; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 700px) {
@@ -171,13 +197,38 @@ textarea:focus { border-color: var(--gold); }
   <a class="nav-back" href="https://prawdziwademokracja.pl/#narzedzia">← Wszystkie narzędzia</a>
 </nav>
 
-<div class="mod-bar">
+<!-- PASEK LOGOWANIA ADMINA — widoczny zawsze, dyskretny -->
+<div class="admin-login-bar" id="admin-login-bar">
+  <span class="admin-status" id="admin-status">Panel administratora</span>
+  <input type="password" id="admin-pwd" placeholder="Hasło admina…" onkeydown="if(event.key==='Enter')adminLogin()" />
+  <button class="admin-login-btn" onclick="adminLogin()">Zaloguj</button>
+  <button class="admin-logout-btn" id="admin-logout-btn" onclick="adminLogout()">Wyloguj</button>
+</div>
+
+<!-- PANEL MODERATORA — widoczny TYLKO dla admina -->
+<div class="mod-bar" id="mod-bar" style="display:none;">
   <span>Panel moderatora:</span>
   <button class="mod-btn-close" onclick="closeVoting()">⏹ Zakończ głosowanie</button>
   <button class="mod-btn-reopen" id="reopen-btn" onclick="reopenVoting()">▶ Wznów głosowanie</button>
   <button class="mod-btn-export" onclick="exportReport()">⬇ Eksportuj raport</button>
   <button class="mod-btn-reset" onclick="openResetModal()">🗑 Wyczyść synapsę</button>
+  <button class="mod-btn-new" onclick="openNewModal()">＋ Nowa Synapsa</button>
+  <a class="mod-btn-list" href="synapsy.html">☰ Lista synaps</a>
   <span id="closed-label" style="color:#f0a0a0;display:none;">● Głosowanie zamknięte</span>
+</div>
+
+<!-- MODAL NOWEJ SYNAPSY -->
+<div class="new-modal" id="new-modal">
+  <div class="new-modal-box">
+    <h3>＋ Nowa Synapsa</h3>
+    <p>Wpisz pytanie deliberacji. Nowa Synapsa zostanie zapisana w bazie i pojawi się na liście wszystkich synaps.</p>
+    <input type="text" id="new-question-input" placeholder="Czy…?" oninput="checkNewQuestion()" maxlength="200" />
+    <div class="new-modal-hint">Pytanie powinno być zamknięte (tak/nie) i jednoznaczne. Max 200 znaków.</div>
+    <div class="new-modal-btns">
+      <button class="new-cancel-btn" onclick="closeNewModal()">Anuluj</button>
+      <button class="new-start-btn" id="new-start-btn" onclick="startNewSynapsa()" disabled>Utwórz i przejdź →</button>
+    </div>
+  </div>
 </div>
 
 <!-- MODAL POTWIERDZENIA RESETU -->
@@ -200,8 +251,8 @@ textarea:focus { border-color: var(--gold); }
   <p>Zbieraj opinie · głosuj ZA lub PRZECIW · wygeneruj mapę argumentów</p>
 </div>
 
-<!-- Pasek z opcją zmiany pytania (domyślnie ukryty) -->
-<div class="q-bar">
+<!-- Pasek z opcją zmiany pytania — widoczny TYLKO dla admina -->
+<div class="q-bar" id="q-bar" style="display:none;">
   <button onclick="toggleQEdit()" id="qedit-btn" style="padding:6px 14px;background:transparent;color:var(--ink2);border:1px solid var(--paper3);border-radius:6px;font-family:Georgia,serif;font-size:11px;cursor:pointer;white-space:nowrap;">✎ Zmień pytanie</button>
   <div id="qedit-row" style="display:none;flex:1;display:none;gap:6px;align-items:center;flex-wrap:wrap;">
     <input id="qi" value="Czy telefony komórkowe powinny być zakazane podczas lekcji?" placeholder="Wpisz pytanie…" style="flex:1;min-width:180px;border:1px solid var(--paper3);border-radius:6px;padding:6px 10px;font-family:Georgia,serif;font-size:13px;color:var(--ink);outline:none;background:white;" />
@@ -879,8 +930,163 @@ document.addEventListener('click', function(e) {
   if (modal && e.target === modal) closeResetModal();
 });
 
+// ── NOWA SYNAPSA ────────────────────────────────────────────────
+// Tworzy nową deliberację: zapisuje pytanie do tabeli `synapsy`
+// (osobna tabela z metadanymi każdej deliberacji) i przeładowuje
+// stronę z nowym pytaniem jako parametrem URL (?q=...).
+// Lista wszystkich synaps dostępna na synapsy.html.
+
+function openNewModal() {
+  document.getElementById('new-modal').classList.add('open');
+  document.getElementById('new-question-input').value = '';
+  document.getElementById('new-start-btn').disabled = true;
+  setTimeout(function(){ document.getElementById('new-question-input').focus(); }, 100);
+}
+
+function closeNewModal() {
+  document.getElementById('new-modal').classList.remove('open');
+}
+
+function checkNewQuestion() {
+  var val = document.getElementById('new-question-input').value.trim();
+  document.getElementById('new-start-btn').disabled = val.length < 5;
+}
+
+async function startNewSynapsa() {
+  var q = document.getElementById('new-question-input').value.trim();
+  if (!q) return;
+  closeNewModal();
+  setSave('Tworzę synapsę…', '#c4922a');
+  try {
+    // Zapisz nową synapsę w tabeli synapsy (metadane)
+    await sbFetch('synapsy', 'POST', {
+      question: q,
+      status: 'open',
+      created_at: new Date().toISOString()
+    });
+    // Przejdź do synapsy z nowym pytaniem w URL
+    window.location.href = 'synapsa.html?q=' + encodeURIComponent(q);
+  } catch(e) {
+    // Nawet bez zapisu w tabeli synapsy — otwórz pytanie
+    window.location.href = 'synapsa.html?q=' + encodeURIComponent(q);
+    console.error('startNewSynapsa:', e);
+  }
+}
+
+// Zamknij modal klikając poza nim
+document.addEventListener('click', function(e) {
+  var nm = document.getElementById('new-modal');
+  if (nm && e.target === nm) closeNewModal();
+});
+
+// ── WCZYTAJ PYTANIE Z URL ────────────────────────────────────────
+// Jeśli w URL jest parametr ?q=... (np. po przekierowaniu z listy
+// synaps lub po utworzeniu nowej), ustaw to pytanie automatycznie.
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var qParam = params.get('q');
+  if (qParam) {
+    document.getElementById('qi').value = qParam;
+    document.getElementById('qi-display').textContent = qParam;
+  }
+})();
+
+// ════════════════════════════════════════════════════════════════
+// PANEL ADMINA
+// ════════════════════════════════════════════════════════════════
+// Hasło admina — zmień na własne przed wdrożeniem!
+// W wersji produkcyjnej użyj zmiennej środowiskowej na backendzie.
+var ADMIN_PASSWORD = 'pd2026admin';
+var isAdmin = false;
+
+function adminLogin() {
+  var pwd = document.getElementById('admin-pwd').value;
+  if (pwd === ADMIN_PASSWORD) {
+    isAdmin = true;
+    // Pokaż panel moderatora i pasek zmiany pytania
+    document.getElementById('mod-bar').style.display = 'flex';
+    document.getElementById('q-bar').style.display = 'flex';
+    document.getElementById('admin-pwd').style.display = 'none';
+    document.querySelector('.admin-login-btn').style.display = 'none';
+    document.getElementById('admin-logout-btn').style.display = '';
+    var st = document.getElementById('admin-status');
+    st.textContent = '● Admin zalogowany';
+    st.className = 'admin-status logged';
+    // Zapisz w sessionStorage żeby nie logować przy odświeżeniu
+    sessionStorage.setItem('synapsa_admin', '1');
+  } else {
+    document.getElementById('admin-pwd').style.borderColor = '#8b2020';
+    document.getElementById('admin-pwd').value = '';
+    document.getElementById('admin-pwd').placeholder = 'Złe hasło…';
+    setTimeout(function() {
+      document.getElementById('admin-pwd').style.borderColor = '';
+      document.getElementById('admin-pwd').placeholder = 'Hasło admina…';
+    }, 2000);
+  }
+}
+
+function adminLogout() {
+  isAdmin = false;
+  sessionStorage.removeItem('synapsa_admin');
+  document.getElementById('mod-bar').style.display = 'none';
+  document.getElementById('q-bar').style.display = 'none';
+  document.getElementById('admin-pwd').style.display = '';
+  document.querySelector('.admin-login-btn').style.display = '';
+  document.getElementById('admin-logout-btn').style.display = 'none';
+  var st = document.getElementById('admin-status');
+  st.textContent = 'Panel administratora';
+  st.className = 'admin-status';
+}
+
+// Przywróć sesję admina po odświeżeniu
+if (sessionStorage.getItem('synapsa_admin') === '1') {
+  adminLogin();
+  document.getElementById('admin-pwd').value = ADMIN_PASSWORD;
+}
+
+// ════════════════════════════════════════════════════════════════
+// AKTYWNE PYTANIE Z SUPABASE
+// ════════════════════════════════════════════════════════════════
+// Pytanie jest przechowywane w tabeli `synapsy` w Supabase.
+// Kolumna `active = true` oznacza aktywną synapsę.
+// Admin zmienia pytanie przez panel — zmiana jest trwała dla
+// wszystkich użytkowników bez edycji kodu HTML.
+
+async function loadActiveSynapsa() {
+  setSave('Ładowanie…', '#c4922a');
+  try {
+    // Szukaj aktywnej synapsy w tabeli synapsy
+    var rows = await sbFetch('synapsy?status=eq.open&order=created_at.desc&limit=1&select=question');
+    if (rows && rows[0] && rows[0].question) {
+      var q = rows[0].question;
+      document.getElementById('qi').value = q;
+      document.getElementById('qi-display').textContent = q;
+      loadState(q);
+    } else {
+      // Fallback: użyj pytania z URL lub domyślnego z HTML
+      var params = new URLSearchParams(window.location.search);
+      var qParam = params.get('q');
+      if (qParam) {
+        document.getElementById('qi').value = qParam;
+        document.getElementById('qi-display').textContent = qParam;
+      }
+      loadState(document.getElementById('qi').value.trim());
+    }
+  } catch(e) {
+    console.error('loadActiveSynapsa:', e);
+    // Fallback przy błędzie połączenia
+    var params = new URLSearchParams(window.location.search);
+    var qParam = params.get('q');
+    if (qParam) {
+      document.getElementById('qi').value = qParam;
+      document.getElementById('qi-display').textContent = qParam;
+    }
+    loadState(document.getElementById('qi').value.trim());
+  }
+}
+
 setV('pro');
-loadState(document.getElementById('qi').value.trim());
+loadActiveSynapsa();
 </script>
 </body>
 <!-- UKRYTY DIV DO EKSPORTU RAPORTU -->
