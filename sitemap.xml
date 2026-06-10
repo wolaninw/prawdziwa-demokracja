@@ -105,4 +105,11 @@
     <priority>0.8</priority>
   </url>
   
+  <!-- Drzewo Deliberacji -->
+  <url>
+    <loc>https://prawdziwademokracja.pl/narzedzia/drzewo-deliberacji.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
 </urlset>
