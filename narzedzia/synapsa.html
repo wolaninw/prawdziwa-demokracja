@@ -118,65 +118,12 @@ textarea:focus { border-color: var(--gold); }
 /* ── PROMPT BOX ── */
 .prompt-box { background: #f8f5ee; border: 1px solid var(--paper3); border-left: 3px solid var(--gold); border-radius: 0 7px 7px 0; padding: 10px 14px; font-size: 11px; line-height: 1.6; color: var(--ink2); margin-top: 4px; }
 .prompt-box strong { display: block; margin-bottom: 4px; color: var(--gold); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
-.copy-btn { margin-top: 8px; padding: 7px 14px; background: var(--gold); color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-.copy-btn:hover { opacity: .88; }
-.copy-btn.copied { background: var(--green); }
 
 /* ── FOOTER ── */
 .footer { background: var(--navy); color: rgba(255,255,255,.55); padding: 16px 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 11px; font-style: italic; border-top: 3px solid var(--gold); }
 .footer img { height: 28px; opacity: .7; }
 .footer strong { font-style: normal; color: rgba(255,255,255,.85); }
 .footer a { color: rgba(255,255,255,.55); text-decoration: underline; }
-
-/* ── PASEK MODERATORA ── */
-.mod-bar { background: #1e3a5f; border-bottom: 2px solid #c4922a; padding: 8px 24px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.mod-bar span { font-size: 11px; color: rgba(255,255,255,.6); font-style: italic; }
-.mod-btn-close { padding: 7px 16px; background: #8b2020; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; }
-.mod-btn-close:hover { opacity: .88; }
-.mod-btn-export { padding: 7px 16px; background: #1d6e48; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; }
-.mod-btn-export:hover { opacity: .88; }
-.mod-btn-reopen { padding: 7px 16px; background: #c4922a; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; display:none; }
-.mod-btn-reset { padding: 7px 16px; background: #4a4640; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; }
-.mod-btn-reset:hover { opacity: .88; }
-.mod-btn-new { padding: 7px 16px; background: #c4922a; color: white; border: none; border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; }
-.mod-btn-new:hover { opacity: .88; }
-.mod-btn-list { padding: 7px 16px; background: transparent; color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.3); border-radius: 6px; font-family: Georgia,serif; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
-.mod-btn-list:hover { color: white; border-color: rgba(255,255,255,.6); }
-/* Modal nowej synapsy */
-.new-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:999; align-items:center; justify-content:center; }
-.new-modal.open { display:flex; }
-.new-modal-box { background:white; border-radius:12px; padding:28px 32px; max-width:480px; width:90%; font-family:Georgia,serif; box-shadow:0 8px 32px rgba(0,0,0,.25); }
-.new-modal-box h3 { font-size:16px; color:#1a1714; margin-bottom:8px; }
-.new-modal-box p { font-size:12px; color:#8a857e; margin-bottom:14px; line-height:1.6; }
-.new-modal-box input { width:100%; border:2px solid #e8e1d6; border-radius:6px; padding:9px 11px; font-family:Georgia,serif; font-size:14px; outline:none; margin-bottom:6px; }
-.new-modal-box input:focus { border-color:#c4922a; }
-.new-modal-hint { font-size:11px; color:#8a857e; font-style:italic; margin-bottom:16px; }
-.new-modal-btns { display:flex; gap:10px; }
-.new-start-btn { flex:1; padding:10px; background:#1a1714; color:white; border:none; border-radius:6px; font-family:Georgia,serif; font-size:13px; font-weight:700; cursor:pointer; }
-.new-start-btn:disabled { opacity:.4; cursor:not-allowed; }
-.new-cancel-btn { padding:10px 18px; background:#f2ede4; color:#4a4640; border:1px solid #e8e1d6; border-radius:6px; font-family:Georgia,serif; font-size:13px; font-weight:700; cursor:pointer; }
-/* Modal potwierdzenia resetu */
-.reset-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:999; align-items:center; justify-content:center; }
-.reset-modal.open { display:flex; }
-.reset-modal-box { background:white; border-radius:12px; padding:28px 32px; max-width:400px; width:90%; font-family:Georgia,serif; box-shadow:0 8px 32px rgba(0,0,0,.25); }
-.reset-modal-box h3 { font-size:16px; color:#8b2020; margin-bottom:10px; }
-.reset-modal-box p { font-size:13px; color:#4a4640; line-height:1.6; margin-bottom:18px; }
-.reset-modal-box input { width:100%; border:2px solid #e8e1d6; border-radius:6px; padding:8px 11px; font-family:Georgia,serif; font-size:13px; outline:none; margin-bottom:14px; }
-.reset-modal-box input:focus { border-color:#8b2020; }
-.reset-modal-btns { display:flex; gap:10px; }
-.reset-confirm-btn { flex:1; padding:9px; background:#8b2020; color:white; border:none; border-radius:6px; font-family:Georgia,serif; font-size:13px; font-weight:700; cursor:pointer; }
-.reset-confirm-btn:disabled { opacity:.4; cursor:not-allowed; }
-.reset-cancel-btn { flex:1; padding:9px; background:#f2ede4; color:#4a4640; border:1px solid #e8e1d6; border-radius:6px; font-family:Georgia,serif; font-size:13px; font-weight:700; cursor:pointer; }
-.closed-banner { background: #8b2020; color: white; text-align: center; padding: 10px 24px; font-size: 13px; font-weight: 700; letter-spacing: .05em; display: none; }
-
-/* ── PANEL ADMINA ── */
-.admin-login-bar { background: #1a1714; border-bottom: 1px solid #2e2a26; padding: 6px 24px; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
-.admin-login-bar input { padding: 4px 10px; border: 1px solid #3e3a36; border-radius: 5px; background: #2e2a26; color: #faf7f2; font-family: Georgia,serif; font-size: 11px; outline: none; width: 140px; }
-.admin-login-bar input::placeholder { color: #6a6560; }
-.admin-login-btn { padding: 4px 12px; background: #c4922a; color: white; border: none; border-radius: 5px; font-family: Georgia,serif; font-size: 11px; font-weight: 700; cursor: pointer; }
-.admin-logout-btn { padding: 4px 12px; background: transparent; color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.2); border-radius: 5px; font-family: Georgia,serif; font-size: 11px; cursor: pointer; display: none; }
-.admin-status { font-size: 10px; font-style: italic; color: rgba(255,255,255,.4); }
-.admin-status.logged { color: #9ed4b8; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 700px) {
@@ -197,62 +144,14 @@ textarea:focus { border-color: var(--gold); }
   <a class="nav-back" href="https://prawdziwademokracja.pl/#narzedzia">← Wszystkie narzędzia</a>
 </nav>
 
-<!-- PASEK LOGOWANIA ADMINA — widoczny zawsze, dyskretny -->
-<div class="admin-login-bar" id="admin-login-bar">
-  <span class="admin-status" id="admin-status">Panel administratora</span>
-  <input type="password" id="admin-pwd" placeholder="Hasło admina…" onkeydown="if(event.key==='Enter')adminLogin()" />
-  <button class="admin-login-btn" onclick="adminLogin()">Zaloguj</button>
-  <button class="admin-logout-btn" id="admin-logout-btn" onclick="adminLogout()">Wyloguj</button>
-</div>
-
-<!-- PANEL MODERATORA — widoczny TYLKO dla admina -->
-<div class="mod-bar" id="mod-bar" style="display:none;">
-  <span>Panel moderatora:</span>
-  <button class="mod-btn-close" onclick="closeVoting()">⏹ Zakończ głosowanie</button>
-  <button class="mod-btn-reopen" id="reopen-btn" onclick="reopenVoting()">▶ Wznów głosowanie</button>
-  <button class="mod-btn-export" onclick="exportReport()">⬇ Eksportuj raport</button>
-  <button class="mod-btn-reset" onclick="openResetModal()">🗑 Wyczyść synapsę</button>
-  <button class="mod-btn-new" onclick="openNewModal()">＋ Nowa Synapsa</button>
-  <a class="mod-btn-list" href="synapsy.html">☰ Lista synaps</a>
-  <span id="closed-label" style="color:#f0a0a0;display:none;">● Głosowanie zamknięte</span>
-</div>
-
-<!-- MODAL NOWEJ SYNAPSY -->
-<div class="new-modal" id="new-modal">
-  <div class="new-modal-box">
-    <h3>＋ Nowa Synapsa</h3>
-    <p>Wpisz pytanie deliberacji. Nowa Synapsa zostanie zapisana w bazie i pojawi się na liście wszystkich synaps.</p>
-    <input type="text" id="new-question-input" placeholder="Czy…?" oninput="checkNewQuestion()" maxlength="200" />
-    <div class="new-modal-hint">Pytanie powinno być zamknięte (tak/nie) i jednoznaczne. Max 200 znaków.</div>
-    <div class="new-modal-btns">
-      <button class="new-cancel-btn" onclick="closeNewModal()">Anuluj</button>
-      <button class="new-start-btn" id="new-start-btn" onclick="startNewSynapsa()" disabled>Utwórz i przejdź →</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL POTWIERDZENIA RESETU -->
-<div class="reset-modal" id="reset-modal">
-  <div class="reset-modal-box">
-    <h3>⚠ Wyczyść synapsę</h3>
-    <p>Ta operacja <strong>trwale usuwa</strong> wszystkie odpowiedzi i mapę argumentów dla bieżącego pytania z bazy danych. Nie można jej cofnąć.<br><br>Wpisz <strong>WYCZYŚĆ</strong> aby potwierdzić:</p>
-    <input type="text" id="reset-confirm-input" placeholder="Wpisz WYCZYŚĆ" oninput="checkResetConfirm()" />
-    <div class="reset-modal-btns">
-      <button class="reset-cancel-btn" onclick="closeResetModal()">Anuluj</button>
-      <button class="reset-confirm-btn" id="reset-confirm-btn" onclick="confirmReset()" disabled>Usuń wszystko</button>
-    </div>
-  </div>
-</div>
-<div class="closed-banner" id="closed-banner">Głosowanie zostało zakończone przez moderatora. Dziękujemy za udział!</div>
-
 <div class="hero">
   <div class="hero-badge">Prototyp · Model Synapsa</div>
   <div id="qi-display" style="font-size:clamp(18px,3.5vw,28px);font-weight:700;line-height:1.3;color:#faf7f2;margin-bottom:6px;">Czy telefony komórkowe powinny być zakazane podczas lekcji?</div>
   <p>Zbieraj opinie · głosuj ZA lub PRZECIW · wygeneruj mapę argumentów</p>
 </div>
 
-<!-- Pasek z opcją zmiany pytania — widoczny TYLKO dla admina -->
-<div class="q-bar" id="q-bar" style="display:none;">
+<!-- Pasek z opcją zmiany pytania (domyślnie ukryty) -->
+<div class="q-bar">
   <button onclick="toggleQEdit()" id="qedit-btn" style="padding:6px 14px;background:transparent;color:var(--ink2);border:1px solid var(--paper3);border-radius:6px;font-family:Georgia,serif;font-size:11px;cursor:pointer;white-space:nowrap;">✎ Zmień pytanie</button>
   <div id="qedit-row" style="display:none;flex:1;display:none;gap:6px;align-items:center;flex-wrap:wrap;">
     <input id="qi" value="Czy telefony komórkowe powinny być zakazane podczas lekcji?" placeholder="Wpisz pytanie…" style="flex:1;min-width:180px;border:1px solid var(--paper3);border-radius:6px;padding:6px 10px;font-family:Georgia,serif;font-size:13px;color:var(--ink);outline:none;background:white;" />
@@ -310,11 +209,8 @@ textarea:focus { border-color: var(--gold); }
 
       <!-- PROMPT BOX: wyświetla prompt do skopiowania do AI -->
       <div class="prompt-box" id="promptbox" style="display:none">
-        <strong>Wklej ten prompt do Claude.ai lub ChatGPT</strong>
+        <strong>Skopiuj ten prompt i wklej do Claude.ai lub ChatGPT</strong>
         <span id="prompttext" style="white-space:pre-wrap;word-break:break-all;font-size:10px;"></span>
-        <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">
-          <span id="copy-icon">⎘</span> <span id="copy-label">Kopiuj prompt</span>
-        </button>
       </div>
 
       <!-- JSON PASTE BOX: po otrzymaniu wyniku od AI wklej go tutaj -->
@@ -371,135 +267,37 @@ function setSave(txt, color) {
   document.getElementById('sdot').style.background = color;
 }
 
-// ════════════════════════════════════════════════════════════════
-// KONFIGURACJA SUPABASE
-// ────────────────────────────────────────────────────────────────
-// Jak skonfigurować (jednorazowo, ~10 minut):
-//
-// 1. Załóż darmowe konto na https://supabase.com
-// 2. Utwórz nowy projekt (wybierz region Europe)
-// 3. W panelu Supabase otwórz: SQL Editor → wklej i uruchom:
-//
-//    CREATE TABLE responses (
-//      id        bigserial PRIMARY KEY,
-//      question  text NOT NULL,
-//      vote      text NOT NULL,
-//      reason    text NOT NULL,
-//      created_at timestamptz DEFAULT now()
-//    );
-//    ALTER TABLE responses ENABLE ROW LEVEL SECURITY;
-//    CREATE POLICY "allow_all" ON responses FOR ALL USING (true) WITH CHECK (true);
-//
-//    CREATE TABLE arg_maps (
-//      id        bigserial PRIMARY KEY,
-//      question  text UNIQUE NOT NULL,
-//      pro_args  jsonb DEFAULT '[]',
-//      con_args  jsonb DEFAULT '[]',
-//      updated_at timestamptz DEFAULT now()
-//    );
-//    ALTER TABLE arg_maps ENABLE ROW LEVEL SECURITY;
-//    CREATE POLICY "allow_all" ON arg_maps FOR ALL USING (true) WITH CHECK (true);
-//
-// 4. Skopiuj ze Settings → API:
-//    • Project URL  → wklej jako SUPABASE_URL poniżej
-//    • anon public key → wklej jako SUPABASE_KEY poniżej
-//
-// ════════════════════════════════════════════════════════════════
-var SUPABASE_URL = 'https://vfvgqhzdwzljfbzmerzo.supabase.co';
-var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmdmdxaHpkd3psamZiem1lcnpvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MjY3MTAsImV4cCI6MjA5NDEwMjcxMH0.jncvu2oWncv62-tbcT4GWxM6MJNlz5fFoTJNr_wkMYs';
-
-function sbFetch(path, method, body) {
-  return fetch(SUPABASE_URL + '/rest/v1/' + path, {
-    method: method || 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': SUPABASE_KEY,
-      'Authorization': 'Bearer ' + SUPABASE_KEY,
-      'Prefer': method === 'POST' ? 'return=representation' : (method === 'DELETE' || method === 'PATCH' ? 'return=minimal' : '')
-    },
-    body: body ? JSON.stringify(body) : undefined
-  }).then(function(r) {
-    if (!r.ok) return r.text().then(function(t) { throw new Error(t); });
-    return r.json().catch(function() { return {}; });
-  });
+// ── BAZA DANYCH: ODCZYT ─────────────────────────────────────────
+// Używa localStorage jako zamiennika persistent storage
+// (w środowisku poza Claude.ai)
+function loadState(q) {
+  STORAGE_KEY = slugify(q);
+  setSave('Ładowanie…', '#c4922a');
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    STATE = raw
+      ? JSON.parse(raw)
+      : { question: q, responses: [], proArgs: [], conArgs: [] };
+  } catch(e) {
+    STATE = { question: q, responses: [], proArgs: [], conArgs: [] };
+  }
+  render();
+  showArgs('pargs', STATE.proArgs, 'pro');
+  showArgs('cargs', STATE.conArgs, 'con');
+  if (STATE.responses.length) document.getElementById('gbtn').disabled = false;
+  setSave('Gotowe ✓', '#1d6e48');
 }
 
-// ── BAZA DANYCH: ODCZYT ─────────────────────────────────────────
-// Pobiera wszystkie odpowiedzi dla bieżącego pytania z Supabase.
-// Co 5 sekund odpytuje bazę o nowe odpowiedzi (polling).
-// ── BAZA DANYCH: ODCZYT ─────────────────────────────────────────
-// Używa synapsa_id (liczba) zamiast tekstu pytania.
-// Eliminuje problem różnych synaps na różnych urządzeniach.
-function loadState(synapsaId, q) {
-  STORAGE_KEY = synapsaId;
-  STATE.question = q;
-  STATE.synapsaId = synapsaId;
-
-  // Pobierz odpowiedzi po synapsa_id
-  sbFetch('responses?synapsa_id=eq.' + synapsaId + '&order=created_at.asc&select=vote,reason')
-    .then(function(rows) {
-      STATE.responses = (rows || []).map(function(r) { return { v: r.vote, r: r.reason }; });
-      render();
-      if (STATE.responses.length) document.getElementById('gbtn').disabled = false;
-    })
-    .catch(function(e) { console.error('loadState responses:', e); });
-
-  // Pobierz mapę argumentów po synapsa_id
-  sbFetch('arg_maps?question=eq.' + encodeURIComponent(q) + '&select=pro_args,con_args')
-    .then(function(rows) {
-      if (rows && rows[0]) {
-        STATE.proArgs = rows[0].pro_args || [];
-        STATE.conArgs = rows[0].con_args || [];
-        showArgs('pargs', STATE.proArgs, 'pro');
-        showArgs('cargs', STATE.conArgs, 'con');
-      }
-      setSave('Połączono ✓', '#1d6e48');
-    })
-    .catch(function(e) { setSave('Błąd połączenia', '#8b2020'); console.error(e); });
-
-  // Polling co 5 sekund — wszyscy widzą nowe odpowiedzi
-  clearInterval(window._pollInterval);
-  window._pollInterval = setInterval(function() {
-    sbFetch('responses?synapsa_id=eq.' + synapsaId + '&order=created_at.asc&select=vote,reason')
-      .then(function(rows) {
-        var prev = STATE.responses.length;
-        STATE.responses = (rows || []).map(function(r) { return { v: r.vote, r: r.reason }; });
-        render();
-        if (STATE.responses.length > prev) document.getElementById('gbtn').disabled = false;
-      })
-      .catch(function() {});
-  }, 5000);
-}
-
-// ── BAZA DANYCH: ZAPIS ODPOWIEDZI ───────────────────────────────
-// Każdy uczestnik zapisuje swój głos bezpośrednio do Supabase.
-// Dane są natychmiast widoczne dla innych uczestników (po max 5 sek).
-// ── ZAPIS ODPOWIEDZI ────────────────────────────────────────────
-// Zapisuje synapsa_id razem z odpowiedzią — powiązanie przez ID.
-function saveResponse(vote, reason) {
+// ── BAZA DANYCH: ZAPIS ──────────────────────────────────────────
+// W wersji produkcyjnej: zastąpić fetch('/api/save', STATE)
+function saveState() {
+  if (!STORAGE_KEY) return;
   setSave('Zapisuje…', '#c4922a');
-  var q = document.getElementById('qi').value.trim();
-  sbFetch('responses', 'POST', {
-    question: q,
-    vote: vote,
-    reason: reason,
-    synapsa_id: STATE.synapsaId
-  })
-    .then(function() { setSave('Zapisano ✓', '#1d6e48'); })
-    .catch(function(e) { setSave('Błąd zapisu', '#8b2020'); console.error(e); });
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+    setSave('Zapisano ✓', '#1d6e48');
+  } catch(e) { setSave('Błąd zapisu', '#8b2020'); }
 }
-
-// ── BAZA DANYCH: ZAPIS MAPY ARGUMENTÓW ─────────────────────────
-// Zapisuje zagregowaną mapę argumentów (wynik analizy AI).
-function saveArgMap() {
-  var q = document.getElementById('qi').value.trim();
-  sbFetch('arg_maps', 'POST', {
-    question: q, pro_args: STATE.proArgs, con_args: STATE.conArgs,
-    updated_at: new Date().toISOString()
-  });
-}
-
-function saveState() {}
 
 // ── TOGGLE EDYCJI PYTANIA ───────────────────────────────────────
 // Przycisk "Zmień pytanie" pokazuje/ukrywa wiersz z inputem.
@@ -515,74 +313,31 @@ function toggleQEdit() {
 // ── ZMIANA PYTANIA ──────────────────────────────────────────────
 // Aby zmienić pytanie na stałe w kodzie, edytuj atrybut value
 // elementu <input id="qi"> oraz tekst w <div id="qi-display">.
-// ── ZMIANA PYTANIA (ADMIN) ──────────────────────────────────────
-// Tworzy nową synapsę w bazie i przekierowuje do niej przez ?id=
-async function setQ() {
+function setQ() {
   var q = document.getElementById('qi').value.trim();
   if (!q) return;
-  try {
-    var rows = await sbFetch('synapsy', 'POST', {
-      question: q, status: 'open', created_at: new Date().toISOString()
-    });
-    var newId = rows && rows[0] ? rows[0].id : null;
-    if (newId) {
-      window.location.href = 'synapsa.html?id=' + newId;
-    } else {
-      // Fallback bez ID
-      document.getElementById('qi-display').textContent = q;
-      document.getElementById('qedit-row').style.display = 'none';
-      document.getElementById('qedit-btn').style.display = '';
+  
+  // Sprawdź czy są już jakieś dane
+  var hasData = state.votes.pro > 0 || state.votes.con > 0 || 
+                state.args.pro.length > 0 || state.args.con.length > 0;
+  
+  // Jeśli są dane, zapytaj o potwierdzenie
+  if (hasData) {
+    if (!confirm('Ustawienie nowego pytania spowoduje usunięcie wszystkich argumentów i danych z deliberacji.\n\nCzy na pewno chcesz kontynuować?')) {
+      return; // Anuluj jeśli użytkownik kliknął "Anuluj"
     }
-  } catch(e) {
-    console.error('setQ:', e);
-    document.getElementById('qi-display').textContent = q;
-    document.getElementById('qedit-row').style.display = 'none';
-    document.getElementById('qedit-btn').style.display = '';
   }
+  
+  // Aktualizuj nagłówek na czarnym tle
+  document.getElementById('qi-display').textContent = q;
+  // Schowaj wiersz edycji, pokaż przycisk
+  document.getElementById('qedit-row').style.display = 'none';
+  document.getElementById('qedit-btn').style.display = '';
   document.getElementById('gbtn').disabled = true;
   document.getElementById('gmsg').textContent = '';
   document.getElementById('promptbox').style.display = 'none';
   document.getElementById('jsonbox').style.display = 'none';
-}
-
-// ── KOPIOWANIE PROMPTU ─────────────────────────────────────────
-// Kopiuje treść promptu do schowka i zmienia wygląd przycisku
-// na potwierdzenie (zielony "Skopiowano!") przez 2 sekundy.
-function copyPrompt() {
-  var text = document.getElementById('prompttext').textContent;
-  var btn = document.getElementById('copy-btn');
-  var label = document.getElementById('copy-label');
-  var icon = document.getElementById('copy-icon');
-  navigator.clipboard.writeText(text)
-    .then(function() {
-      btn.classList.add('copied');
-      icon.textContent = '✓';
-      label.textContent = 'Skopiowano!';
-      setTimeout(function() {
-        btn.classList.remove('copied');
-        icon.textContent = '⎘';
-        label.textContent = 'Kopiuj prompt';
-      }, 2000);
-    })
-    .catch(function() {
-      // Fallback dla starszych przeglądarek
-      var ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      btn.classList.add('copied');
-      icon.textContent = '✓';
-      label.textContent = 'Skopiowano!';
-      setTimeout(function() {
-        btn.classList.remove('copied');
-        icon.textContent = '⎘';
-        label.textContent = 'Kopiuj prompt';
-      }, 2000);
-    });
+  loadState(q);
 }
 
 // ── WYBÓR STANOWISKA (ZA / PRZECIW) ────────────────────────────
@@ -607,13 +362,11 @@ function setV(v) {
 function addR() {
   var r = document.getElementById('reason').value.trim();
   if (!r) { flash('Wpisz uzasadnienie'); return; }
-  // Zapisz do Supabase — dane trafią do wspólnej bazy widocznej dla wszystkich
-  saveResponse(V, r);
-  // Dodaj lokalnie do STATE żeby nie czekać na polling
-  STATE.responses.push({ v: V, r: r });
+  STATE.responses.push({ v: V, r: r, ts: Date.now() });
   document.getElementById('reason').value = '';
   flash('Dodano!');
   render();
+  saveState();
   document.getElementById('gbtn').disabled = false;
 }
 
@@ -731,8 +484,7 @@ function applyJson() {
     STATE.conArgs = Array.isArray(parsed.con) ? parsed.con : [];
     showArgs('pargs', STATE.proArgs, 'pro');
     showArgs('cargs', STATE.conArgs, 'con');
-    // Zapisz mapę do Supabase — będzie widoczna dla wszystkich odwiedzających
-    saveArgMap();
+    saveState();
     document.getElementById('gmsg').textContent = 'Mapa argumentów zaktualizowana ✓';
     document.getElementById('jsonbox').style.display = 'none';
     document.getElementById('promptbox').style.display = 'none';
@@ -762,374 +514,8 @@ function showArgs(id, args, type) {
 }
 
 // ── INICJALIZACJA ───────────────────────────────────────────────
-// ── ZAMKNIĘCIE GŁOSOWANIA ───────────────────────────────────────
-// Moderator klika "Zakończ głosowanie" — formularz się blokuje,
-// pojawia się baner informujący uczestników.
-// Stan zamknięcia jest zapisywany w bazie (arg_maps.closed = true).
-function closeVoting() {
-  if (!confirm('Czy na pewno zakończyć głosowanie? Uczestnicy nie będą mogli dodawać nowych odpowiedzi.')) return;
-  STATE.closed = true;
-  applyClosedState(true);
-  saveArgMap(); // zapisz stan zamknięcia w bazie
-}
-
-function reopenVoting() {
-  if (!confirm('Czy wznowić głosowanie?')) return;
-  STATE.closed = false;
-  applyClosedState(false);
-  saveArgMap();
-}
-
-// Aplikuje wizualny stan zamknięcia/otwarcia bez pytania
-function applyClosedState(closed) {
-  document.getElementById('closed-banner').style.display = closed ? 'block' : 'none';
-  document.getElementById('closed-label').style.display = closed ? '' : 'none';
-  document.querySelector('.mod-btn-close').style.display = closed ? 'none' : '';
-  document.getElementById('reopen-btn').style.display = closed ? '' : 'none';
-  // Zablokuj / odblokuj formularz
-  var addBtn = document.querySelector('.add-btn');
-  var reasonTA = document.getElementById('reason');
-  var bpro = document.getElementById('bpro');
-  var bcon = document.getElementById('bcon');
-  [addBtn, reasonTA, bpro, bcon].forEach(function(el) {
-    if (el) el.disabled = closed;
-  });
-  if (addBtn) addBtn.style.opacity = closed ? '0.4' : '1';
-}
-
-// ── EKSPORT RAPORTU ─────────────────────────────────────────────
-// Generuje raport HTML z wynikami plebiscytu:
-//   • pytanie i data
-//   • wynik sondażu (ZA / PRZECIW z procentami)
-//   • lista zagregowanych argumentów ZA
-//   • lista zagregowanych argumentów PRZECIW
-//   • lista wszystkich zebranych odpowiedzi
-// Raport można wydrukować (Ctrl+P) lub zapisać jako PDF z przeglądarki.
-// Przycisk "Zapisz jako PNG" używa html2canvas do zrzutu ekranu.
-function exportReport() {
-  var q = document.getElementById('qi').value.trim();
-  var tot = STATE.responses.length;
-  var pros = STATE.responses.filter(function(x){ return x.v === 'pro'; }).length;
-  var cons = tot - pros;
-  var pp = tot ? Math.round(pros / tot * 100) : 0;
-  var cp = tot ? Math.round(cons / tot * 100) : 0;
-  var now = new Date().toLocaleString('pl-PL');
-
-  // Buduj HTML raportu
-  var proArgsHtml = STATE.proArgs.length
-    ? STATE.proArgs.map(function(a) {
-        return '<li style="margin-bottom:8px;"><span style="color:#1d6e48;">●</span> ' + a.argument +
-          (a.count > 1 ? ' <em style="color:#8a857e;font-size:12px;">(' + a.count + ' podobnych argumentów)</em>' : '') + '</li>';
-      }).join('')
-    : '<li style="color:#8a857e;font-style:italic;">Brak wygenerowanych argumentów</li>';
-
-  var conArgsHtml = STATE.conArgs.length
-    ? STATE.conArgs.map(function(a) {
-        return '<li style="margin-bottom:8px;"><span style="color:#8b2020;">●</span> ' + a.argument +
-          (a.count > 1 ? ' <em style="color:#8a857e;font-size:12px;">(' + a.count + ' podobnych argumentów)</em>' : '') + '</li>';
-      }).join('')
-    : '<li style="color:#8a857e;font-style:italic;">Brak wygenerowanych argumentów</li>';
-
-  var responsesHtml = STATE.responses.length
-    ? STATE.responses.map(function(x, i) {
-        var color = x.v === 'pro' ? '#1d6e48' : '#8b2020';
-        var label = x.v === 'pro' ? 'ZA' : 'PRZECIW';
-        return '<tr style="border-bottom:1px solid #e8e1d6;">' +
-          '<td style="padding:6px 10px;color:#8a857e;font-size:11px;">' + (i+1) + '</td>' +
-          '<td style="padding:6px 10px;font-weight:700;color:' + color + ';font-size:11px;">' + label + '</td>' +
-          '<td style="padding:6px 10px;font-size:12px;">' + x.r + '</td>' +
-          '</tr>';
-      }).join('')
-    : '<tr><td colspan="3" style="padding:12px;color:#8a857e;font-style:italic;">Brak odpowiedzi</td></tr>';
-
-  var reportHtml =
-    '<div style="background:#1a1714;color:white;padding:20px 28px;border-bottom:3px solid #c4922a;">' +
-      '<div style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#c4922a;font-weight:700;margin-bottom:6px;">Raport Deliberacji · Model Synapsa · Prawdziwa Demokracja</div>' +
-      '<div style="font-size:20px;font-weight:700;line-height:1.3;">' + q + '</div>' +
-      '<div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:4px;">Wygenerowano: ' + now + '</div>' +
-    '</div>' +
-    '<div style="padding:24px 28px;">' +
-      '<h2 style="font-size:15px;border-bottom:2px solid #c4922a;padding-bottom:6px;margin-bottom:14px;">Wynik sondażu</h2>' +
-      '<div style="display:flex;gap:24px;margin-bottom:8px;">' +
-        '<div style="flex:1;background:#edf7f2;border:1px solid #9ed4b8;border-radius:8px;padding:14px;text-align:center;">' +
-          '<div style="font-size:28px;font-weight:900;color:#1d6e48;">' + pp + '%</div>' +
-          '<div style="font-size:12px;color:#1d6e48;font-weight:700;">ZA (' + pros + ' głosów)</div>' +
-        '</div>' +
-        '<div style="flex:1;background:#fdf0f0;border:1px solid #e8a5a5;border-radius:8px;padding:14px;text-align:center;">' +
-          '<div style="font-size:28px;font-weight:900;color:#8b2020;">' + cp + '%</div>' +
-          '<div style="font-size:12px;color:#8b2020;font-weight:700;">PRZECIW (' + cons + ' głosów)</div>' +
-        '</div>' +
-        '<div style="flex:1;background:#f2ede4;border:1px solid #e8e1d6;border-radius:8px;padding:14px;text-align:center;">' +
-          '<div style="font-size:28px;font-weight:900;color:#1a1714;">' + tot + '</div>' +
-          '<div style="font-size:12px;color:#4a4640;font-weight:700;">Łączna liczba głosów</div>' +
-        '</div>' +
-      '</div>' +
-      '<div style="display:flex;gap:16px;margin-top:20px;">' +
-        '<div style="flex:1;">' +
-          '<h2 style="font-size:14px;color:#1d6e48;border-bottom:2px solid #1d6e48;padding-bottom:6px;margin-bottom:10px;">Argumenty ZA</h2>' +
-          '<ul style="padding-left:0;list-style:none;">' + proArgsHtml + '</ul>' +
-        '</div>' +
-        '<div style="flex:1;">' +
-          '<h2 style="font-size:14px;color:#8b2020;border-bottom:2px solid #8b2020;padding-bottom:6px;margin-bottom:10px;">Argumenty PRZECIW</h2>' +
-          '<ul style="padding-left:0;list-style:none;">' + conArgsHtml + '</ul>' +
-        '</div>' +
-      '</div>' +
-      '<h2 style="font-size:14px;border-bottom:2px solid #e8e1d6;padding-bottom:6px;margin:20px 0 10px;color:#4a4640;">Wszystkie zebrane odpowiedzi (' + tot + ')</h2>' +
-      '<table style="width:100%;border-collapse:collapse;font-family:Georgia,serif;">' +
-        '<thead><tr style="background:#f2ede4;">' +
-          '<th style="padding:6px 10px;text-align:left;font-size:11px;color:#8a857e;">#</th>' +
-          '<th style="padding:6px 10px;text-align:left;font-size:11px;color:#8a857e;">Głos</th>' +
-          '<th style="padding:6px 10px;text-align:left;font-size:11px;color:#8a857e;">Uzasadnienie</th>' +
-        '</tr></thead>' +
-        '<tbody>' + responsesHtml + '</tbody>' +
-      '</table>' +
-      '<div style="margin-top:24px;padding-top:12px;border-top:1px solid #e8e1d6;font-size:10px;color:#8a857e;font-style:italic;">' +
-        'Raport wygenerowany przez narzędzie Synapsa · Prawdziwa Demokracja · prawdziwademokracja.pl' +
-      '</div>' +
-    '</div>';
-
-  // Otwórz raport w nowym oknie — użytkownik może wydrukować lub zapisać jako PDF
-  var win = window.open('', '_blank', 'width=900,height=700');
-  win.document.write('<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8"><title>Raport — ' + q + '</title></head><body style="margin:0;font-family:Georgia,serif;">' + reportHtml + '<script>window.onload=function(){window.print();}<\/script></body></html>');
-  win.document.close();
-}
-
-// ── RESET SYNAPSY ───────────────────────────────────────────────
-// Usuwa wszystkie odpowiedzi i mapę argumentów z Supabase
-// dla bieżącego pytania. Wymaga wpisania "WYCZYŚĆ" jako
-// zabezpieczenie przed przypadkowym kliknięciem.
-
-function openResetModal() {
-  document.getElementById('reset-modal').classList.add('open');
-  document.getElementById('reset-confirm-input').value = '';
-  document.getElementById('reset-confirm-btn').disabled = true;
-  setTimeout(function(){ document.getElementById('reset-confirm-input').focus(); }, 100);
-}
-
-function closeResetModal() {
-  document.getElementById('reset-modal').classList.remove('open');
-}
-
-function checkResetConfirm() {
-  var val = document.getElementById('reset-confirm-input').value.trim();
-  document.getElementById('reset-confirm-btn').disabled = val !== 'WYCZYŚĆ';
-}
-
-async function confirmReset() {
-  var q = document.getElementById('qi').value.trim();
-  closeResetModal();
-  setSave('Czyszczenie…', '#8b2020');
-
-  try {
-    // Usuń wszystkie odpowiedzi dla tego pytania
-    await sbFetch(
-      'responses?synapsa_id=eq.' + STATE.synapsaId,
-      'DELETE'
-    );
-    // Usuń mapę argumentów dla tego pytania
-    await sbFetch(
-      'arg_maps?question=eq.' + encodeURIComponent(q),
-      'DELETE'
-    );
-
-    // Wyczyść lokalny stan
-    STATE = { question: q, responses: [], proArgs: [], conArgs: [], closed: false };
-    render();
-    showArgs('pargs', [], 'pro');
-    showArgs('cargs', [], 'con');
-    applyClosedState(false);
-    document.getElementById('gbtn').disabled = true;
-    document.getElementById('gmsg').textContent = '';
-    document.getElementById('promptbox').style.display = 'none';
-    document.getElementById('jsonbox').style.display = 'none';
-
-    setSave('Wyczyszczono ✓', '#1d6e48');
-    flash('Synapsa wyczyszczona!');
-  } catch(e) {
-    setSave('Błąd czyszczenia', '#8b2020');
-    console.error('confirmReset:', e);
-  }
-}
-
-// Zamknij modal klikając poza nim
-document.addEventListener('click', function(e) {
-  var modal = document.getElementById('reset-modal');
-  if (modal && e.target === modal) closeResetModal();
-});
-
-// ── NOWA SYNAPSA ────────────────────────────────────────────────
-// Tworzy nową deliberację: zapisuje pytanie do tabeli `synapsy`
-// (osobna tabela z metadanymi każdej deliberacji) i przeładowuje
-// stronę z nowym pytaniem jako parametrem URL (?q=...).
-// Lista wszystkich synaps dostępna na synapsy.html.
-
-function openNewModal() {
-  document.getElementById('new-modal').classList.add('open');
-  document.getElementById('new-question-input').value = '';
-  document.getElementById('new-start-btn').disabled = true;
-  setTimeout(function(){ document.getElementById('new-question-input').focus(); }, 100);
-}
-
-function closeNewModal() {
-  document.getElementById('new-modal').classList.remove('open');
-}
-
-function checkNewQuestion() {
-  var val = document.getElementById('new-question-input').value.trim();
-  document.getElementById('new-start-btn').disabled = val.length < 5;
-}
-
-async function startNewSynapsa() {
-  var q = document.getElementById('new-question-input').value.trim();
-  if (!q) return;
-  closeNewModal();
-  setSave('Tworzę synapsę…', '#c4922a');
-  try {
-    // Zapisz nową synapsę w tabeli synapsy (metadane)
-    await sbFetch('synapsy', 'POST', {
-      question: q,
-      status: 'open',
-      created_at: new Date().toISOString()
-    });
-    // Przejdź do synapsy z nowym pytaniem w URL
-    var newRows = await sbFetch('synapsy?question=eq.' + encodeURIComponent(q) + '&select=id');
-    var newId = newRows && newRows[0] ? newRows[0].id : null;
-    window.location.href = 'synapsa.html?' + (newId ? 'id=' + newId : 'q=' + encodeURIComponent(q));
-  } catch(e) {
-    // Nawet bez zapisu w tabeli synapsy — otwórz pytanie
-    var newRows = await sbFetch('synapsy?question=eq.' + encodeURIComponent(q) + '&select=id');
-    var newId = newRows && newRows[0] ? newRows[0].id : null;
-    window.location.href = 'synapsa.html?' + (newId ? 'id=' + newId : 'q=' + encodeURIComponent(q));
-    console.error('startNewSynapsa:', e);
-  }
-}
-
-// Zamknij modal klikając poza nim
-document.addEventListener('click', function(e) {
-  var nm = document.getElementById('new-modal');
-  if (nm && e.target === nm) closeNewModal();
-});
-
-// ── WCZYTAJ PYTANIE Z URL ────────────────────────────────────────
-// Jeśli w URL jest parametr ?q=... (np. po przekierowaniu z listy
-// synaps lub po utworzeniu nowej), ustaw to pytanie automatycznie.
-(function() {
-  var params = new URLSearchParams(window.location.search);
-  var qParam = params.get('q');
-  if (qParam) {
-    document.getElementById('qi').value = qParam;
-    document.getElementById('qi-display').textContent = qParam;
-  }
-})();
-
-// ════════════════════════════════════════════════════════════════
-// PANEL ADMINA
-// ════════════════════════════════════════════════════════════════
-// Hasło admina — zmień na własne przed wdrożeniem!
-// W wersji produkcyjnej użyj zmiennej środowiskowej na backendzie.
-var ADMIN_PASSWORD = 'pd2026admin';
-var isAdmin = false;
-
-function adminLogin() {
-  var pwd = document.getElementById('admin-pwd').value;
-  if (pwd === ADMIN_PASSWORD) {
-    isAdmin = true;
-    // Pokaż panel moderatora i pasek zmiany pytania
-    document.getElementById('mod-bar').style.display = 'flex';
-    document.getElementById('q-bar').style.display = 'flex';
-    document.getElementById('admin-pwd').style.display = 'none';
-    document.querySelector('.admin-login-btn').style.display = 'none';
-    document.getElementById('admin-logout-btn').style.display = '';
-    var st = document.getElementById('admin-status');
-    st.textContent = '● Admin zalogowany';
-    st.className = 'admin-status logged';
-    // Zapisz w sessionStorage żeby nie logować przy odświeżeniu
-    sessionStorage.setItem('synapsa_admin', '1');
-  } else {
-    document.getElementById('admin-pwd').style.borderColor = '#8b2020';
-    document.getElementById('admin-pwd').value = '';
-    document.getElementById('admin-pwd').placeholder = 'Złe hasło…';
-    setTimeout(function() {
-      document.getElementById('admin-pwd').style.borderColor = '';
-      document.getElementById('admin-pwd').placeholder = 'Hasło admina…';
-    }, 2000);
-  }
-}
-
-function adminLogout() {
-  isAdmin = false;
-  sessionStorage.removeItem('synapsa_admin');
-  document.getElementById('mod-bar').style.display = 'none';
-  document.getElementById('q-bar').style.display = 'none';
-  document.getElementById('admin-pwd').style.display = '';
-  document.querySelector('.admin-login-btn').style.display = '';
-  document.getElementById('admin-logout-btn').style.display = 'none';
-  var st = document.getElementById('admin-status');
-  st.textContent = 'Panel administratora';
-  st.className = 'admin-status';
-}
-
-// Przywróć sesję admina po odświeżeniu
-if (sessionStorage.getItem('synapsa_admin') === '1') {
-  adminLogin();
-  document.getElementById('admin-pwd').value = ADMIN_PASSWORD;
-}
-
-// ════════════════════════════════════════════════════════════════
-// AKTYWNE PYTANIE Z SUPABASE
-// ════════════════════════════════════════════════════════════════
-// Pytanie jest przechowywane w tabeli `synapsy` w Supabase.
-// Kolumna `active = true` oznacza aktywną synapsę.
-// Admin zmienia pytanie przez panel — zmiana jest trwała dla
-// wszystkich użytkowników bez edycji kodu HTML.
-
-// ── ŁADOWANIE SYNAPSY PO ID ─────────────────────────────────────
-// Synapsa jest identyfikowana przez ID (nie tekst pytania).
-// URL: synapsa.html?id=3  → ładuje synapsę o id=3
-// Bez parametru → ładuje pierwszą otwartą synapsę.
-async function loadActiveSynapsa() {
-  setSave('Ładowanie…', '#c4922a');
-  try {
-    var params = new URLSearchParams(window.location.search);
-    var idParam = params.get('id');
-    var rows;
-
-    if (idParam) {
-      // Konkretna synapsa po ID
-      rows = await sbFetch('synapsy?id=eq.' + idParam + '&select=id,question,status');
-    } else {
-      // Pierwsza otwarta (dla admina bez parametru)
-      rows = await sbFetch('synapsy?status=eq.open&order=created_at.desc&limit=1&select=id,question,status');
-    }
-
-    if (rows && rows[0]) {
-      var s = rows[0];
-      STATE.synapsaId = s.id;
-      document.getElementById('qi').value = s.question;
-      document.getElementById('qi-display').textContent = s.question;
-      // Pokaż w URL bez przeładowania
-      if (!idParam) {
-        history.replaceState(null, '', '?id=' + s.id);
-      }
-      if (s.status === 'closed') {
-        applyClosedState(true);
-      }
-      loadState(s.id, s.question);
-    } else {
-      setSave('Brak synaps — utwórz pierwszą', '#c4922a');
-    }
-  } catch(e) {
-    console.error('loadActiveSynapsa:', e);
-    setSave('Błąd połączenia', '#8b2020');
-  }
-}
-
 setV('pro');
-loadActiveSynapsa();
+loadState(document.getElementById('qi').value.trim());
 </script>
 </body>
-<!-- UKRYTY DIV DO EKSPORTU RAPORTU -->
-<div id="export-tpl" style="display:none;font-family:Georgia,serif;max-width:800px;margin:0 auto;padding:40px;">
-</div>
-
 </html>
