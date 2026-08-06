@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gildia Innowacji – Partnerstwo Regionalne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#faf7f2; --ink:#0d0814; --warm:#f2ebe0; --card:#ffffff;
+  --purple:#45276e; --burgundy:#621708; --red:#941b0c;
+  --orange:#f4643a; --gold:#f7bb35; --muted:#6b5c4e; --border:rgba(13,8,20,0.1); --white:#ffffff;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1rem 4rem;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.8rem;text-decoration:none;}
+.nav-brand img{width:44px;height:44px;object-fit:contain;border-radius:50%;box-shadow:0 2px 12px rgba(244,100,58,0.3),0 0 0 2px rgba(244,100,58,0.12);background:var(--bg);padding:2px;}
+.nav-brand-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink);}
+.nav-brand-text span{color:var(--orange);}
+.nav-badge{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;background:rgba(69,39,110,0.1);color:var(--purple);border:1px solid rgba(69,39,110,0.2);padding:0.2rem 0.7rem;border-radius:100px;}
+.nav-right{display:flex;align-items:center;gap:2rem;}
+.nav-right a{font-size:0.82rem;font-weight:500;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-right a:hover{color:var(--ink);}
+.nav-cta{background:linear-gradient(135deg,var(--purple),var(--red));color:white;font-size:0.78rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:0.65rem 1.6rem;border:none;border-radius:100px;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(69,39,110,0.35);transition:opacity 0.2s,transform 0.15s;}
+.nav-cta:hover{opacity:0.85;transform:translateY(-2px);}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--ink);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding-top:72px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 55% 65% at 15% 50%,rgba(69,39,110,0.55),transparent 60%),radial-gradient(ellipse 40% 50% at 85% 30%,rgba(98,23,8,0.4),transparent 60%);}
+.hero-left{padding:5rem 4rem 5rem 5rem;position:relative;z-index:2;}
+.hero-kicker{display:inline-flex;align-items:center;gap:0.8rem;font-size:0.65rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:2rem;animation:fadeUp 0.8s ease both;}
+.kicker-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.5vw,5rem);font-weight:900;line-height:1.02;color:white;margin-bottom:1.8rem;animation:fadeUp 0.8s 0.1s ease both;}
+.hero-h1 em{color:var(--gold);font-style:italic;}
+.hero-lead{font-size:1.05rem;line-height:1.85;color:rgba(250,247,242,0.65);max-width:480px;margin-bottom:2.5rem;animation:fadeUp 0.8s 0.2s ease both;}
+.hero-lead strong{color:white;font-weight:500;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.8s 0.3s ease both;}
+.btn-gold{background:var(--gold);color:var(--ink);font-family:'Barlow',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:1rem 2.2rem;border:none;border-radius:100px;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 6px 20px rgba(247,187,53,0.45);transition:transform 0.2s,box-shadow 0.2s;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(247,187,53,0.5);}
+.btn-outline-light{background:transparent;color:rgba(250,247,242,0.8);font-size:0.85rem;font-weight:500;padding:1rem 2.2rem;border:1.5px solid rgba(250,247,242,0.2);border-radius:100px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color 0.2s,color 0.2s;}
+.btn-outline-light:hover{border-color:var(--gold);color:var(--gold);}
+
+/* hero right */
+.hero-right{padding:5rem 5rem 5rem 3rem;position:relative;z-index:2;animation:fadeIn 1s 0.4s ease both;}
+.stat-panel{display:flex;flex-direction:column;gap:1.2rem;}
+.stat-block{padding:1.6rem 2rem;border:1px solid rgba(250,247,242,0.07);border-radius:10px;background:rgba(250,247,242,0.03);position:relative;overflow:hidden;transition:border-color 0.3s;}
+.stat-block:hover{border-color:rgba(247,187,53,0.3);}
+.stat-block::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),var(--orange));border-radius:3px 0 0 3px;}
+.sb-title{font-weight:600;font-size:0.9rem;color:white;margin-bottom:0.35rem;}
+.sb-body{font-size:0.82rem;color:rgba(250,247,242,0.5);line-height:1.6;}
+.sb-badge{display:inline-block;margin-top:0.5rem;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;background:rgba(244,100,58,0.15);color:var(--orange);padding:0.2rem 0.6rem;border-radius:100px;font-weight:700;}
+
+/* bottom bar */
+.hero-bottom{grid-column:1/-1;border-top:1px solid rgba(250,247,242,0.06);display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:2;}
+.hb-item{padding:1.8rem 2.5rem;border-right:1px solid rgba(250,247,242,0.06);}
+.hb-item:last-child{border-right:none;}
+.hb-num{font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;line-height:1;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hb-label{font-size:0.78rem;color:rgba(250,247,242,0.45);line-height:1.4;margin-top:0.3rem;}
+
+/* AUDIENCE STRIP */
+.astrip{background:var(--white);border-bottom:1px solid var(--border);padding:1.4rem 4rem;text-align:center;font-size:0.88rem;color:var(--muted);}
+.astrip strong{color:var(--ink);}
+
+/* SECTIONS */
+.sec{padding:7rem 4rem;}
+.sec-inner{max-width:1200px;margin:0 auto;}
+.eyebrow{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);font-weight:600;display:flex;align-items:center;gap:0.6rem;margin-bottom:0.8rem;}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--orange);border-radius:2px;}
+.sec-h{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;margin-bottom:1rem;}
+.sec-h em{color:var(--orange);font-style:italic;}
+.sec-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:640px;}
+
+/* PROBLEM */
+.problem{background:var(--white);}
+.problem-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.prob-card{padding:2.2rem 2rem;border:1.5px solid var(--border);border-radius:12px;background:var(--bg);position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s;}
+.prob-card:hover{border-color:var(--orange);transform:translateY(-3px);}
+.prob-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--orange));transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.prob-card:hover::before{transform:scaleX(1);}
+.prob-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:rgba(13,8,20,0.05);line-height:1;margin-bottom:0.5rem;}
+.prob-title{font-weight:700;font-size:1.1rem;margin-bottom:0.6rem;}
+.prob-body{font-size:0.85rem;color:var(--muted);line-height:1.75;}
+
+/* VISION */
+.vision{background:var(--ink);color:white;padding:7rem 4rem;}
+.vision-inner{max-width:1200px;margin:0 auto;}
+.vision .eyebrow{color:var(--gold);}
+.vision .eyebrow::before{background:var(--gold);}
+.vision-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.02;color:white;margin-bottom:1.5rem;}
+.vision-h em{color:var(--gold);font-style:italic;}
+.vision-lead{font-size:1.1rem;color:rgba(250,247,242,0.65);line-height:1.85;max-width:680px;margin-bottom:4rem;}
+.vision-lead strong{color:white;font-weight:500;}
+
+/* mikro centra grid */
+.mck-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(250,247,242,0.06);border:1px solid rgba(250,247,242,0.06);border-radius:12px;overflow:hidden;margin-bottom:4rem;}
+.mck{background:#18140f;padding:2.2rem 2rem;transition:background 0.3s;}
+.mck:hover{background:rgba(98,23,8,0.25);}
+.mck-icon{font-size:1.5rem;margin-bottom:1rem;display:block;}
+.mck-title{font-weight:700;font-size:0.95rem;margin-bottom:0.4rem;}
+.mck-body{font-size:0.82rem;color:rgba(250,247,242,0.48);line-height:1.65;}
+
+/* ekosystem */
+.eco{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:2rem;}
+.eco-text h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1rem;}
+.eco-text h3 em{color:var(--gold);font-style:italic;}
+.eco-text p{font-size:0.9rem;color:rgba(250,247,242,0.6);line-height:1.8;margin-bottom:0.8rem;}
+.eco-nodes{display:flex;flex-direction:column;gap:0.8rem;}
+.eco-node{display:flex;align-items:center;gap:1rem;padding:1rem 1.4rem;background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.07);border-radius:8px;font-size:0.85rem;color:rgba(250,247,242,0.75);transition:border-color 0.2s;}
+.eco-node:hover{border-color:rgba(247,187,53,0.3);}
+.eco-node-icon{font-size:1.1rem;flex-shrink:0;}
+
+/* WHY NOW */
+.whynow{background:var(--warm);}
+.why-grid{display:grid;grid-template-columns:1fr 2fr;gap:6rem;align-items:start;}
+.why-sticky{position:sticky;top:7rem;}
+.why-items{display:flex;flex-direction:column;gap:1.2rem;}
+.why-item{display:grid;grid-template-columns:3rem 1fr;gap:1.2rem;align-items:start;padding:1.6rem 1.8rem;background:var(--card);border-radius:10px;border:1.5px solid var(--border);transition:border-color 0.2s,transform 0.2s;}
+.why-item:hover{border-color:var(--orange);transform:translateX(4px);}
+.wi-num{font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;line-height:1;color:rgba(13,8,20,0.07);}
+.wi-h{font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;}
+.wi-p{font-size:0.83rem;color:var(--muted);line-height:1.65;}
+
+/* MODEL */
+.model{background:var(--white);}
+.model-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:3rem;}
+.ms{background:var(--bg);padding:2.5rem 2rem;transition:background 0.3s;}
+.ms:hover{background:var(--warm);}
+.ms-n{font-family:'Playfair Display',serif;font-weight:900;font-size:3.5rem;line-height:1;color:rgba(13,8,20,0.05);margin-bottom:0.8rem;}
+.ms-icon{font-size:1.6rem;margin-bottom:1rem;display:block;}
+.ms-title{font-weight:700;font-size:1.05rem;margin-bottom:0.6rem;}
+.ms-body{font-size:0.83rem;color:var(--muted);line-height:1.7;}
+
+/* CONFERENCE */
+.conference{background:linear-gradient(135deg,#1a0e30,#2e1a0e);color:white;padding:7rem 4rem;}
+.conf-inner{max-width:1200px;margin:0 auto;}
+.conf-eyebrow{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem;}
+.conf-eyebrow::before{content:'';width:20px;height:2px;background:var(--gold);border-radius:2px;}
+.conf-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;color:white;margin-bottom:1.2rem;}
+.conf-h em{color:var(--gold);font-style:italic;}
+.conf-lead{font-size:1rem;color:rgba(250,247,242,0.6);line-height:1.8;max-width:620px;margin-bottom:3rem;}
+.conf-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.conf-topics{display:flex;flex-direction:column;gap:0.7rem;}
+.conf-topic{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.4rem;background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.07);border-radius:8px;font-size:0.85rem;color:rgba(250,247,242,0.75);transition:border-color 0.2s;}
+.conf-topic:hover{border-color:rgba(247,187,53,0.3);}
+.ct-icon{font-size:1.1rem;flex-shrink:0;}
+.conf-format{background:rgba(247,187,53,0.08);border:1px solid rgba(247,187,53,0.15);border-radius:12px;padding:2.5rem;}
+.cf-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;margin-bottom:1rem;color:var(--gold);}
+.cf-items{display:flex;flex-direction:column;gap:0.6rem;}
+.cf-item{display:flex;gap:0.7rem;font-size:0.85rem;color:rgba(250,247,242,0.72);}
+.cf-item::before{content:'→';color:var(--gold);flex-shrink:0;}
+.conf-cta{margin-top:2rem;}
+
+/* PARTNERSHIP */
+.partner{background:var(--warm);}
+.partner-h{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;margin-bottom:1rem;}
+.partner-h em{color:var(--orange);font-style:italic;}
+.partner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem;}
+.part-card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:2rem;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;}
+.part-card:hover{border-color:var(--orange);transform:translateY(-3px);box-shadow:0 12px 36px rgba(13,8,20,0.08);}
+.pc-icon{font-size:2rem;margin-bottom:1rem;display:block;}
+.pc-title{font-weight:700;font-size:1rem;margin-bottom:0.5rem;}
+.pc-body{font-size:0.83rem;color:var(--muted);line-height:1.7;}
+.partner-note{margin-top:2rem;padding:1.4rem 1.8rem;background:rgba(244,100,58,0.07);border:1px solid rgba(244,100,58,0.15);border-radius:10px;font-size:0.88rem;color:var(--ink);line-height:1.7;display:flex;gap:1rem;align-items:flex-start;}
+
+/* CONTACT */
+.contact{background:linear-gradient(135deg,var(--purple),var(--burgundy));color:white;padding:7rem 4rem;}
+.contact-inner{max-width:1200px;margin:0 auto;}
+.contact .eyebrow{color:var(--gold);}
+.contact .eyebrow::before{background:var(--gold);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+.contact-left p{font-size:1rem;color:rgba(250,247,242,0.72);line-height:1.8;margin-bottom:2rem;}
+.ci-items{display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2rem;}
+.ci-item{display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;}
+.ci-item a{color:var(--gold);text-decoration:none;}
+.ci-item a:hover{text-decoration:underline;}
+.ci-item span{color:rgba(250,247,242,0.7);}
+.trust-list{display:flex;flex-direction:column;gap:0.7rem;}
+.trust-item{display:flex;gap:0.8rem;align-items:flex-start;padding:0.9rem 1.2rem;background:rgba(250,247,242,0.07);border:1px solid rgba(250,247,242,0.1);border-radius:8px;font-size:0.82rem;color:rgba(250,247,242,0.7);line-height:1.5;}
+
+.cform{background:rgba(250,247,242,0.06);border:1px solid rgba(250,247,242,0.12);border-radius:14px;padding:2.5rem;}
+.cf-h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:0.3rem;}
+.cf-sub{font-size:0.82rem;color:rgba(250,247,242,0.5);margin-bottom:2rem;line-height:1.5;}
+.fgroup{display:flex;flex-direction:column;gap:0.35rem;margin-bottom:1rem;}
+.flabel{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(250,247,242,0.45);font-weight:600;}
+.finput,.fselect,.ftextarea{background:rgba(250,247,242,0.07);border:1.5px solid rgba(250,247,242,0.12);color:white;font-family:'Barlow',sans-serif;font-size:0.9rem;padding:0.85rem 1rem;outline:none;border-radius:8px;transition:border-color 0.2s;}
+.finput::placeholder,.ftextarea::placeholder{color:rgba(250,247,242,0.22);}
+.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--gold);}
+.fselect option{background:var(--burgundy);}
+.ftextarea{resize:vertical;min-height:90px;}
+.btn-submit{width:100%;background:var(--gold);color:var(--ink);font-family:'Barlow',sans-serif;font-size:0.88rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:1.1rem;border:none;border-radius:100px;cursor:pointer;margin-top:0.5rem;box-shadow:0 4px 16px rgba(247,187,53,0.4);transition:transform 0.2s,box-shadow 0.2s;}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(247,187,53,0.5);}
+.form-note{text-align:center;font-size:0.72rem;color:rgba(250,247,242,0.35);margin-top:0.8rem;}
+.success-box{display:none;text-align:center;padding:3rem 1rem;}
+.success-box h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:0.5rem;}
+.success-box p{font-size:0.88rem;color:rgba(250,247,242,0.6);line-height:1.6;}
+
+footer{background:#08040e;color:rgba(250,247,242,0.3);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;border-top:1px solid rgba(247,187,53,0.1);}
+.foot-brand{font-family:'Playfair Display',serif;font-size:0.95rem;color:white;font-weight:700;}
+.foot-brand span{color:var(--gold);}
+.foot-links{display:flex;gap:2rem;}
+.foot-links a{color:rgba(250,247,242,0.3);text-decoration:none;transition:color 0.2s;}
+.foot-links a:hover{color:white;}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.on{opacity:1;transform:none;}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.6);}}
+
+@media(max-width:1024px){
+  nav{padding:1rem 1.5rem;}
+  .nav-right a:not(.nav-cta){display:none;}
+  .hero{grid-template-columns:1fr;padding-top:5rem;}
+  .hero-right{display:none;}
+  .hero-bottom{grid-template-columns:1fr 1fr;}
+  .sec,.vision,.conference,.contact,.partner{padding:5rem 1.5rem;}
+  .astrip{padding:1rem 1.5rem;}
+  .problem-3,.mck-grid,.model-steps,.partner-grid,.conf-grid,.contact-grid,.why-grid,.eco{grid-template-columns:1fr;gap:2rem;}
+  .why-sticky{position:static;}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:1.5rem;}
+}
+@media(max-width:640px){
+  .hero-bottom{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-brand">
+    <img src="../assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+    <div class="nav-brand-text">Gildia<span>.</span>Innowacji</div>
+  </a>
+  <div style="display:flex;align-items:center;gap:0.8rem;">
+    <span class="nav-badge">Dla gmin i JST</span>
+  </div>
+  <div class="nav-right">
+    <a href="#wizja">Wizja</a>
+    <a href="#konferencja">Konferencja</a>
+    <a href="#partnerstwo">Partnerstwo</a>
+    <a href="#kontakt" class="nav-cta">Zostań partnerem</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <div class="hero-kicker"><span class="kicker-dot"></span>Program dla gmin · samorządów · JST</div>
+    <h1 class="hero-h1">
+      Regionalny ekosystem<br>
+      młodzieży — <em>już dziś.</em>
+    </h1>
+    <p class="hero-lead">
+      Gildia Innowacji to <strong>systemowe rozwiązanie</strong> problemu odpływu talentów i niskiej aktywności młodych. Nie warsztat. Nie projekt. <strong>Infrastruktura społeczna</strong> dla Twojego regionu.
+    </p>
+    <div class="hero-btns">
+      <a href="#kontakt" class="btn-gold">Zostań partnerem regionalnym →</a>
+      <a href="#wizja" class="btn-outline-light">Zobacz wizję</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-panel">
+      <div class="stat-block">
+        <div class="sb-title">Systemowe rozwiązanie</div>
+        <div class="sb-body">Nie jednorazowy warsztat — trwały ekosystem łączący młodzież, samorządy, ekspertów i projekty w jednym modelu działania.</div>
+        <span class="sb-badge">Model sieciowy</span>
+      </div>
+      <div class="stat-block">
+        <div class="sb-title">Finansowanie zewnętrzne</div>
+        <div class="sb-body">Program może być w pełni realizowany ze środków UE i dotacyjnych. Wskazujemy źródła, piszemy wniosek, rozliczamy.</div>
+        <span class="sb-badge">0 zł z budżetu gminy</span>
+      </div>
+      <div class="stat-block">
+        <div class="sb-title">Gotowy do wdrożenia</div>
+        <div class="sb-body">Działający prototyp z dokumentacją, narzędziami i katalogiem projektów. Szukamy pierwszych partnerów regionalnych.</div>
+        <span class="sb-badge">Etap pilotażu</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hb-item"><div class="hb-num">A→Z</div><div class="hb-label">Obsługa od finansowania<br>po raport końcowy</div></div>
+    <div class="hb-item"><div class="hb-num">0 zł</div><div class="hb-label">Koszt dla gminy<br>w modelu dotacyjnym</div></div>
+    <div class="hb-item"><div class="hb-num">30'</div><div class="hb-label">Bezpłatna konsultacja<br>z konkretną rekomendacją</div></div>
+    <div class="hb-item"><div class="hb-num">MVP</div><div class="hb-label">Możliwość współtworzenia<br>modelu wdrożenia</div></div>
+  </div>
+</section>
+
+<div class="astrip">
+  Partnerstwo dla: <strong>gmin wiejskich i miejskich · starostw powiatowych · urzędów marszałkowskich · instytucji kultury · NGO</strong>
+</div>
+
+<!-- PROBLEM -->
+<section class="sec problem">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Problem społeczny</div>
+    <h2 class="sec-h reveal">Trzy fakty, których <em>nie możemy ignorować.</em></h2>
+    <div class="problem-3">
+      <div class="prob-card reveal">
+        <div class="prob-num">01</div>
+        <div class="prob-title">Młodzi nie mają przestrzeni</div>
+        <p class="prob-body">Lokalne talenty nie mają gdzie realizować pomysłów. Brak infrastruktury społecznej przekłada się bezpośrednio na odpływ kapitału ludzkiego z regionów do dużych miast.</p>
+      </div>
+      <div class="prob-card reveal d1">
+        <div class="prob-num">02</div>
+        <div class="prob-title">Edukacja nie uczy realizacji celu</div>
+        <p class="prob-body">System edukacji przekazuje wiedzę, ale nie uczy jak definiować cel, planować działania i doprowadzać projekty do końca. To luka, którą czuje rynek pracy i społeczności lokalne.</p>
+      </div>
+      <div class="prob-card reveal d2">
+        <div class="prob-num">03</div>
+        <div class="prob-title">Talenty odpływają z regionów</div>
+        <p class="prob-body">Bez lokalnego ekosystemu wsparcia, mentoringu i możliwości działania — młodzi ludzie wybierają metropolie. Regiony tracą właśnie tych, których najbardziej potrzebują.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision" id="wizja">
+  <div class="vision-inner">
+    <div class="eyebrow reveal">Wizja</div>
+    <h2 class="vision-h reveal">Mikro Centra<br><em>Kreatywności.</em></h2>
+    <p class="vision-lead reveal">
+      Lokalne przestrzenie współpracy, mentoringu i realizacji projektów — <strong>infrastruktura społeczna przyszłości</strong>, która zatrzymuje talenty w regionach i buduje lokalny kapitał innowacji.
+    </p>
+
+    <div class="mck-grid">
+      <div class="mck reveal">
+        <span class="mck-icon">🤝</span>
+        <div class="mck-title">Współpraca i sieciowanie</div>
+        <div class="mck-body">Przestrzeń łącząca młodzież, mentorów, ekspertów i lokalnych przedsiębiorców wokół wspólnych celów.</div>
+      </div>
+      <div class="mck reveal d1">
+        <span class="mck-icon">🧭</span>
+        <div class="mck-title">Mentoring i wsparcie</div>
+        <div class="mck-body">Każdy uczestnik ma dostęp do mentora — praktyka, który pomaga przejść od pomysłu do realizacji.</div>
+      </div>
+      <div class="mck reveal d2">
+        <span class="mck-icon">🚀</span>
+        <div class="mck-title">Realizacja projektów</div>
+        <div class="mck-body">Realne projekty społeczne i startupy młodzieżowe — z dokumentacją, budżetem i efektem mierzalnym dla gminy.</div>
+      </div>
+      <div class="mck reveal d3">
+        <span class="mck-icon">📚</span>
+        <div class="mck-title">Edukacja projektowa</div>
+        <div class="mck-body">Design Thinking, Agile, Kanban — kompetencje przyszłości w praktycznym, angażującym wydaniu dla młodych.</div>
+      </div>
+      <div class="mck reveal d4">
+        <span class="mck-icon">💼</span>
+        <div class="mck-title">Przedsiębiorczość młodzieżowa</div>
+        <div class="mck-body">Od projektu społecznego do inicjatywy biznesowej — ścieżka, która buduje lokalnych liderów i przedsiębiorców.</div>
+      </div>
+      <div class="mck reveal d5">
+        <span class="mck-icon">🌐</span>
+        <div class="mck-title">Sieć regionalna</div>
+        <div class="mck-body">Centra w różnych gminach tworzą sieć — wymiana doświadczeń, wspólne projekty, ogólnopolska widoczność.</div>
+      </div>
+    </div>
+
+    <div class="eco">
+      <div class="eco-text">
+        <h3>Platforma łącząca <em>pięć światów.</em></h3>
+        <p>Gildia Innowacji nie jest organizatorem warsztatów. Jest platformą łączącą wszystkich kluczowych aktorów lokalnego ekosystemu innowacji — w jednym, spójnym modelu działania.</p>
+        <p>To dużo większa historia niż program edukacyjny.</p>
+      </div>
+      <div class="eco-nodes">
+        <div class="eco-node"><span class="eco-node-icon">👥</span>Młodzież — realizuje projekty, zdobywa kompetencje</div>
+        <div class="eco-node"><span class="eco-node-icon">🏛️</span>Samorządy — finansują, wspierają, raportują efekty</div>
+        <div class="eco-node"><span class="eco-node-icon">🎓</span>Eksperci i mentorzy — dzielą się wiedzą i doświadczeniem</div>
+        <div class="eco-node"><span class="eco-node-icon">🏢</span>Firmy lokalne — angażują się w CSR, pozyskują talenty</div>
+        <div class="eco-node"><span class="eco-node-icon">🗂️</span>Projekty i startupy — realne efekty dla społeczności</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section class="sec whynow">
+  <div class="sec-inner">
+    <div class="why-grid">
+      <div class="why-sticky">
+        <div class="eyebrow reveal">Dlaczego teraz?</div>
+        <h2 class="sec-h reveal">Okno<br><em>możliwości</em><br>jest otwarte.</h2>
+        <p class="sec-sub reveal" style="margin-top:0.8rem;">Cztery powody, dla których właśnie teraz jest najlepszy moment na budowanie lokalnych ekosystemów innowacji.</p>
+      </div>
+      <div class="why-items">
+        <div class="why-item reveal">
+          <div class="wi-num">01</div>
+          <div><div class="wi-h">Fundusze UE na nową perspektywę</div><p class="wi-p">Środki z FEdR i EFS+ na lata 2021–2027 są dostępne właśnie teraz. Programy aktywizacji młodzieży i edukacji to priorytet polityki spójności. Okno aplikacyjne jest otwarte.</p></div>
+        </div>
+        <div class="why-item reveal d1">
+          <div class="wi-num">02</div>
+          <div><div class="wi-h">Polityka młodzieżowa jako priorytet</div><p class="wi-p">Samorządy, które budują dziś infrastrukturę dla młodych, zyskują przewagę w pozyskiwaniu talentów i przyciąganiu inwestycji w perspektywie 10–15 lat.</p></div>
+        </div>
+        <div class="why-item reveal d2">
+          <div class="wi-num">03</div>
+          <div><div class="wi-h">AI zmienia rynek kompetencji</div><p class="wi-p">Kompetencje projektowe, kreatywne myślenie i umiejętność realizacji celów to właśnie te, których AI nie zastąpi. Inwestycja w nie teraz to inwestycja w lokalny kapitał ludzki przyszłości.</p></div>
+        </div>
+        <div class="why-item reveal d3">
+          <div class="wi-num">04</div>
+          <div><div class="wi-h">Gotowy model do wdrożenia</div><p class="wi-p">Gildia Innowacji jest na etapie pilotażu — pierwsi partnerzy regionalni współtworzą model, mają realny wpływ na jego kształt i korzystają z preferencyjnych warunków realizacji.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODEL -->
+<section class="sec model">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Jak działa model</div>
+    <h2 class="sec-h reveal">Trzy kroki do <em>lokalnego ekosystemu.</em></h2>
+    <p class="sec-sub reveal">Prosty model, który transformuje bierną młodzież w aktywnych uczestników życia społecznego i lokalnych innowatorów.</p>
+    <div class="model-steps">
+      <div class="ms reveal">
+        <div class="ms-n">01</div>
+        <span class="ms-icon">⚡</span>
+        <div class="ms-title">Aktywizacja młodych</div>
+        <p class="ms-body">Rejestracja, test profilujący, dostęp do katalogu projektów. Każdy uczestnik znajdzie coś dla siebie — niezależnie od pasji, wieku i doświadczenia. Udział zawsze bezpłatny.</p>
+      </div>
+      <div class="ms reveal d1">
+        <div class="ms-n">02</div>
+        <span class="ms-icon">🏘️</span>
+        <div class="ms-title">Budowa lokalnych społeczności</div>
+        <p class="ms-body">Grupy projektowe wokół wspólnych zainteresowań — sport, kultura, technologia, ekologia, media. Mentorzy i eksperci towarzyszą od pierwszego pomysłu do gotowego efektu.</p>
+      </div>
+      <div class="ms reveal d2">
+        <div class="ms-n">03</div>
+        <span class="ms-icon">🌱</span>
+        <div class="ms-title">Projekty i startupy społeczne</div>
+        <p class="ms-body">Realne inicjatywy z mierzalnym wpływem na lokalną społeczność. Dokumentacja wyników gotowa do sprawozdań dotacyjnych. Portfolio dla uczestników, wskaźniki dla samorządu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFERENCE -->
+<section class="conference" id="konferencja">
+  <div class="conf-inner">
+    <div class="conf-eyebrow">Wydarzenie</div>
+    <h2 class="conf-h">Ogólnopolska Konferencja<br><em>Polityki Młodzieżowej.</em></h2>
+    <p class="conf-lead">Przestrzeń dla samorządów, ekspertów i liderów społecznych, którzy chcą wspólnie budować ekosystemy innowacji dla młodych. Networking, case studies, partnerstwa regionalne.</p>
+    <div class="conf-grid">
+      <div>
+        <div style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(250,247,242,0.4);font-weight:600;margin-bottom:1rem;">Tematy przewodnie</div>
+        <div class="conf-topics">
+          <div class="conf-topic"><span class="ct-icon">🚀</span>Przedsiębiorczość młodych i edukacja przyszłości</div>
+          <div class="conf-topic"><span class="ct-icon">🤖</span>AI, automatyzacja i kompetencje przyszłości</div>
+          <div class="conf-topic"><span class="ct-icon">🏛️</span>Mikro Centra Kreatywności jako infrastruktura społeczna</div>
+          <div class="conf-topic"><span class="ct-icon">🌐</span>Lokalne ekosystemy innowacji — modele i case studies</div>
+          <div class="conf-topic"><span class="ct-icon">🤝</span>Współpraca samorządów — sieć regionalna</div>
+          <div class="conf-topic"><span class="ct-icon">💶</span>Finansowanie polityki młodzieżowej z funduszy UE</div>
+          <div class="conf-topic"><span class="ct-icon">🧭</span>Jak zatrzymać talenty w regionach?</div>
+        </div>
+      </div>
+      <div class="conf-format">
+        <div class="cf-title">Format konferencji</div>
+        <div class="cf-items">
+          <div class="cf-item">Wystąpienia ekspertów i praktyków</div>
+          <div class="cf-item">Panele dyskusyjne z przedstawicielami samorządów</div>
+          <div class="cf-item">Case studies z wdrożeń regionalnych</div>
+          <div class="cf-item">Networking i spotkania bilateralne</div>
+          <div class="cf-item">Prezentacja modelu Gildii Innowacji</div>
+          <div class="cf-item">Podpisanie listów intencyjnych partnerstw</div>
+        </div>
+        <div class="conf-cta">
+          <a href="#kontakt" class="btn-gold" style="display:inline-block;font-size:0.8rem;padding:0.85rem 1.8rem;">Wyraź zainteresowanie →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERSHIP -->
+<section class="sec partner" id="partnerstwo">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Partnerstwo regionalne</div>
+    <h2 class="partner-h reveal">Zostań partnerem.<br>Nie <em>klientem.</em></h2>
+    <p class="sec-sub reveal">Szukamy samorządów, instytucji i organizacji, które chcą współtworzyć model — nie tylko z niego korzystać. To różnica między zakupem usługi a budowaniem przyszłości regionu.</p>
+    <div class="partner-grid">
+      <div class="part-card reveal">
+        <span class="pc-icon">🏛️</span>
+        <div class="pc-title">Gminy i urzędy</div>
+        <p class="pc-body">Aktywizacja młodzieży, wskaźniki do sprawozdań UE, lokalna infrastruktura społeczna. Program finansowany zewnętrznie — bez obciążania budżetu bieżącego.</p>
+      </div>
+      <div class="part-card reveal d1">
+        <span class="pc-icon">🎓</span>
+        <div class="pc-title">Szkoły i uczelnie</div>
+        <p class="pc-body">Realne kompetencje projektowe dla uczniów i studentów. Minimalne obciążenie nauczycieli. Portfolio i doświadczenie dla absolwentów.</p>
+      </div>
+      <div class="part-card reveal d2">
+        <span class="pc-icon">🎭</span>
+        <div class="pc-title">Instytucje kultury</div>
+        <p class="pc-body">Domy kultury i biblioteki jako naturalne centra społeczności — idealna przestrzeń dla Mikro Centrum Kreatywności w gminie.</p>
+      </div>
+      <div class="part-card reveal d3">
+        <span class="pc-icon">🌱</span>
+        <div class="pc-title">NGO i fundacje</div>
+        <p class="pc-body">Wspólna aplikacja o środki, realizacja programu, budowanie lokalnego kapitału społecznego. Model open source — współtworzymy razem.</p>
+      </div>
+      <div class="part-card reveal d4">
+        <span class="pc-icon">🏢</span>
+        <div class="pc-title">Firmy lokalne</div>
+        <p class="pc-body">CSR z realnym wpływem — mentorzy z biznesu, staże dla uczestników, dostęp do lokalnych talentów zanim trafią na rynek pracy.</p>
+      </div>
+      <div class="part-card reveal d5">
+        <span class="pc-icon">🔬</span>
+        <div class="pc-title">Ośrodki badawcze</div>
+        <p class="pc-body">Gildia jako środowisko badawcze — badamy jakie kompetencje i metody pracy realnie wspierają innowacje. Wspólne publikacje i dane.</p>
+      </div>
+    </div>
+    <div class="partner-note reveal">
+      <span>💡</span>
+      <span>Program może być finansowany ze środków UE (FEdR, EFS+), programów rządowych MEN, funduszy norweskich i grantów samorządowych. Pomagamy zidentyfikować źródło, piszemy wniosek i rozliczamy projekt. <strong>W praktyce koszt dla instytucji może wynosić 0 zł.</strong></span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="kontakt">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="eyebrow reveal">Kontakt</div>
+        <h2 class="sec-h reveal" style="color:white;">Zacznijmy<br><em style="color:var(--gold)">rozmowę.</em></h2>
+        <p class="reveal">Bezpłatna konsultacja trwa 30 minut i kończy się konkretną rekomendacją. Omawiamy potrzeby regionu, możliwe źródła finansowania i zakres partnerstwa.</p>
+        <div class="ci-items reveal">
+          <div class="ci-item">👤 <span>Wojciech Wolanin · Kreatywne Klocki</span></div>
+          <div class="ci-item">📞 <a href="tel:+48793738281">793 738 281</a></div>
+          <div class="ci-item">📧 <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a></div>
+          <div class="ci-item">🌐 <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></div>
+        </div>
+        <div class="trust-list reveal d1">
+          <div class="trust-item"><span>🧪</span>Program w fazie pilotażu — możliwość współtworzenia modelu wdrożenia na preferencyjnych warunkach.</div>
+          <div class="trust-item"><span>📋</span>Pełna dokumentacja programu dostępna przed podpisaniem jakiejkolwiek umowy.</div>
+          <div class="trust-item"><span>🤝</span>Elastyczne warunki dopasowane do budżetu i harmonogramu instytucji.</div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <div class="cform" id="form-wrap">
+          <div class="cf-h2">Wyraź zainteresowanie partnerstwem</div>
+          <div class="cf-sub">Odpiszemy w ciągu 24h i zaproponujemy termin rozmowy.</div>
+          <form onsubmit="sub(event)">
+            <div class="fgroup"><label class="flabel">Imię i nazwisko</label><input type="text" class="finput" placeholder="Anna Kowalska" required></div>
+            <div class="fgroup"><label class="flabel">Instytucja</label><input type="text" class="finput" placeholder="Urząd Gminy w..." required></div>
+            <div class="fgroup">
+              <label class="flabel">Rodzaj instytucji</label>
+              <select class="fselect" required>
+                <option value="" disabled selected>Wybierz</option>
+                <option>Gmina / urząd</option>
+                <option>Starostwo powiatowe</option>
+                <option>Urząd marszałkowski</option>
+                <option>Szkoła / uczelnia</option>
+                <option>Instytucja kultury</option>
+                <option>NGO / fundacja</option>
+                <option>Firma</option>
+              </select>
+            </div>
+            <div class="fgroup"><label class="flabel">E-mail służbowy</label><input type="email" class="finput" placeholder="a.kowalska@gmina.pl" required></div>
+            <div class="fgroup"><label class="flabel">Czego szukasz?</label><textarea class="ftextarea finput" placeholder="Opisz potrzeby swojej instytucji..."></textarea></div>
+            <button type="submit" class="btn-submit">Wysyłam zapytanie →</button>
+            <p class="form-note">Odpowiadamy w 24h · Bez zobowiązań · Bez spamu</p>
+          </form>
+          <div class="success-box" id="success">
+            <div style="font-size:2.5rem;margin-bottom:0.8rem">✉️</div>
+            <h3>Wiadomość wysłana!</h3>
+            <p>Odezwiemy się w ciągu 24h z propozycją terminu konsultacji.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-brand">Gildia<span>.</span>Innowacji</div>
+  <div class="foot-links">
+    <a href="szkola.html">Oferta dla szkół →</a>
+    <a href="../index.html">Strona główna</a>
+    <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a>
+  </div>
+  <div>© 2025 Kreatywne Klocki · Kielce</div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');obs.unobserve(x.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function sub(e){e.preventDefault();e.target.style.display='none';document.getElementById('success').style.display='block';}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});});
+</script>
+</body>
+</html>
