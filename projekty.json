@@ -1,60 +1,62 @@
 [
   {
-    "id": "p001",
-    "tytul": "Kiermasz zabawek",
-    "kategoria": "spoleczne",
-    "podkategoria": "Projekty dla szkoły",
-    "pitch": "Organizacja kiermaszu wyprzedażowego zabawek w SP 25 — uczniowie uczą się jak zaplanować wydarzenie, dotrzeć do odbiorców i przeprowadzić akcję społeczną od A do Z.",
-    "status": "zakonczone",
-    "postep": "6. Zakończenie",
-    "miejsce": "SP 25, Kielce",
-    "media": {
-      "typ": "placeholder"
-    },
-    "tagi": [
-      "kiermasz",
-      "szkoła",
-      "wydarzenie",
-      "społeczny"
-    ],
-    "dokumentacja": "https://www.youtube.com/watch?v=vAr5ei4akoY",
-    "narzedzia": [
-      {
-        "nazwa": "Google Forms",
-        "opis": "Formularz zgłoszeniowy dla wystawców"
-      },
-      {
-        "nazwa": "Canva",
-        "opis": "Plakat i materiały promocyjne"
-      },
-      {
-        "nazwa": "Facebook Events",
-        "opis": "Komunikacja i dyskusja z uczestnikami"
-      },
-      {
-        "nazwa": "Google Docs",
-        "opis": "Dokumentacja projektu i regulamin"
-      }
-    ],
-    "wnioski": [
-      {
-        "typ": "-",
-        "tresc": "Promocja w social mediach przyniosła znikome efekty — tylko 1 uczestnik z Facebooka"
-      },
-      {
-        "typ": "+",
-        "tresc": "Większość uczestników dowiedziała się od wychowawcy lub z plakatu — kanał szkolny działa"
-      },
-      {
-        "typ": "-",
-        "tresc": "Z 26 zarejestrowanych przybyło tylko 10-15 wystawców — rejestracja nie równa sie obecności"
-      },
-      {
-        "typ": "->",
-        "tresc": "Na plakacie mocniej podkreslić ze szukamy wystawców, nie tylko odwiedzających"
-      }
-    ]
+  "id": "p001",
+  "tytul": "Kiermasz zabawek",
+  "kategoria": "spoleczne",
+  "podkategoria": "Projekty dla szkoły",
+  "pitch": "Organizacja kiermaszu wyprzedażowego zabawek w SP 25 — uczniowie uczą się jak zaplanować wydarzenie, dotrzeć do odbiorców i przeprowadzić akcję społeczną od A do Z.",
+  "status": "zakonczone",
+  "postep": "6. Zakończenie",
+  "miejsce": "SP 25, Kielce",
+  "widoczny": true,
+  "media": {
+    "typ": "obraz",
+    "src": "assets/projekty/Kiermasz_zabawek.png"
   },
+  "narzedzia": [
+    {
+      "nazwa": "Google Forms",
+      "opis": "Formularz zgłoszeniowy dla wystawców"
+    },
+    {
+      "nazwa": "Canva",
+      "opis": "Plakat i materiały promocyjne"
+    },
+    {
+      "nazwa": "Facebook Events",
+      "opis": "Komunikacja i dyskusja z uczestnikami"
+    },
+    {
+      "nazwa": "Google Docs",
+      "opis": "Dokumentacja projektu i regulamin"
+    }
+  ],
+  "wnioski": [
+    {
+      "typ": "-",
+      "tresc": "Promocja w social mediach przyniosła znikome efekty — tylko 1 uczestnik z Facebooka"
+    },
+    {
+      "typ": "+",
+      "tresc": "Większość uczestników dowiedziała się od wychowawcy lub z plakatu — kanał szkolny działa"
+    },
+    {
+      "typ": "-",
+      "tresc": "Z 26 zarejestrowanych przybyło tylko 10-15 wystawców — rejestracja nie równa sie obecności"
+    },
+    {
+      "typ": "->",
+      "tresc": "Na plakacie mocniej podkreslić ze szukamy wystawców, nie tylko odwiedzających"
+    }
+  ],
+  "tagi": [
+    "kiermasz",
+    "szkoła",
+    "wydarzenie",
+    "społeczny"
+  ],
+  "dokumentacja": "https://www.youtube.com/watch?v=vAr5ei4akoY"
+}
   {
     "id": "p002",
     "tytul": "Pojemnik na zabawki do piasku",
